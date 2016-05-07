@@ -8,8 +8,21 @@ public class Cliente extends Usuario{
 	private static final int MAX_ITENS_CARRINHO = 150;
 	private int numeroItensCarrinho = 0; // numero atual de itens no carrinho
 
+	public int getNumeroItensCarrinho() {
+		return numeroItensCarrinho;
+	}
+
 	public Cliente(String login, String senha, String nome, long id) {
 		super(login, senha, nome, id);
+	}
+	
+	@Override
+	public Cliente clone(){
+		Cliente copia = new Cliente(getLogin(), getSenha(), getNome(), getId());
+		copia.setCarrinho(getCarrinho());
+		copia.setFavoritos(getFavoritos());
+		copia.numeroItensCarrinho = getNumeroItensCarrinho();
+		return copia;
 	}
 
 	// adiciona um item no final do array carrinho
