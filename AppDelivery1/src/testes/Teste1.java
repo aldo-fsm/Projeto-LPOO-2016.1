@@ -1,10 +1,11 @@
 package testes;
 
+/*
 import entidades.Gerente;
 import entidades.ItemCardapio;
 import entidades.Cliente;
 import entidades.Restaurante;
-
+*/
 public class Teste1 {
 	public static void main(String[] args) {
 /*
