@@ -69,17 +69,6 @@ public class RepositorioRestaurante {
 		}
 	}
 
-	public void recuperarPedidos(long id) {
-		// recupera um restaurnate e o posiciona ao fim do vetor de restaurnates
-		for (int i = 0; i < MAX_NUMERO_RESTAURANTES; i++) {
-			if (backupRestaurantes[i].getId() == id) {
-				restaurantes[numeroRestaurantes] = backupRestaurantes[i];
-				numeroRestaurantes++;
-				break;
-			}
-		}
-	}
-
 	// retorna uma copia de todos os itens do repositorio
 	public Restaurante[] copiar() {
 		Restaurante[] copia = new Restaurante[MAX_NUMERO_RESTAURANTES];
@@ -88,10 +77,18 @@ public class RepositorioRestaurante {
 		}
 		return copia;
 	}
-
-	public void backupPedidos() {
-		// aloca no vetor backupRestaurnates as informacoes atuais do vetor
-		// restaurnates
-		backupRestaurantes = restaurantes;
+	
+	public Restaurante getCopia(long id) {
+		Restaurante[] copia = new Restaurante[numeroRestaurantes];
+		for (int i = 0; i < numeroRestaurantes; i++) {
+			if (restaurantes[i].getId()== id) {
+				copia[i].setId(restaurantes[i].getId());
+				copia[i].setLogin(restaurantes[i].getLogin());
+				copia[i].setNome(restaurantes[i].getNome());
+				copia[i].setSenha(restaurantes[i].getSenha());
+				return copia[i];
+			}
+		}
+		return null;
 	}
 }
