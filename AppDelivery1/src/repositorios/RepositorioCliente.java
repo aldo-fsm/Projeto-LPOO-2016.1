@@ -53,17 +53,6 @@ public class RepositorioCliente {
 		return null;
 	}
 
-	public void recuperarCliente(long id) {
-		// recupera um cliente e o posiciona ao fim do vetor de clientes
-		for (int i = 0; i < MAX_NUMERO_CLIENTES; i++) {
-			if (backupCliente[i].getId() == id) {
-				clientes[numeroClientes] = backupCliente[i];
-				numeroClientes++;
-				break;
-			}
-		}
-	}
-
 	// retorna uma copia de todos os itens do repositorio
 	public Cliente[] copiar() {
 		Cliente[] copia = new Cliente[MAX_NUMERO_CLIENTES];
@@ -72,12 +61,23 @@ public class RepositorioCliente {
 		}
 		return copia;
 	}
-
-	public void backupClientes() {
-		// aloca no vetor backupCliente as informacoes atuais do vetor cliente
-		backupCliente = clientes;
+	
+	public Cliente getCopia(long id) {
+		Cliente[] copia = new Cliente[numeroClientes];
+		for (int i = 0; i < numeroClientes; i++) {
+			if (clientes[i].getId() == id) {
+				copia[i].setId(clientes[i].getId());
+				copia[i].setLogin(clientes[i].getLogin());
+				copia[i].setNome(clientes[i].getNome());
+				copia[i].setSenha(clientes[i].getSenha());
+				copia[i].setCarrinho(clientes[i].getCarrinho());
+				copia[i].setFavoritos(clientes[i].getFavoritos());
+				return copia[i];
+			}
+		}
+		return null;
 	}
-
+	
 	public int getNumeroClientes() {
 		return numeroClientes;
 	}
