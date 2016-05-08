@@ -36,17 +36,17 @@ public class RepositorioPedido {
 		return null;
 	}
 	//retorna uma copia pelo id 
-	public Pedido getCopia(int id) {
-		Pedido[] copia = new Pedido[MAX_NUMERO_PEDIDOS];
+	public Pedido getCopia(long id) {
+		Pedido[] copia = new Pedido[numeroPedidos];
 		for (int i = 0; i < numeroPedidos; i++) {
-			copia[i].setIdCliente(pedidos[i].getIdCliente());
-			copia[i].setIdPedido(pedidos[i].getIdPedido());
-			copia[i].setIdRestaurate(pedidos[i].getIdRestaurate());
-			copia[i].setItens(pedidos[i].getItens());
-			copia[i].setStatus(pedidos[i].getStatus());
-		}
-		if (id >= 0 && id < numeroPedidos) {
-			return copia[id];
+			if (pedidos[i].getIdPedido()== id) {
+				copia[i].setIdCliente(pedidos[i].getIdCliente());
+				copia[i].setIdPedido(pedidos[i].getIdPedido());
+				copia[i].setIdRestaurate(pedidos[i].getIdRestaurate());
+				copia[i].setItens(pedidos[i].getItens());
+				copia[i].setStatus(pedidos[i].getStatus());
+				return copia[i];
+			}
 		}
 		return null;
 	}
