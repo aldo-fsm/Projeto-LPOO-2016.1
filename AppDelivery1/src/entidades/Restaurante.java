@@ -1,7 +1,6 @@
 package entidades;
 
-
-public class Restaurante extends Usuario{
+public class Restaurante extends Usuario {
 
 	private Pedido[] pedidosEspera = new Pedido[MAX_PEDIDOS_ESPERA];
 	private ItemCardapio[] cardapio = new ItemCardapio[MAX_PRATOS];
@@ -20,6 +19,19 @@ public class Restaurante extends Usuario{
 				System.out.println(pedidosEspera[i].getIdPedido());
 			}
 		}
+	}
+
+	@Override
+	public Restaurante clone() {
+		Restaurante copia = new Restaurante(getLogin(), getSenha(), getNome(), getId());
+		copia.setPedidosEspera(pedidosEspera);
+		copia.setCardapio(cardapio);
+		copia.numeroPratosCardapio = getNumeroPratosCardapio();
+		return copia;
+	}
+
+	public void setCardapio(ItemCardapio[] cardapio) {
+		this.cardapio = cardapio;
 	}
 
 	// adiciona um prato no final do array cardapio
