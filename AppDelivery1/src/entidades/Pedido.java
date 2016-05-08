@@ -12,15 +12,23 @@ public class Pedido {
 		setIdCliente(idCliente);
 		setIdPedido(idPedido);
 	}
-	
+
 	@Override
 	public String toString() {
 		String stringPedido;
-		stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status ;
-		for(int i = 0; i < 150 ;i++){
+		stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
+		for (int i = 0; i < 150; i++) {
 			stringPedido += itens[i];
 		}
 		return stringPedido;
+	}
+
+	@Override
+	public Pedido clone() {
+		Pedido copia = new Pedido(getIdRestaurate(), getIdCliente(), getIdPedido());
+		copia.setStatus(getStatus());
+		copia.setItens(getItens());
+		return copia;
 	}
 
 	public long getIdCliente() {
