@@ -85,4 +85,8 @@ public class RepositorioCliente {
 	public void setProximoId(long proximoId) {
 		this.proximoId = proximoId;
 	}
+
+	public long getProximoId() {
+		return proximoId;
+	}
 }

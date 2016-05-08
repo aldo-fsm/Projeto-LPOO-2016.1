@@ -58,12 +58,25 @@ public class DataBase {
 	}
 
 	public static void salvarEstado(RepositorioRestaurante restaurantes) {
-
+		int i;
+		String nome = "arquivos/repositorioRestaurante";
+		String str = Long.toString(restaurantes.getProximoId()) + "\n";
+		for (i = 0; i < restaurantes.getNumeroRestaurantes(); i++) {
+			str += restaurantes.getRestaurante(i).toString() + "\n";
+		}
+		gravarDados(nome, str);
 	}
 
 	public static void salvarEstado(RepositorioCliente clientes) {
-
+		int i;
+		String nome = "arquivos/repositorioCliente";
+		String str = Long.toString(clientes.getProximoId()) + "\n";
+		for (i = 0; i < clientes.getNumeroClientes(); i++) {
+			str += clientes.getCliente(i).toString() + "\n";
+		}
+		gravarDados(nome, str);
 	}
+
 
 	public static void salvarEstado(Gerente gerente) {
 

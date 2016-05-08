@@ -1,22 +1,23 @@
 package testes;
 
-/*
+
 import entidades.Gerente;
 import entidades.ItemCardapio;
+import dados.DataBase;
 import entidades.Cliente;
 import entidades.Restaurante;
-*/
+
 public class Teste1 {
 	public static void main(String[] args) {
-/*
+
 		Gerente gerente = new Gerente();
 
-		// testando o repositorio de restaurantes
+		//testando o repositorio de restaurantes
 
-		gerente.adicionarRestaurante(new Restaurante("login1", "senha1", "restaurante1", 1));
-		gerente.adicionarRestaurante(new Restaurante("login2", "senha2", "restaurante2", 2));
-		gerente.adicionarRestaurante(new Restaurante("login3", "senha3", "restaurante3", 3));
-		gerente.adicionarRestaurante(new Restaurante("login4", "senha4", "restaurante4", 4));
+		gerente.adicionarRestaurante(new Restaurante("login1", "senha1", "restaurante1"));
+		gerente.adicionarRestaurante(new Restaurante("login2", "senha2", "restaurante2"));
+		gerente.adicionarRestaurante(new Restaurante("login3", "senha3", "restaurante3"));
+		gerente.adicionarRestaurante(new Restaurante("login4", "senha4", "restaurante4"));
 
 		System.out.println("lista de restaurantes\n");
 		gerente.listarRestaurantes();
@@ -53,10 +54,10 @@ public class Teste1 {
 
 		// testando o repositorio de clientes
 
-		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente1", 5));
-		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente2", 6));
-		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente3", 7));
-		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente4", 8));
+		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente1"));
+		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente2"));
+		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente3"));
+		gerente.adicionarCliente(new Cliente("login5", "senha5", "cliente4"));
 
 		System.out.println("\nlista de clientes\n");
 		gerente.listarClientes();
@@ -86,6 +87,10 @@ public class Teste1 {
 		gerente.repositorioC().getCliente(1)
 				.adicionarNoCarrinho(gerente.repositorioR().getRestaurante(1).getPratoCardapio(3));
 		gerente.repositorioC().getCliente(1).efetuarPedido(1);
-*/
+
+		//testando DataBase
+		
+		DataBase.salvarEstado(gerente.repositorioR());
+		DataBase.salvarEstado(gerente.repositorioC());
 	}
 }

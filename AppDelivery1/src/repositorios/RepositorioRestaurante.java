@@ -11,6 +11,10 @@ public class RepositorioRestaurante {
 	private int numeroRestaurantes = 0; // numero atual de restaurantes
 	private long proximoId = 0;
 
+	public long getProximoId() {
+		return proximoId;
+	}
+
 	// adiciona um restaurante no final do array
 	public void adicionar(Restaurante restaurante) {
 		if (numeroRestaurantes < MAX_NUMERO_RESTAURANTES) {
