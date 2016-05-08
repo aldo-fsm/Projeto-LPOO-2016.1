@@ -25,7 +25,7 @@ public class DataBase {
 			gravarArq.printf(str);
 			arq.close();
 		} catch (IOException e) {
-			System.out.println("Erro na gravaÃ§Ã£o do arquivo ...");
+			System.out.println("Erro na gravação do arquivo ...");
 		}
 	}
 
@@ -87,21 +87,21 @@ public class DataBase {
 
 	public static RepositorioCliente lerBaseClientes() {
 
-		return null;
+		return new RepositorioCliente();
 	}
 
 	public static RepositorioRestaurante LerBaseRestaurantes() {
 
-		return null;
+		return new RepositorioRestaurante();
 	}
 
 	public static RepositorioPedido lerBasePedidos() {
 
-		return null;
+		return new RepositorioPedido();
 	}
 
 	public static Gerente lerBaseGerente() {
 
-		return null;
+		return new Gerente();
 	}
 }

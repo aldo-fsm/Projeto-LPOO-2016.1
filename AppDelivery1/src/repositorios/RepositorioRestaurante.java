@@ -1,6 +1,5 @@
 package repositorios;
 
-import entidades.Cliente;
 import entidades.Restaurante;
 
 public class RepositorioRestaurante {
@@ -19,6 +18,7 @@ public class RepositorioRestaurante {
 	public void adicionar(Restaurante restaurante) {
 		if (numeroRestaurantes < MAX_NUMERO_RESTAURANTES) {
 			this.restaurantes[numeroRestaurantes] = restaurante;
+			this.restaurantes[numeroRestaurantes].setId(proximoId);
 			numeroRestaurantes++;
 			proximoId++;
 		}
@@ -82,10 +82,7 @@ public class RepositorioRestaurante {
 		Restaurante[] copia = new Restaurante[numeroRestaurantes];
 		for (int i = 0; i < numeroRestaurantes; i++) {
 			if (restaurantes[i].getId()== id) {
-				copia[i].setId(restaurantes[i].getId());
-				copia[i].setLogin(restaurantes[i].getLogin());
-				copia[i].setNome(restaurantes[i].getNome());
-				copia[i].setSenha(restaurantes[i].getSenha());
+				copia[i] = restaurantes[i].clone();
 				return copia[i];
 			}
 		}

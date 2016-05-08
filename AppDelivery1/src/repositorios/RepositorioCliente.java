@@ -15,6 +15,7 @@ public class RepositorioCliente {
 		if (numeroClientes < MAX_NUMERO_CLIENTES) {
 			cliente.setId(proximoId);
 			this.clientes[numeroClientes] = cliente;
+			this.clientes[numeroClientes].setId(proximoId);
 			numeroClientes++;
 			proximoId++;
 		}
@@ -66,12 +67,7 @@ public class RepositorioCliente {
 		Cliente[] copia = new Cliente[numeroClientes];
 		for (int i = 0; i < numeroClientes; i++) {
 			if (clientes[i].getId() == id) {
-				copia[i].setId(clientes[i].getId());
-				copia[i].setLogin(clientes[i].getLogin());
-				copia[i].setNome(clientes[i].getNome());
-				copia[i].setSenha(clientes[i].getSenha());
-				copia[i].setCarrinho(clientes[i].getCarrinho());
-				copia[i].setFavoritos(clientes[i].getFavoritos());
+				copia[i] = clientes[i].clone();
 				return copia[i];
 			}
 		}

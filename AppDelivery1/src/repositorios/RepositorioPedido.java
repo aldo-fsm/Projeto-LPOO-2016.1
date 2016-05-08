@@ -1,6 +1,5 @@
 package repositorios;
 
-import entidades.Cliente;
 import entidades.Pedido;
 
 public class RepositorioPedido {
@@ -13,6 +12,7 @@ public class RepositorioPedido {
 	public void adicionar(long idRestaurante, long idCliente) {
 		if (numeroPedidos < MAX_NUMERO_PEDIDOS) {
 			this.pedidos[numeroPedidos] = new Pedido(idRestaurante, idCliente, proximoId);
+			this.pedidos[numeroPedidos].setIdPedido(proximoId);
 			numeroPedidos++;
 			proximoId++;
 		}
@@ -34,27 +34,11 @@ public class RepositorioPedido {
 		Pedido[] copia = new Pedido[numeroPedidos];
 		for (int i = 0; i < numeroPedidos; i++) {
 			if (pedidos[i].getIdPedido() == id) {
-				copia[i].setIdCliente(pedidos[i].getIdCliente());
-				copia[i].setIdPedido(pedidos[i].getIdPedido());
-				copia[i].setIdRestaurate(pedidos[i].getIdRestaurate());
-				copia[i].setItens(pedidos[i].getItens());
-				copia[i].setStatus(pedidos[i].getStatus());
+				copia[i] = pedidos[i].clone();
 				return copia[i];
 			}
 		}
 		return null;
-	}
-
-	public Pedido[] getCopia() {
-		Pedido[] copia = new Pedido[MAX_NUMERO_PEDIDOS];
-		for (int i = 0; i < numeroPedidos; i++) {
-			copia[i].setIdCliente(pedidos[i].getIdCliente());
-			copia[i].setIdPedido(pedidos[i].getIdPedido());
-			copia[i].setIdRestaurate(pedidos[i].getIdRestaurate());
-			copia[i].setItens(pedidos[i].getItens());
-			copia[i].setStatus(pedidos[i].getStatus());
-		}
-		return copia;
 	}
 
 	// retorna uma copia de todos os itens armazenados
