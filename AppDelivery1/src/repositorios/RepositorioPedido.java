@@ -28,18 +28,12 @@ public class RepositorioPedido {
 			numeroPedidos--;
 		}
 	}
-	// retorna o pedido da posicao id do array
-	public Pedido getPedidos(int id) {
-		if (id >= 0 && id < numeroPedidos) {
-			return pedidos[id];
-		}
-		return null;
-	}
-	//retorna uma copia pelo id 
+
+	// retorna uma copia pelo id
 	public Pedido getCopia(long id) {
 		Pedido[] copia = new Pedido[numeroPedidos];
 		for (int i = 0; i < numeroPedidos; i++) {
-			if (pedidos[i].getIdPedido()== id) {
+			if (pedidos[i].getIdPedido() == id) {
 				copia[i].setIdCliente(pedidos[i].getIdCliente());
 				copia[i].setIdPedido(pedidos[i].getIdPedido());
 				copia[i].setIdRestaurate(pedidos[i].getIdRestaurate());
@@ -51,7 +45,6 @@ public class RepositorioPedido {
 		return null;
 	}
 
-	// retorna uma copia de todos os itens armazenados
 	public Pedido[] getCopia() {
 		Pedido[] copia = new Pedido[MAX_NUMERO_PEDIDOS];
 		for (int i = 0; i < numeroPedidos; i++) {
@@ -63,7 +56,8 @@ public class RepositorioPedido {
 		}
 		return copia;
 	}
-	
+
+	// retorna uma copia de todos os itens armazenados
 	public Pedido[] copiar() {
 		Pedido[] copia = new Pedido[MAX_NUMERO_PEDIDOS];
 		for (int i = 0; i < numeroPedidos; i++) {
@@ -71,9 +65,10 @@ public class RepositorioPedido {
 		}
 		return copia;
 	}
-	
-	public Pedido getPedido(int id){
-		if(id>=0&&id<numeroPedidos){
+
+	// retorna o pedido da posicao id do array
+	public Pedido getPedido(int id) {
+		if (id >= 0 && id < numeroPedidos) {
 			return pedidos[id];
 		}
 		return null;

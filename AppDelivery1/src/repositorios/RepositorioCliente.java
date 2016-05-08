@@ -8,7 +8,7 @@ public class RepositorioCliente {
 	private static final int MAX_NUMERO_CLIENTES = 100;
 	private Cliente[] backupCliente = new Cliente[MAX_NUMERO_CLIENTES];
 	private int numeroClientes = 0; // numero atual de clientes
-	private long proximoId = 0;
+	private long proximoId = 0; // proximo id disponivel
 
 	// adiciona um cliente no final do array
 	public void adicionar(Cliente cliente) {
