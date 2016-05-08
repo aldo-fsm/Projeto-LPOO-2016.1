@@ -10,8 +10,8 @@ public class Gerente{
 
 
 	// adiciona um cliente no repositorio
-	public void adicionarCliente(String login, String senha, String nome) {
-		clientes.adicionar(login, senha, nome);
+	public void adicionarCliente(Cliente cliente) {
+		clientes.adicionar(cliente);
 	}
 
 	// remove um cliente do repositorio

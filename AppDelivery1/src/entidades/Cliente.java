@@ -12,13 +12,14 @@ public class Cliente extends Usuario{
 		return numeroItensCarrinho;
 	}
 
-	public Cliente(String login, String senha, String nome, long id) {
-		super(login, senha, nome, id);
+	public Cliente(String login, String senha, String nome) {
+		super(login, senha, nome);
 	}
 	
 	@Override
 	public Cliente clone(){
-		Cliente copia = new Cliente(getLogin(), getSenha(), getNome(), getId());
+		Cliente copia = new Cliente(getLogin(), getSenha(), getNome());
+		copia.setId(getId());
 		copia.setCarrinho(getCarrinho());
 		copia.setFavoritos(getFavoritos());
 		copia.numeroItensCarrinho = getNumeroItensCarrinho();

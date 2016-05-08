@@ -7,12 +7,11 @@ public class Usuario {
 	private String nome;
 	private long id;
 
-	public Usuario(String login, String senha, String nome, long id) {
+	public Usuario(String login, String senha, String nome) {
 
 		setLogin(login);
 		setSenha(senha);
 		setNome(nome);
-		setId(id);
 
 	}
 

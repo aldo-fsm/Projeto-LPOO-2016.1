@@ -11,9 +11,10 @@ public class RepositorioCliente {
 	private long proximoId = 0;
 
 	// adiciona um cliente no final do array
-	public void adicionar(String login, String senha, String nome) {
+	public void adicionar(Cliente cliente) {
 		if (numeroClientes < MAX_NUMERO_CLIENTES) {
-			this.clientes[numeroClientes] = new Cliente(login, senha, nome, proximoId);
+			cliente.setId(proximoId);
+			this.clientes[numeroClientes] = cliente;
 			numeroClientes++;
 			proximoId++;
 		}

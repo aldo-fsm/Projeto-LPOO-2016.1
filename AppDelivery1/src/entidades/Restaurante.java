@@ -8,8 +8,8 @@ public class Restaurante extends Usuario {
 	private static final int MAX_PEDIDOS_ESPERA = 100;
 	private int numeroPratosCardapio = 0; // numero atual de pratos no cardapio
 
-	public Restaurante(String login, String senha, String nome, long id) {
-		super(login, senha, nome, id);
+	public Restaurante(String login, String senha, String nome) {
+		super(login, senha, nome);
 	}
 
 	// lista o id de cada pedido em espera
@@ -23,7 +23,8 @@ public class Restaurante extends Usuario {
 
 	@Override
 	public Restaurante clone() {
-		Restaurante copia = new Restaurante(getLogin(), getSenha(), getNome(), getId());
+		Restaurante copia = new Restaurante(getLogin(), getSenha(), getNome());
+		copia.setId(getId());
 		copia.setPedidosEspera(pedidosEspera);
 		copia.setCardapio(cardapio);
 		copia.numeroPratosCardapio = getNumeroPratosCardapio();
