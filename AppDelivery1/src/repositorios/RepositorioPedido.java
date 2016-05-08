@@ -1,14 +1,15 @@
 package repositorios;
 
+import entidades.Cliente;
 import entidades.Pedido;
 
 public class RepositorioPedido {
 	private Pedido[] pedidos = new Pedido[MAX_NUMERO_PEDIDOS];
 	private static final int MAX_NUMERO_PEDIDOS = 100;
 	private int numeroPedidos = 0; // numero atual de pedidos
+	private long proximoId = 0;
 
 	// adiciona um pedido no final do array
-	private long proximoId = 1000;
 	public void adicionar(long idRestaurante, long idCliente) {
 		if (numeroPedidos < MAX_NUMERO_PEDIDOS) {
 			this.pedidos[numeroPedidos] = new Pedido(idRestaurante, idCliente, proximoId);
@@ -61,6 +62,21 @@ public class RepositorioPedido {
 			copia[i].setStatus(pedidos[i].getStatus());
 		}
 		return copia;
+	}
+	
+	public Pedido[] copiar() {
+		Pedido[] copia = new Pedido[MAX_NUMERO_PEDIDOS];
+		for (int i = 0; i < numeroPedidos; i++) {
+			copia[i] = pedidos[i].clone();
+		}
+		return copia;
+	}
+	
+	public Pedido getPedido(int id){
+		if(id>=0&&id<numeroPedidos){
+			return pedidos[id];
+		}
+		return null;
 	}
 
 	public int getNumeroPedidos() {

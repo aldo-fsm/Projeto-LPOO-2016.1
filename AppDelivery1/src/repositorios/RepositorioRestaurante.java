@@ -1,5 +1,6 @@
 package repositorios;
 
+import entidades.Cliente;
 import entidades.Restaurante;
 
 public class RepositorioRestaurante {
@@ -73,8 +74,18 @@ public class RepositorioRestaurante {
 		}
 	}
 
+	// retorna uma copia de todos os itens do repositorio
+	public Restaurante[] copiar() {
+		Restaurante[] copia = new Restaurante[MAX_NUMERO_RESTAURANTES];
+		for (int i = 0; i < numeroRestaurantes; i++) {
+			copia[i] = restaurantes[i].clone();
+		}
+		return copia;
+	}
+
 	public void backupPedidos() {
-		// aloca no vetor backupRestaurnates as informacoes atuais do vetor restaurnates
-		backupRestaurantes= restaurantes;
+		// aloca no vetor backupRestaurnates as informacoes atuais do vetor
+		// restaurnates
+		backupRestaurantes = restaurantes;
 	}
 }
