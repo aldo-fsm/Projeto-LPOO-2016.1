@@ -90,7 +90,6 @@ public class Teste1 {
 
 		//testando DataBase
 		
-		DataBase.salvarEstado(gerente.repositorioR());
-		DataBase.salvarEstado(gerente.repositorioC());
+		DataBase.salvarEstado(gerente);
 	}
 }

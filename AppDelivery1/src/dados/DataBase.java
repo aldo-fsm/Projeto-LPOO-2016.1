@@ -57,6 +57,7 @@ public class DataBase {
 		return retorno;
 	}
 
+	// Salva em um arquivo de texto os dados do repositório de restaurantes
 	public static void salvarEstado(RepositorioRestaurante restaurantes) {
 		int i;
 		String nome = "arquivos/repositorioRestaurante";
@@ -67,6 +68,7 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
+	// Salva em um arquivo de texto os dados do repositório de clientes
 	public static void salvarEstado(RepositorioCliente clientes) {
 		int i;
 		String nome = "arquivos/repositorioCliente";
@@ -77,9 +79,10 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
-
+	// Salva o estado dos repositórios do gerente
 	public static void salvarEstado(Gerente gerente) {
-
+		salvarEstado(gerente.repositorioC());
+		salvarEstado(gerente.repositorioR());
 	}
 
 	public static RepositorioCliente lerBaseClientes() {
