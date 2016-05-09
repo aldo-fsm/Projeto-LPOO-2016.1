@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 	private JButton loginButton;
-	private JButton cadastroButton;
+	//private JButton cadastroButton;
 	private JButton loginOkButton;
 	private JTextField campoTextoLogin;
 	private JPasswordField campoSenhaLogin;
@@ -28,28 +28,28 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		setSize(800, 600);
 		setResizable(false);
 		
-		JPanel telaInicial = new JPanel(null);
+		//JPanel telaInicial = new JPanel(null);
 		JPanel telaLogin = new JPanel(null);
-		JPanel telaCadastro = new JPanel(null);
+		//JPanel telaCadastro = new JPanel(null);
 		
-		cards.add(telaInicial,"tela inicial");
+		//cards.add(telaInicial,"tela inicial");
 		cards.add(telaLogin,"tela de login");
-		cards.add(telaCadastro,"tela de cadastro");
+		//cards.add(telaCadastro,"tela de cadastro");
 		
 		add(cards);
 	
 		
-		loginButton = new JButton("Login");
+/*		loginButton = new JButton("Login");
 		loginButton.addActionListener(this);
 		cadastroButton = new JButton("Cadastro");
 		loginButton.setBounds(300, 300, 200, 70);
 		cadastroButton.setBounds(300, 400, 200, 70);
 		telaInicial.add(loginButton);
-		telaInicial.add(cadastroButton);
+		telaInicial.add(cadastroButton);*/
 		
 		campoTextoLogin = new JTextField();
 		campoSenhaLogin = new JPasswordField();
-		cadastroButton = new JButton("Cadastro");
+		//cadastroButton = new JButton("Cadastro");
 		loginOkButton = new JButton("OK");
 		JLabel loginNome = new JLabel("Login :");
 		JLabel loginSenha = new JLabel("Senha :");
