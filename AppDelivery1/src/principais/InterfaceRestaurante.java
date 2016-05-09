@@ -1,10 +1,6 @@
 package principais;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -71,7 +67,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		
 		
 		
-		cL.show(cards, "tela inicial");
+		cL.show(cards, "tela de login");
 	}
 
 	public static void main(String[] args) {
