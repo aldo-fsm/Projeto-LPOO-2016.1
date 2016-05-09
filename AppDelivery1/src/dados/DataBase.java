@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import entidades.Cliente;
 import entidades.Gerente;
 import repositorios.RepositorioCliente;
 import repositorios.RepositorioPedido;
@@ -86,9 +88,43 @@ public class DataBase {
 	}
 
 	public static RepositorioCliente lerBaseClientes() {
-		
+		RepositorioCliente repositorioCliente = new RepositorioCliente();
+		Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
+		String[] str = lerDados("arquivos/repositorioCliente.txt");
+		repositorioCliente.setProximoId(Long.parseLong(str[0]));
+		str[0] = null;
+		int i = 0;
+		int j;
+		long id;
+		String login;
+		String senha;
+		String nome;
+		for (String string : str) {
+			if (string != null) {
 
-		return new RepositorioCliente();
+				j = string.indexOf(';');
+				id = Long.parseLong(string.substring(0, j));
+
+				string = string.substring(j + 1);
+				j = string.indexOf(';');
+				login = string.substring(0, j);
+
+				string = string.substring(j + 1);
+				j = string.indexOf(';');
+				senha = string.substring(0, j);
+
+				string = string.substring(j + 1);
+				nome = string;
+
+				clientes[i] = new Cliente(login, senha, nome);
+				clientes[i].setId(id);
+				i++;
+			}
+		}
+		repositorioCliente.setClientes(clientes);
+		repositorioCliente.setNumeroClientes(i);
+		
+		return repositorioCliente;
 	}
 
 	public static RepositorioRestaurante LerBaseRestaurantes() {
