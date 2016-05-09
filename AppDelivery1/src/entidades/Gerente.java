@@ -3,11 +3,10 @@ package entidades;
 import repositorios.RepositorioRestaurante;
 import repositorios.RepositorioCliente;
 
-public class Gerente{
+public class Gerente {
 
 	private RepositorioCliente clientes = new RepositorioCliente();
 	private RepositorioRestaurante restaurantes = new RepositorioRestaurante();
-
 
 	// adiciona um cliente no repositorio
 	public void adicionarCliente(Cliente cliente) {
@@ -70,5 +69,6 @@ public class Gerente{
 	public RepositorioRestaurante repositorioR() {
 		return restaurantes;
 	}
+
 
 }

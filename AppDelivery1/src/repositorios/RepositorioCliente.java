@@ -5,7 +5,7 @@ import entidades.Cliente;
 public class RepositorioCliente {
 
 	private Cliente[] clientes = new Cliente[MAX_NUMERO_CLIENTES];
-	private static final int MAX_NUMERO_CLIENTES = 100;
+	public static final int MAX_NUMERO_CLIENTES = 100;
 	private int numeroClientes = 0; // numero atual de clientes
 	private long proximoId = 0; // proximo id disponivel
 
@@ -83,5 +83,13 @@ public class RepositorioCliente {
 
 	public long getProximoId() {
 		return proximoId;
+	}
+
+	public void setNumeroClientes(int numeroClientes) {
+		this.numeroClientes = numeroClientes;
+	}
+
+	public void setClientes(Cliente[] clientes) {
+		this.clientes = clientes;
 	}
 }

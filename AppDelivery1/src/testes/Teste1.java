@@ -6,6 +6,7 @@ import entidades.ItemCardapio;
 import dados.DataBase;
 import entidades.Cliente;
 import entidades.Restaurante;
+import repositorios.RepositorioCliente;
 
 public class Teste1 {
 	public static void main(String[] args) {
@@ -90,6 +91,12 @@ public class Teste1 {
 
 		//testando DataBase
 		
-		DataBase.salvarEstado(gerente);
+		//DataBase.salvarEstado(gerente);		
+		RepositorioCliente testeClientes = DataBase.lerBaseClientes();
+		System.out.println(testeClientes.getProximoId());
+		for(int i = 0;i<testeClientes.getNumeroClientes();i++){
+			System.out.println(testeClientes.getCliente(i));
+		}
+
 	}
 }
