@@ -25,7 +25,7 @@ public class DataBase {
 			gravarArq.printf(str);
 			arq.close();
 		} catch (IOException e) {
-			System.out.println("Erro na gravação do arquivo ...");
+			System.out.println("Erro na gravaï¿½ï¿½o do arquivo ...");
 		}
 	}
 
@@ -57,7 +57,7 @@ public class DataBase {
 		return retorno;
 	}
 
-	// Salva em um arquivo de texto os dados do repositório de restaurantes
+	// Salva em um arquivo de texto os dados do repositï¿½rio de restaurantes
 	public static void salvarEstado(RepositorioRestaurante restaurantes) {
 		int i;
 		String nome = "arquivos/repositorioRestaurante";
@@ -68,7 +68,7 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
-	// Salva em um arquivo de texto os dados do repositório de clientes
+	// Salva em um arquivo de texto os dados do repositï¿½rio de clientes
 	public static void salvarEstado(RepositorioCliente clientes) {
 		int i;
 		String nome = "arquivos/repositorioCliente";
@@ -79,13 +79,14 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
-	// Salva o estado dos repositórios do gerente
+	// Salva o estado dos repositï¿½rios do gerente
 	public static void salvarEstado(Gerente gerente) {
 		salvarEstado(gerente.repositorioC());
 		salvarEstado(gerente.repositorioR());
 	}
 
 	public static RepositorioCliente lerBaseClientes() {
+		
 
 		return new RepositorioCliente();
 	}

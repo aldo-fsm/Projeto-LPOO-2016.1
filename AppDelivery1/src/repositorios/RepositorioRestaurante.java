@@ -5,7 +5,6 @@ import entidades.Restaurante;
 public class RepositorioRestaurante {
 
 	private Restaurante[] restaurantes = new Restaurante[MAX_NUMERO_RESTAURANTES];
-	private Restaurante[] backupRestaurantes = new Restaurante[MAX_NUMERO_RESTAURANTES];
 	private static final int MAX_NUMERO_RESTAURANTES = 100;
 	private int numeroRestaurantes = 0; // numero atual de restaurantes
 	private long proximoId = 0;
