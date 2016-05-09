@@ -1,4 +1,4 @@
 4
-0;login2;senha2;restaurante2
-0;login3;senha3;restaurante3;1001/Pizza/29.9;1082/Macaronada/9.9;1189/Arroz/5.9
-0;login4;senha1;restaurante1
+1;login2;senha2;restaurante2
+2;login3;senha3;restaurante3;1001/Pizza/29.9;1082/Macaronada/9.9;1189/Arroz/5.9
+3;login4;senha1;restaurante1
