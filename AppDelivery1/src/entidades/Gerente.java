@@ -39,12 +39,15 @@ public class Gerente {
 	}
 
 	// imprime no console o id e o nome de todos os restaurantes do repositorio
-	public void listarRestaurantes() {
+	public String listarRestaurantes() {
 		Restaurante restaurante;
+		String listaDeRestaurantes = "";
 		for (int i = 0; i < restaurantes.getNumeroRestaurantes(); i++) {
 			restaurante = restaurantes.getRestaurante(i);
-			System.out.println(i + ". " + restaurante.getId() + " " + restaurante.getNome());
+			listaDeRestaurantes = listaDeRestaurantes + i + ". " + restaurante.getId() + " " + restaurante.getNome()
+					+ "\n";
 		}
+		return listaDeRestaurantes;
 	}
 
 	// imprime no console o id e o nome de todos os clientes do repositorio
@@ -69,6 +72,5 @@ public class Gerente {
 	public RepositorioRestaurante repositorioR() {
 		return restaurantes;
 	}
-
 
 }
