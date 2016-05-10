@@ -46,6 +46,8 @@ public class Gerente {
 			restaurante = restaurantes.getRestaurante(i);
 			listaDeRestaurantes = listaDeRestaurantes + i + ". " + restaurante.getId() + " " + restaurante.getNome()
 					+ "\n";
+			System.out.println(i + ". " + restaurante.getId() + " " + restaurante.getNome()
+			+ "\n");
 		}
 		return listaDeRestaurantes;
 	}
