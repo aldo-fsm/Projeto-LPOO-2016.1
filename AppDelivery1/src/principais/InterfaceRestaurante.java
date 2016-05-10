@@ -5,14 +5,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import entidades.ItemCardapio;
+import entidades.Restaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
+
+	Restaurante restaurante = new Restaurante("aaa", "bbb", "ccc");
+
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
 	private JButton removerItemButton;
@@ -21,23 +28,25 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	private JTextField campoTextoLogin;
 	private JPasswordField campoSenhaLogin;
 	private CardLayout cL = new CardLayout();
-	private JPanel cards = new JPanel(cL);
-	
+	private JPanel telas = new JPanel(cL);
+
 	public InterfaceRestaurante() {
-		
+
+		super("AppDelivery - Restaurante");
+
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
 		setResizable(false);
-		
+
 		JPanel telaInicial = new JPanel(null);
 		JPanel telaLogado = new JPanel(null);
-		
-		cards.add(telaLogado, "logado");
-		cards.add(telaInicial,"tela inicial");
-		
-		add(cards);
-			
+
+		telas.add(telaLogado, "logado");
+		telas.add(telaInicial, "tela inicial");
+
+		add(telas);
+
 		campoTextoLogin = new JTextField();
 		campoSenhaLogin = new JPasswordField();
 		loginOkButton = new JButton("OK");
@@ -54,12 +63,17 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaInicial.add(loginNome);
 		telaInicial.add(loginSenha);
 		telaInicial.add(loginOkButton);
-		
+
 		cadastrarItemButton = new JButton("Adicionar Item no Cardapio");
 		removerItemButton = new JButton("Remover Item do Cardapio");
 		listarPedidosButton = new JButton("Listar Pedidos em Espera");
 		logoutButton = new JButton("Logout");
+
+		cadastrarItemButton.addActionListener(this);
+		removerItemButton.addActionListener(this);
+		listarPedidosButton.addActionListener(this);
 		logoutButton.addActionListener(this);
+
 		cadastrarItemButton.setBounds(290, 280, 220, 50);
 		removerItemButton.setBounds(290, 350, 220, 50);
 		listarPedidosButton.setBounds(290, 420, 220, 50);
@@ -68,28 +82,84 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaLogado.add(removerItemButton);
 		telaLogado.add(listarPedidosButton);
 		telaLogado.add(logoutButton);
-		
-		cL.show(cards, "tela inicial");
+
+		cL.show(telas, "tela inicial");
+	}
+
+	public boolean cadastrarItem() {
+
+		try {
+
+			String nome = JOptionPane.showInputDialog("Digite o nome do novo item");
+
+			if (nome == (null)) {
+				return true;
+			} else if (nome.equals("")) {
+				return false;
+			} else {
+				double preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o preco do item"));
+				ItemCardapio item = new ItemCardapio(nome, preco);
+				restaurante.adicionarPrato(item);
+				return true;
+			}
+		} catch (NumberFormatException e) {
+
+			return false;
+		} catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	public void removerItem() {
+
+		JFrame jd = new JFrame("Remover Item");
+		jd.setVisible(true);
+		jd.setSize(400, 600);
+		jd.setResizable(false);
+		JComboBox cb = new JComboBox(restaurante.listarCardapio());
+		for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
+			cb.addItem(restaurante.getPratoCardapio(i));
+		}
+		jd.add(cb);
 	}
 
 	public static void main(String[] args) {
 		new InterfaceRestaurante();
 	}
 
+	public void listarPedidos() {
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-			
-		if(e.getSource().equals(loginOkButton)){
-			
-			
-			
-			cL.show(cards, "logado");
+
+		if (e.getSource().equals(loginOkButton)) {
+
+			cL.show(telas, "logado");
+			campoTextoLogin.setText(null);
+			campoSenhaLogin.setText(null);
+
 		}
-		if(e.getSource().equals(logoutButton)){
-			cL.show(cards, "tela inicial");
+		if (e.getSource().equals(logoutButton)) {
+			cL.show(telas, "tela inicial");
 		}
-		
-		
+
+		if (e.getSource().equals(cadastrarItemButton)) {
+			if (!cadastrarItem()) {
+
+				JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o item", "Erro",
+						JOptionPane.ERROR_MESSAGE);
+
+			}
+
+		}
+		if (e.getSource().equals(removerItemButton)) {
+			removerItem();
+		}
+		if (e.getSource().equals(listarPedidosButton)) {
+			listarPedidos();
+		}
+
 	}
 }

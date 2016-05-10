@@ -6,9 +6,8 @@ public class ItemCardapio {
 	private String nome;
 	private double preco;
 
-	public ItemCardapio(long id, String nome, double preco) {
+	public ItemCardapio(String nome, double preco) {
 
-		setId(id);
 		setNome(nome);
 		setPreco(preco);
 

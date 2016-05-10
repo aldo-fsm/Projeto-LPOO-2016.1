@@ -7,6 +7,7 @@ public class Restaurante extends Usuario {
 	private static final int MAX_PRATOS = 150;
 	private static final int MAX_PEDIDOS_ESPERA = 100;
 	private int numeroPratosCardapio = 0; // numero atual de pratos no cardapio
+	private long proximoId = 0;
 
 	public Restaurante(String login, String senha, String nome) {
 		super(login, senha, nome);
@@ -39,7 +40,9 @@ public class Restaurante extends Usuario {
 	public void adicionarPrato(ItemCardapio item) {
 		if (numeroPratosCardapio < MAX_PRATOS) {
 			cardapio[numeroPratosCardapio] = item;
+			item.setId(proximoId);
 			numeroPratosCardapio++;
+			proximoId++;
 		}
 	}
 
@@ -76,6 +79,15 @@ public class Restaurante extends Usuario {
 
 	public int getNumeroPratosCardapio() {
 		return numeroPratosCardapio;
+	}
+
+	public String[] listarCardapio() {
+		String[] retorno = new String[numeroPratosCardapio];
+		for (int i = 0; i < numeroPratosCardapio; i++) {
+			retorno[i] = cardapio[i].getNome();
+		}
+
+		return retorno;
 	}
 
 	@Override

@@ -90,7 +90,8 @@ public class InterfaceGerente {
 				System.out.println("informe o preco do prato: ");
 				double precoDoPrato = sc.nextDouble();
 				// Instancia e adiciona o novo prato
-				ItemCardapio novoPrato = new ItemCardapio(idDoPrato, nomeDoPrato, precoDoPrato);
+				ItemCardapio novoPrato = new ItemCardapio(
+						/* idDoPrato, o id dos itens tambem sao incrementais */nomeDoPrato, precoDoPrato);
 				novo.adicionarPrato(idDoRestaurante, novoPrato);
 				// Salva o estado do sistema;
 				DataBase.salvarEstado(novo.repositorioR());

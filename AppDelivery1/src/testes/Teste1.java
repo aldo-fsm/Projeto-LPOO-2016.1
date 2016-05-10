@@ -39,10 +39,10 @@ public class Teste1 {
 		System.out.println("\na nova senha do restaurante de posicao 2 e:\n"
 				+ gerente.repositorioR().getRestaurante(2).getSenha());
 
-		gerente.adicionarPrato(1, new ItemCardapio(1001, "Pizza", 29.90));
-		gerente.adicionarPrato(1, new ItemCardapio(1082, "Macaronada", 9.90));
-		gerente.adicionarPrato(1, new ItemCardapio(1028, "Feijoada", 12.90));
-		gerente.adicionarPrato(1, new ItemCardapio(1189, "Arroz", 5.90));
+		gerente.adicionarPrato(1, new ItemCardapio("Pizza", 29.90));
+		gerente.adicionarPrato(1, new ItemCardapio("Macaronada", 9.90));
+		gerente.adicionarPrato(1, new ItemCardapio("Feijoada", 12.90));
+		gerente.adicionarPrato(1, new ItemCardapio("Arroz", 5.90));
 
 		System.out.println("\nO cardapio do restaurante numero 1 tem:");
 		gerente.listarCardapio(1);
