@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,15 +18,18 @@ import entidades.Restaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
-	Restaurante restaurante = new Restaurante("aaa", "bbb", "ccc");//temporario(teste)
+	private Restaurante restaurante = new Restaurante("aaa", "bbb", "ccc");// temporario(teste)
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
 	private JButton removerItemButton;
+	private JButton removerOkButton;
+	private JButton removerCancelarButton;
 	private JButton listarPedidosButton;
 	private JButton logoutButton;
 	private JTextField campoTextoLogin;
 	private JPasswordField campoSenhaLogin;
+	private JComboBox<ItemCardapio> removerItemComboBox;
 	private CardLayout cL = new CardLayout();
 	private JPanel telas = new JPanel(cL);
 
@@ -40,12 +44,15 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		JPanel telaInicial = new JPanel(null);
 		JPanel telaLogado = new JPanel(null);
+		JPanel telaRemover = new JPanel(null);
 
 		telas.add(telaLogado, "logado");
 		telas.add(telaInicial, "tela inicial");
+		telas.add(telaRemover, "tela remover");
 
 		add(telas);
 
+		// tela inicial
 		campoTextoLogin = new JTextField();
 		campoSenhaLogin = new JPasswordField();
 		loginOkButton = new JButton("OK");
@@ -63,6 +70,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaInicial.add(loginSenha);
 		telaInicial.add(loginOkButton);
 
+		// tela logado
 		cadastrarItemButton = new JButton("Adicionar Item no Cardapio");
 		removerItemButton = new JButton("Remover Item do Cardapio");
 		listarPedidosButton = new JButton("Listar Pedidos em Espera");
@@ -81,6 +89,23 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaLogado.add(removerItemButton);
 		telaLogado.add(listarPedidosButton);
 		telaLogado.add(logoutButton);
+
+		// tela de remocao de item
+		removerOkButton = new JButton("Remover");
+		removerCancelarButton = new JButton("Cancelar");
+		removerItemComboBox = new JComboBox<ItemCardapio>();
+
+		removerOkButton.addActionListener(this);
+		removerCancelarButton.addActionListener(this);
+		removerItemComboBox.addActionListener(this);
+
+		removerItemComboBox.setBounds(290, 280, 220, 30);
+		removerOkButton.setBounds(290, 500, 100, 30);
+		removerCancelarButton.setBounds(410, 500, 100, 30);
+
+		telaRemover.add(removerOkButton);
+		telaRemover.add(removerCancelarButton);
+		telaRemover.add(removerItemComboBox);
 
 		cL.show(telas, "tela inicial");
 	}
@@ -109,14 +134,6 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		}
 	}
 
-	public void removerItem() {
-
-	}
-
-	public static void main(String[] args) {
-		new InterfaceRestaurante();
-	}
-
 	public void listarPedidos() {
 
 	}
@@ -126,8 +143,6 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(loginOkButton)) {
 
-			
-			
 			cL.show(telas, "logado");
 			campoTextoLogin.setText(null);
 			campoSenhaLogin.setText(null);
@@ -146,12 +161,36 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 			}
 
 		}
+
 		if (e.getSource().equals(removerItemButton)) {
-			removerItem();
+			if (restaurante.getNumeroPratosCardapio() != 0) {
+				removerItemComboBox.removeAllItems();
+				for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
+					removerItemComboBox.addItem(restaurante.getPratoCardapio(i));
+				}
+				cL.show(telas, "tela remover");
+			} else {
+				JOptionPane.showMessageDialog(this, "Não há nenhum item cadastrado", "Erro",
+						JOptionPane.INFORMATION_MESSAGE, null);
+			}
 		}
+
 		if (e.getSource().equals(listarPedidosButton)) {
 			listarPedidos();
 		}
 
+		if (e.getSource().equals(removerOkButton)) {
+			restaurante.removerPrato(removerItemComboBox.getSelectedIndex());
+			cL.show(telas, "logado");
+		}
+
+		if (e.getSource().equals(removerCancelarButton)) {
+			cL.show(telas, "logado");
+		}
+
+	}
+
+	public static void main(String[] args) {
+		new InterfaceRestaurante();
 	}
 }
