@@ -5,7 +5,7 @@ import entidades.Restaurante;
 public class RepositorioRestaurante {
 
 	private Restaurante[] restaurantes = new Restaurante[MAX_NUMERO_RESTAURANTES];
-	private static final int MAX_NUMERO_RESTAURANTES = 100;
+	public static final int MAX_NUMERO_RESTAURANTES = 100;
 	private int numeroRestaurantes = 0; // numero atual de restaurantes
 	private long proximoId = 0;
 
@@ -86,5 +86,9 @@ public class RepositorioRestaurante {
 			}
 		}
 		return null;
+	}
+
+	public void setProximoId(long id) {
+		proximoId = id;
 	}
 }

@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +17,7 @@ import entidades.Restaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
-	Restaurante restaurante = new Restaurante("aaa", "bbb", "ccc");
+	Restaurante restaurante = new Restaurante("aaa", "bbb", "ccc");//temporario(teste)
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
@@ -127,6 +126,8 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(loginOkButton)) {
 
+			
+			
 			cL.show(telas, "logado");
 			campoTextoLogin.setText(null);
 			campoSenhaLogin.setText(null);
