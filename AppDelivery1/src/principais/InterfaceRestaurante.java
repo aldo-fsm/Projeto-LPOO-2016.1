@@ -112,15 +112,6 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 	public void removerItem() {
 
-		JFrame jd = new JFrame("Remover Item");
-		jd.setVisible(true);
-		jd.setSize(400, 600);
-		jd.setResizable(false);
-		JComboBox cb = new JComboBox(restaurante.listarCardapio());
-		for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
-			cb.addItem(restaurante.getPratoCardapio(i));
-		}
-		jd.add(cb);
 	}
 
 	public static void main(String[] args) {
