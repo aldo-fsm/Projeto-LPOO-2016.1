@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-10
+4
 0;login5;senha5;cliente1
 1;login5;senha5;cliente2
-4;login5;aaa;Jose
-5;login5;123;algum Nome
-6;login5;123321;nome
-7;login5;456312;bbbb
-8;login5;098123;aaa
-9;login5;01922938;outro nome 
-=======
-0
->>>>>>> branch 'master' of https://github.com/aldo-fsm/Projeto-LPOO-2016.1
+3;login5;senhaDeJose;Jose

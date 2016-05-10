@@ -91,7 +91,7 @@ public class Teste1 {
 
 		//testando DataBase
 		
-		//DataBase.salvarEstado(gerente);		
+		DataBase.salvarEstado(gerente);		
 		RepositorioCliente testeClientes = DataBase.lerBaseClientes();
 		System.out.println(testeClientes.getProximoId());
 		for(int i = 0;i<testeClientes.getNumeroClientes();i++){
