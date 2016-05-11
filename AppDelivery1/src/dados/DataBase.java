@@ -68,7 +68,7 @@ public class DataBase {
 		String nome = "arquivos/repositorioRestaurante";
 		String str = Long.toString(restaurantes.getProximoId()) + "\n";
 		for (i = 0; i < restaurantes.getNumeroRestaurantes(); i++) {
-			str += restaurantes.getRestaurante(i).toString() + "\n";
+			str += restaurantes.getRestaurante(i).getProximoId() + ";" + restaurantes.getRestaurante(i).toString() + "\n";
 		}
 		gravarDados(nome, str);
 	}
@@ -99,12 +99,11 @@ public class DataBase {
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			int i;
 			int j;
-			String[] stringSplit1;
-			String[] stringSplit2;
+			String[] stringSplit;
 			for (i = 1; i < strings.length; i++) {
-				stringSplit1 = strings[i].split(";");
-				clientes[i-1] = new Cliente(stringSplit1[1], stringSplit1[2], stringSplit1[3]);
-				clientes[i-1].setId(Long.parseLong(stringSplit1[0]));
+				stringSplit = strings[i].split(";");
+				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
+				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
 				i++;
 			}
 			repositorioCliente.setClientes(clientes);
@@ -117,60 +116,42 @@ public class DataBase {
 	}
 
 	public static RepositorioRestaurante LerBaseRestaurantes() {
-		try {
-			String[] str = lerDados("arquivos/repositorioRestaurante.txt");
+		String[] strings = lerDados("arquivos/repositorioRestaurante.txt");
+		if (strings != null) {
+
+			RepositorioRestaurante repositorioRestaurante = new RepositorioRestaurante();
+			Restaurante[] restaurantes = new Restaurante[RepositorioRestaurante.MAX_NUMERO_RESTAURANTES];
+			ItemCardapio[] cardapio;
+
+			repositorioRestaurante.setProximoId(Long.parseLong(strings[0]));
 			String[] stringSplit;
 			String[] stringSplit2;
-			RepositorioRestaurante repositorioRestaurante = new RepositorioRestaurante();
-			Restaurante restaurante;
-			Restaurante[] restaurantes = new Restaurante[RepositorioRestaurante.MAX_NUMERO_RESTAURANTES];
-			ItemCardapio prato;
-			ItemCardapio[] cardapio;
-			repositorioRestaurante.setProximoId(Long.parseLong(str[0]));
-			long id;
-			String login;
-			String senha;
-			String nome;
-			long idPrato;
-			String nomePrato;
-			double precoPrato;
-
 			int i;
 			int j;
-			for (i = 1; i < str.length; i++) {
+			for (i = 1; i < strings.length; i++) {
 
-				stringSplit = str[i].split(";");
-				id = Long.parseLong(stringSplit[0]);
-				login = stringSplit[1];
-				senha = stringSplit[2];
-				nome = stringSplit[3];
-				restaurante = new Restaurante(login, senha, nome);
-				restaurante.setId(id);
-				restaurantes[i - 1] = restaurante;
+				stringSplit = strings[i].split(";");
+				restaurantes[i - 1] = new Restaurante(stringSplit[2], stringSplit[3], stringSplit[4]);
+				restaurantes[i - 1].setProximoId(Long.parseLong(stringSplit[0]));
+				restaurantes[i - 1].setId(Long.parseLong(stringSplit[1]));
 
 				cardapio = new ItemCardapio[Restaurante.MAX_PRATOS];
-				for (j = 4; j < stringSplit.length; j++) {
+				for (j = 5; j < stringSplit.length; j++) {
 					stringSplit2 = stringSplit[j].split("/");
-					idPrato = Long.parseLong(stringSplit2[0]);
-					nomePrato = stringSplit2[1];
-					precoPrato = Double.parseDouble(stringSplit2[2]);
-
-					prato = new ItemCardapio(nomePrato, precoPrato);
-					prato.setId(idPrato);
-					cardapio[j - 4] = prato;
+					cardapio[j - 5] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));
+					cardapio[j - 5].setId(Long.parseLong(stringSplit2[0]));
 				}
-				restaurante.setNumeroPratosCardapio(j - 4);
-				restaurante.setCardapio(cardapio);
-
+				restaurantes[i - 1].setNumeroPratosCardapio(j - 5);
+				restaurantes[i - 1].setCardapio(cardapio);
 			}
 			repositorioRestaurante.setRestaurantes(restaurantes);
 			repositorioRestaurante.setNumeroRestaurantes(i - 1);
 
 			return repositorioRestaurante;
-
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} else {
 			return null;
 		}
+
 	}
 
 	public static RepositorioPedido lerBasePedidos() {

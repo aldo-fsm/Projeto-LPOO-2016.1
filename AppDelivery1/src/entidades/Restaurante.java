@@ -104,4 +104,12 @@ public class Restaurante extends Usuario {
 		this.numeroPratosCardapio = numeroPratosCardapio;
 	}
 
+	public void setProximoId(long proximoId) {
+		this.proximoId = proximoId;
+	}
+
+	public long getProximoId() {
+		return proximoId;
+	}
+
 }
