@@ -91,4 +91,12 @@ public class RepositorioRestaurante {
 	public void setProximoId(long id) {
 		proximoId = id;
 	}
+
+	public void setRestaurantes(Restaurante[] restaurantes) {
+		this.restaurantes = restaurantes;
+	}
+
+	public void setNumeroRestaurantes(int numeroRestaurantes) {
+		this.numeroRestaurantes = numeroRestaurantes;
+	}
 }

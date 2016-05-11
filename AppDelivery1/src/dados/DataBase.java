@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import entidades.Cliente;
 import entidades.Gerente;
+import entidades.ItemCardapio;
+import entidades.Restaurante;
 import repositorios.RepositorioCliente;
 import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
@@ -88,48 +90,105 @@ public class DataBase {
 	}
 
 	public static RepositorioCliente lerBaseClientes() {
-		RepositorioCliente repositorioCliente = new RepositorioCliente();
-		Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
-		String[] str = lerDados("arquivos/repositorioCliente.txt");
-		repositorioCliente.setProximoId(Long.parseLong(str[0]));
-		str[0] = null;
-		int i = 0;
-		int j;
-		long id;
-		String login;
-		String senha;
-		String nome;
-		for (String string : str) {
-			if (string != null) {
+		try {
+			RepositorioCliente repositorioCliente = new RepositorioCliente();
+			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
+			String[] str = lerDados("arquivos/repositorioCliente.txt");
+			repositorioCliente.setProximoId(Long.parseLong(str[0]));
+			str[0] = null;
+			int i = 0;
+			int j;
+			long id;
+			String login;
+			String senha;
+			String nome;
+			for (String string : str) {
+				if (string != null) {
 
-				j = string.indexOf(';');
-				id = Long.parseLong(string.substring(0, j));
+					j = string.indexOf(';');
+					id = Long.parseLong(string.substring(0, j));
 
-				string = string.substring(j + 1);
-				j = string.indexOf(';');
-				login = string.substring(0, j);
+					string = string.substring(j + 1);
+					j = string.indexOf(';');
+					login = string.substring(0, j);
 
-				string = string.substring(j + 1);
-				j = string.indexOf(';');
-				senha = string.substring(0, j);
+					string = string.substring(j + 1);
+					j = string.indexOf(';');
+					senha = string.substring(0, j);
 
-				string = string.substring(j + 1);
-				nome = string;
+					string = string.substring(j + 1);
+					nome = string;
 
-				clientes[i] = new Cliente(login, senha, nome);
-				clientes[i].setId(id);
-				i++;
+					clientes[i] = new Cliente(login, senha, nome);
+					clientes[i].setId(id);
+					i++;
+				}
 			}
+			repositorioCliente.setClientes(clientes);
+			repositorioCliente.setNumeroClientes(i);
+
+			return repositorioCliente;
+
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
 		}
-		repositorioCliente.setClientes(clientes);
-		repositorioCliente.setNumeroClientes(i);
-		
-		return repositorioCliente;
 	}
 
 	public static RepositorioRestaurante LerBaseRestaurantes() {
+		try {
+			String[] str = lerDados("arquivos/repositorioRestaurante.txt");
+			String[] stringSplit;
+			String[] stringSplit2;
+			RepositorioRestaurante repositorioRestaurante = new RepositorioRestaurante();
+			Restaurante restaurante;
+			Restaurante[] restaurantes = new Restaurante[RepositorioRestaurante.MAX_NUMERO_RESTAURANTES];
+			ItemCardapio prato;
+			ItemCardapio[] cardapio;
+			repositorioRestaurante.setProximoId(Long.parseLong(str[0]));
+			long id;
+			String login;
+			String senha;
+			String nome;
+			long idPrato;
+			String nomePrato;
+			double precoPrato;
 
-		return new RepositorioRestaurante();
+			int i;
+			int j;
+			for (i = 1; i < str.length; i++) {
+
+				stringSplit = str[i].split(";");
+				id = Long.parseLong(stringSplit[0]);
+				login = stringSplit[1];
+				senha = stringSplit[2];
+				nome = stringSplit[3];
+				restaurante = new Restaurante(login, senha, nome);
+				restaurante.setId(id);
+				restaurantes[i - 1] = restaurante;
+
+				cardapio = new ItemCardapio[Restaurante.MAX_PRATOS];
+				for (j = 4; j < stringSplit.length; j++) {
+					stringSplit2 = stringSplit[j].split("/");
+					idPrato = Long.parseLong(stringSplit2[0]);
+					nomePrato = stringSplit2[1];
+					precoPrato = Double.parseDouble(stringSplit2[2]);
+
+					prato = new ItemCardapio(nomePrato, precoPrato);
+					prato.setId(idPrato);
+					cardapio[j - 4] = prato;
+				}
+				restaurante.setNumeroPratosCardapio(j - 4);
+				restaurante.setCardapio(cardapio);
+
+			}
+			repositorioRestaurante.setRestaurantes(restaurantes);
+			repositorioRestaurante.setNumeroRestaurantes(i - 1);
+
+			return repositorioRestaurante;
+
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	public static RepositorioPedido lerBasePedidos() {

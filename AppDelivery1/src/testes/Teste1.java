@@ -7,6 +7,7 @@ import dados.DataBase;
 import entidades.Cliente;
 import entidades.Restaurante;
 import repositorios.RepositorioCliente;
+import repositorios.RepositorioRestaurante;
 
 public class Teste1 {
 	public static void main(String[] args) {
@@ -91,12 +92,18 @@ public class Teste1 {
 
 		//testando DataBase
 		
+		gerente.adicionarPrato(0, new ItemCardapio("nome do prato", 999.99));
+		
 		DataBase.salvarEstado(gerente);		
 		RepositorioCliente testeClientes = DataBase.lerBaseClientes();
 		System.out.println(testeClientes.getProximoId());
 		for(int i = 0;i<testeClientes.getNumeroClientes();i++){
 			System.out.println(testeClientes.getCliente(i));
 		}
-
+		RepositorioRestaurante testeRestaurates = DataBase.LerBaseRestaurantes();
+		System.out.println(testeRestaurates.getProximoId());
+		for(int i = 0;i<testeRestaurates.getNumeroRestaurantes();i++){
+			System.out.println(testeRestaurates.getRestaurante(i).toString());
+		}
 	}
 }
