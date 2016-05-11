@@ -10,7 +10,7 @@ import repositorios.RepositorioCliente;
 import repositorios.RepositorioRestaurante;
 
 public class Teste1 {
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 
 		Gerente gerente = new Gerente();
 
@@ -105,5 +105,5 @@ public class Teste1 {
 		for(int i = 0;i<testeRestaurates.getNumeroRestaurantes();i++){
 			System.out.println(testeRestaurates.getRestaurante(i).toString());
 		}
-	}
+	}*/
 }
