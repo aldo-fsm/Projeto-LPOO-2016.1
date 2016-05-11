@@ -4,7 +4,7 @@ public class Restaurante extends Usuario {
 
 	private Pedido[] pedidosEspera = new Pedido[MAX_PEDIDOS_ESPERA];
 	private ItemCardapio[] cardapio = new ItemCardapio[MAX_PRATOS];
-	private static final int MAX_PRATOS = 150;
+	public static final int MAX_PRATOS = 150;
 	private static final int MAX_PEDIDOS_ESPERA = 100;
 	private int numeroPratosCardapio = 0; // numero atual de pratos no cardapio
 	private long proximoId = 0;
@@ -98,6 +98,10 @@ public class Restaurante extends Usuario {
 			stringRestaurante += ";" + cardapio[i];
 		}
 		return stringRestaurante;
+	}
+
+	public void setNumeroPratosCardapio(int numeroPratosCardapio) {
+		this.numeroPratosCardapio = numeroPratosCardapio;
 	}
 
 }
