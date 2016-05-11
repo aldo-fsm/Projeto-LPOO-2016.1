@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import entidades.Cliente;
 import entidades.Gerente;
 import entidades.ItemCardapio;
+import entidades.Pedido;
 import entidades.Restaurante;
 import repositorios.RepositorioCliente;
 import repositorios.RepositorioPedido;
@@ -82,7 +83,7 @@ public class DataBase {
 		}
 		gravarDados(nome, str);
 	}
-
+	
 	// Salva o estado dos reposit�rios do gerente
 	public static void salvarEstado(Gerente gerente) {
 		salvarEstado(gerente.repositorioC());
@@ -192,12 +193,30 @@ public class DataBase {
 	}
 
 	public static RepositorioPedido lerBasePedidos() {
+		try {
+			RepositorioPedido repositorioPedido = new RepositorioPedido();
+			Pedido[] pedidos = new Pedido[100];
+			int numeroPedidos = 0; // numero atual de pedidos
+			long proximoId = 0;
+			String[] str = lerDados("arquivos/repositorioPedido.txt");
+			
+			
+			
+			
+			
+			
+			
+			return repositorioPedido;
 
-		return new RepositorioPedido();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	public static Gerente lerBaseGerente() {
-
-		return new Gerente();
+		Gerente recuperado =new Gerente();
+		recuperado.setRepositorioC(lerBaseClientes());
+		recuperado.setRepositorioR(LerBaseRestaurantes());
+		return recuperado;
 	}
 }

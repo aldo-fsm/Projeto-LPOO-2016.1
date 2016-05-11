@@ -75,4 +75,13 @@ public class Gerente {
 		return restaurantes;
 	}
 
+	// atribui ao repositorio de clientes
+	public void setRepositorioC(RepositorioCliente clientes) {
+		clientes = this.clientes;
+	}
+
+	// atribui ao repositorio de restaurantes
+	public void setRepositorioR(RepositorioRestaurante restaurantes) {
+		restaurantes = this.restaurantes;
+	}
 }
