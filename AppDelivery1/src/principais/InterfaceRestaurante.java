@@ -20,7 +20,8 @@ import repositorios.RepositorioRestaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
-	private Restaurante restaurante = new Restaurante("aaa", "bbb", "ccc");// temporario(teste)
+	private Restaurante restaurante;
+	private RepositorioRestaurante repositorio;
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
@@ -126,6 +127,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				double preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o preco do item"));
 				ItemCardapio item = new ItemCardapio(nome, preco);
 				restaurante.adicionarPrato(item);
+				atualizarDataBase();
 				return true;
 			}
 		} catch (NumberFormatException e) {
@@ -134,6 +136,9 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		} catch (NullPointerException e) {
 			return false;
 		}
+	}
+	public void atualizarDataBase(){
+		DataBase.salvarEstado(repositorio);
 	}
 
 	public void listarPedidos() {
@@ -144,9 +149,9 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource().equals(loginOkButton)) {
+			repositorio = DataBase.LerBaseRestaurantes();
 			String login = campoTextoLogin.getText();
 			String senha = campoSenhaLogin.getText();
-			RepositorioRestaurante repositorio = DataBase.LerBaseRestaurantes();
 			for (int i = 0; i < repositorio.getNumeroRestaurantes(); i++) {
 				restaurante = repositorio.getRestaurante(i);
 				if (restaurante.getLogin().equals(login) && restaurante.getSenha().equals(senha)) {
@@ -156,14 +161,17 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 			}
 			if (restaurante != null) {
 				cL.show(telas, "logado");
+				this.setTitle(this.getTitle()+" - "+restaurante.getLogin());
 				campoSenhaLogin.setText(null);
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+				campoSenhaLogin.setText(null);
 			}
 
 		}
 		if (e.getSource().equals(logoutButton)) {
 			cL.show(telas, "tela inicial");
+			this.setTitle("AppDelivery - Restaurante");
 		}
 
 		if (e.getSource().equals(cadastrarItemButton)) {
@@ -195,6 +203,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(removerOkButton)) {
 			restaurante.removerPrato(removerItemComboBox.getSelectedIndex());
+			atualizarDataBase();
 			cL.show(telas, "logado");
 		}
 
