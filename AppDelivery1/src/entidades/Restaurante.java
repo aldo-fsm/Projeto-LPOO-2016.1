@@ -7,7 +7,7 @@ public class Restaurante extends Usuario {
 	public static final int MAX_PRATOS = 150;
 	private static final int MAX_PEDIDOS_ESPERA = 100;
 	private int numeroPratosCardapio = 0; // numero atual de pratos no cardapio
-	private long proximoId = 0;
+	private long proximoId = 0; // proximo id disponivel para itens no cardapio
 
 	public Restaurante(String login, String senha, String nome) {
 		super(login, senha, nome);

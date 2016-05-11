@@ -83,7 +83,7 @@ public class DataBase {
 		}
 		gravarDados(nome, str);
 	}
-	
+
 	// Salva o estado dos reposit�rios do gerente
 	public static void salvarEstado(Gerente gerente) {
 		salvarEstado(gerente.repositorioC());
@@ -91,46 +91,27 @@ public class DataBase {
 	}
 
 	public static RepositorioCliente lerBaseClientes() {
-		try {
+		String[] strings = lerDados("arquivos/repositorioCliente.txt");
+		if (strings != null) {
+
 			RepositorioCliente repositorioCliente = new RepositorioCliente();
 			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
-			String[] str = lerDados("arquivos/repositorioCliente.txt");
-			repositorioCliente.setProximoId(Long.parseLong(str[0]));
-			str[0] = null;
-			int i = 0;
+			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
+			int i;
 			int j;
-			long id;
-			String login;
-			String senha;
-			String nome;
-			for (String string : str) {
-				if (string != null) {
-
-					j = string.indexOf(';');
-					id = Long.parseLong(string.substring(0, j));
-
-					string = string.substring(j + 1);
-					j = string.indexOf(';');
-					login = string.substring(0, j);
-
-					string = string.substring(j + 1);
-					j = string.indexOf(';');
-					senha = string.substring(0, j);
-
-					string = string.substring(j + 1);
-					nome = string;
-
-					clientes[i] = new Cliente(login, senha, nome);
-					clientes[i].setId(id);
-					i++;
-				}
+			String[] stringSplit1;
+			String[] stringSplit2;
+			for (i = 1; i < strings.length; i++) {
+				stringSplit1 = strings[i].split(";");
+				clientes[i-1] = new Cliente(stringSplit1[1], stringSplit1[2], stringSplit1[3]);
+				clientes[i-1].setId(Long.parseLong(stringSplit1[0]));
+				i++;
 			}
 			repositorioCliente.setClientes(clientes);
 			repositorioCliente.setNumeroClientes(i);
 
 			return repositorioCliente;
-
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} else {
 			return null;
 		}
 	}
@@ -199,13 +180,7 @@ public class DataBase {
 			int numeroPedidos = 0; // numero atual de pedidos
 			long proximoId = 0;
 			String[] str = lerDados("arquivos/repositorioPedido.txt");
-			
-			
-			
-			
-			
-			
-			
+
 			return repositorioPedido;
 
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -214,7 +189,7 @@ public class DataBase {
 	}
 
 	public static Gerente lerBaseGerente() {
-		Gerente recuperado =new Gerente();
+		Gerente recuperado = new Gerente();
 		recuperado.setRepositorioC(lerBaseClientes());
 		recuperado.setRepositorioR(LerBaseRestaurantes());
 		return recuperado;

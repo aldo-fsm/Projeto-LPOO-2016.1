@@ -10,7 +10,7 @@ import repositorios.RepositorioCliente;
 import repositorios.RepositorioRestaurante;
 
 public class Teste1 {
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 
 		Gerente gerente = new Gerente();
 
@@ -94,7 +94,7 @@ public class Teste1 {
 		
 		gerente.adicionarPrato(0, new ItemCardapio("nome do prato", 999.99));
 		
-		DataBase.salvarEstado(gerente);		
+		//DataBase.salvarEstado(gerente);		
 		RepositorioCliente testeClientes = DataBase.lerBaseClientes();
 		System.out.println(testeClientes.getProximoId());
 		for(int i = 0;i<testeClientes.getNumeroClientes();i++){
@@ -105,5 +105,5 @@ public class Teste1 {
 		for(int i = 0;i<testeRestaurates.getNumeroRestaurantes();i++){
 			System.out.println(testeRestaurates.getRestaurante(i).toString());
 		}
-	}
+	}*/
 }

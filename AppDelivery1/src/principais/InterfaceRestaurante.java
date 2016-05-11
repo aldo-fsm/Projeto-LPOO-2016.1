@@ -13,8 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import dados.DataBase;
 import entidades.ItemCardapio;
 import entidades.Restaurante;
+import repositorios.RepositorioRestaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
@@ -142,10 +144,22 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource().equals(loginOkButton)) {
-
-			cL.show(telas, "logado");
-			campoTextoLogin.setText(null);
-			campoSenhaLogin.setText(null);
+			String login = campoTextoLogin.getText();
+			String senha = campoSenhaLogin.getText();
+			RepositorioRestaurante repositorio = DataBase.LerBaseRestaurantes();
+			for (int i = 0; i < repositorio.getNumeroRestaurantes(); i++) {
+				restaurante = repositorio.getRestaurante(i);
+				if (restaurante.getLogin().equals(login) && restaurante.getSenha().equals(senha)) {
+					break;
+				}
+				restaurante = null;
+			}
+			if (restaurante != null) {
+				cL.show(telas, "logado");
+				campoSenhaLogin.setText(null);
+			} else {
+				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 
 		}
 		if (e.getSource().equals(logoutButton)) {
