@@ -11,17 +11,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import dados.DataBase;
 import entidades.ItemCardapio;
 import entidades.Restaurante;
+import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 	private Restaurante restaurante;
 	private RepositorioRestaurante repositorio;
+	private RepositorioPedido pedidos;
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
@@ -30,6 +33,10 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	private JButton removerCancelarButton;
 	private JButton listarPedidosButton;
 	private JButton logoutButton;
+	private JButton listarVoltarButton;
+
+	private JTextArea areaTextoPedidos;
+
 	private JTextField campoTextoLogin;
 	private JPasswordField campoSenhaLogin;
 	private JComboBox<ItemCardapio> removerItemComboBox;
@@ -48,10 +55,12 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		JPanel telaInicial = new JPanel(null);
 		JPanel telaLogado = new JPanel(null);
 		JPanel telaRemover = new JPanel(null);
+		JPanel telaListarPedidos = new JPanel(null);
 
 		telas.add(telaLogado, "logado");
 		telas.add(telaInicial, "tela inicial");
 		telas.add(telaRemover, "tela remover");
+		telas.add(telaListarPedidos, "tela listar pedidos");
 
 		add(telas);
 
@@ -110,6 +119,17 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaRemover.add(removerCancelarButton);
 		telaRemover.add(removerItemComboBox);
 
+		// tela listar pedidos
+
+		areaTextoPedidos = new JTextArea();
+		listarVoltarButton = new JButton("Voltar");
+		listarVoltarButton.addActionListener(this);
+		areaTextoPedidos.setBounds(200, 200, 400, 200);
+		areaTextoPedidos.setEditable(false);
+		listarVoltarButton.setBounds(350, 500, 100, 30);
+		telaListarPedidos.add(areaTextoPedidos);
+		telaListarPedidos.add(listarVoltarButton);
+
 		cL.show(telas, "tela inicial");
 	}
 
@@ -137,12 +157,18 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 			return false;
 		}
 	}
-	public void atualizarDataBase(){
+
+	public void atualizarDataBase() {
 		DataBase.salvarEstado(repositorio);
 	}
 
-	public void listarPedidos() {
-
+	public void atualizarListaPedidos() {
+		pedidos = DataBase.lerBasePedidos();
+		for (int i = 0; i < pedidos.getNumeroPedidos(); i++) {
+			if (pedidos.getPedido(i).getIdRestaurate() != restaurante.getId()) {
+				pedidos.remover(i);
+			}
+		}
 	}
 
 	@Override
@@ -161,7 +187,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 			}
 			if (restaurante != null) {
 				cL.show(telas, "logado");
-				this.setTitle(this.getTitle()+" - "+restaurante.getLogin());
+				this.setTitle(this.getTitle() + " - " + restaurante.getLogin());
 				campoSenhaLogin.setText(null);
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -198,7 +224,16 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource().equals(listarPedidosButton)) {
-			listarPedidos();
+			atualizarListaPedidos();
+			if (pedidos.getNumeroPedidos() > 0) {
+				for (int i = 0; i < pedidos.getNumeroPedidos(); i++) {
+					areaTextoPedidos.append("\n" + pedidos.getPedido(i));
+				}
+				cL.show(telas, "tela listar pedidos");
+			} else {
+				JOptionPane.showMessageDialog(this, "Não há nenhum Pedido", "Erro",
+						JOptionPane.INFORMATION_MESSAGE, null);
+			}
 		}
 
 		if (e.getSource().equals(removerOkButton)) {
@@ -209,6 +244,10 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(removerCancelarButton)) {
 			cL.show(telas, "logado");
+		}
+		if (e.getSource().equals(listarVoltarButton)) {
+			cL.show(telas, "logado");
+			areaTextoPedidos.setText(null);
 		}
 
 	}
