@@ -4,6 +4,26 @@ import entidades.Pedido;
 
 public class RepositorioPedido {
 	private Pedido[] pedidos = new Pedido[MAX_NUMERO_PEDIDOS];
+	public static int getMaxNumeroPedidos() {
+		return MAX_NUMERO_PEDIDOS;
+	}
+
+	public Pedido[] getPedidos() {
+		return pedidos;
+	}
+
+	public Pedido getPedidos(int id) {
+		return pedidos[id];
+	}
+	
+	public void setPedidos(Pedido[] pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public void setNumeroPedidos(int numeroPedidos) {
+		this.numeroPedidos = numeroPedidos;
+	}
+
 	private int numeroPedidos = 0; // numero atual de pedidos
 	private long proximoId = 0;
 	public long getProximoId() {

@@ -15,10 +15,9 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		String stringPedido;
-		stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
-		for (int i = 0; i < 150; i++) {
-			stringPedido += itens[i];
+		String stringPedido= idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
+		for (int i = 0; i<itens.length ; i++) {
+			stringPedido += ";" + itens[i];
 		}
 		return stringPedido;
 	}
@@ -75,4 +74,17 @@ public class Pedido {
 		this.status = status;
 	}
 
+	public void setStatus(String string) {
+		if (string.compareTo("DEFAULT") == 0) {
+			setStatus(Status.DEFAULT);
+		} else if (string.compareTo("DEFAULT") == 0) {
+			setStatus(Status.ENTREGUE);
+		} else if (string.compareTo("ENTREGUE") == 0) {
+			setStatus(Status.ENVIADO);
+		} else if (string.compareTo("ENVIADO") == 0) {
+			setStatus(Status.REALIZADO);
+		} else if (string.compareTo("REALIZADO") == 0) {
+			setStatus(Status.PREPARANDO);
+		}
+	}
 }
