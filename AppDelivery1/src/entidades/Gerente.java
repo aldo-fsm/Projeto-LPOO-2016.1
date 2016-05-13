@@ -77,11 +77,11 @@ public class Gerente {
 
 	// atribui ao repositorio de clientes
 	public void setRepositorioC(RepositorioCliente clientes) {
-		clientes = this.clientes;
+		this.clientes = clientes;
 	}
 
 	// atribui ao repositorio de restaurantes
 	public void setRepositorioR(RepositorioRestaurante restaurantes) {
-		restaurantes = this.restaurantes;
+		this.restaurantes = restaurantes;
 	}
 }

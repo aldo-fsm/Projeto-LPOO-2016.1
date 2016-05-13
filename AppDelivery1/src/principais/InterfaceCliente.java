@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import dados.DataBase;
 import entidades.Cliente;
 import entidades.Gerente;
 
@@ -41,8 +43,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private String loginDoUsuario;
 
 	public static void main(String[] args) {
-		Gerente novo = new Gerente();
-		InterfaceCliente telaCliente = new InterfaceCliente(novo);
+		Gerente gerente = DataBase.lerBaseGerente();
+		System.out.println(gerente.repositorioR().getNumeroRestaurantes());
+		InterfaceCliente telaCliente = new InterfaceCliente(gerente);
 		telaCliente.janelas();
 	}
 
@@ -50,9 +53,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		this.gerente = gerente;
 	}
 
-	public void janelaLogada() {
+	public void janelaPrincipal() {
 		JPanel telaLogado = new JPanel(null);
-		cards.add(telaLogado, "Tela Apos Login");
+		cards.add(telaLogado, "Tela Principal");
 		logoutButton.setBounds(300, 500, 200, 30);
 		logoutButton.addActionListener(this);
 		telaLogado.add(logoutButton);
@@ -85,8 +88,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	public void janelaPedido() {
 		JPanel telaPedir = new JPanel(null);
 		cards.add(telaPedir, "Efetuar Pedido");
-		JLabel listaDeRestaurantes = new JLabel(gerente.listarRestaurantes());
-		listaDeRestaurantes.setBounds(250, 50, 50, 30);
+		System.out.println(DataBase.lerBaseGerente().listarRestaurantes());
+		JLabel listaDeRestaurantes = new JLabel(DataBase.lerBaseGerente().listarRestaurantes());
+		listaDeRestaurantes.setBounds(200, 50, 210, 50);
 		telaPedir.add(listaDeRestaurantes);
 		telaPedir.add(logoutButton);
 		efetuarPedido.setBounds(295, 300, 210, 50);
@@ -144,7 +148,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		janelaLogin();
 		janelaCadastro();
 		janelaPedido();
-		janelaLogada();
+		janelaPrincipal();
 		janelaSair();
 	}
 
@@ -176,7 +180,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			while (i < gerente.repositorioC().getNumeroClientes()) {
 				if (listaDeClientes[i].getNome().equals(campoLogin.getText())
 						&& listaDeClientes[i].getSenha().equals(campoSenhaLogin.getText())) {
-					cL.show(cards, "Tela Apos Login");
+					cL.show(cards, "Tela Principal");
 					loginDoUsuario = campoLogin.getText();
 					campoLogin.setText("");
 					senhaDoUsuario = campoSenhaLogin.getText();
@@ -188,6 +192,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 			if (!logado) {
 				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+				campoSenhaLogin.setText("");
+				campoLogin.setText("");
 			}
 		}
 		if (e.getSource().equals(OkButtonCadastro)) {
@@ -203,11 +209,14 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (podeCadastrar) {
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
 						&& !campoCadastroSenha.getText().equals("")) {
-					cL.show(cards, "Tela Inicial");
+					cL.show(cards, "Tela Principal");
 					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), campoCadastroNome.getText(),
 							campoCadastroSenha.getText()));
+
+					loginDoUsuario = campoCadastroLogin.getText();
 					campoCadastroLogin.setText("");
 					campoCadastroNome.setText("");
+					senhaDoUsuario = campoCadastroSenha.getText();
 					campoCadastroSenha.setText("");
 				} else {
 					JOptionPane.showMessageDialog(this, "Um ou mais campos esta(o) vazio(s)", "Erro",
@@ -215,6 +224,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Informações ja utilizadas", "Erro", JOptionPane.ERROR_MESSAGE);
+				campoCadastroLogin.setText("");
+				campoCadastroNome.setText("");
+				campoCadastroSenha.setText("");
 			}
 		}
 		if (e.getSource().equals(logoutButton)) {
@@ -252,6 +264,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				CampoSenhaSair.setText("");
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+				CampoLoginSair.setText("");
+				CampoSenhaSair.setText("");
 			}
 		}
 	}
