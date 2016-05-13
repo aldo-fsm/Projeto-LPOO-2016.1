@@ -22,6 +22,7 @@ import repositorios.RepositorioRestaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1L;
 	private Restaurante restaurante;
 	private RepositorioRestaurante repositorio;
 	private RepositorioPedido pedidos;
