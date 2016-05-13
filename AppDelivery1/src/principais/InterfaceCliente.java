@@ -87,9 +87,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	public void janelaPedido() {
 		JPanel telaPedir = new JPanel(null);
 		cards.add(telaPedir, "Efetuar Pedido");
-		JLabel listaDeRestaurantes = new JLabel(DataBase.lerBaseGerente().listarRestaurantes());
-		listaDeRestaurantes.setBounds(200, 50, 210, 50);
-		telaPedir.add(listaDeRestaurantes);
 		telaPedir.add(logoutButton);
 		efetuarPedido.setBounds(295, 300, 210, 50);
 		efetuarPedido.addActionListener(this);
@@ -176,6 +173,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			boolean logado = false;
 			Cliente[] listaDeClientes = gerente.repositorioC().getCliente();
 			while (i < gerente.repositorioC().getNumeroClientes()) {
+				System.out.println(listaDeClientes[i].getNome());
 				if (listaDeClientes[i].getNome().equals(campoLogin.getText())
 						&& listaDeClientes[i].getSenha().equals(campoSenhaLogin.getText())) {
 					cL.show(cards, "Tela Principal");
@@ -197,9 +195,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(OkButtonCadastro)) {
 			int i = 0;
 			boolean podeCadastrar = true;
-			System.out.println(gerente.repositorioC().getNumeroClientes() + " " + gerente.repositorioC().getProximoId());
 			while (i < gerente.repositorioC().getNumeroClientes()) {
-				//bug aqui quando se usa o gerente recuperado
+				// bug aqui quando se usa o gerente recuperado
 				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().getCliente(i).getLogin())
 						|| campoCadastroNome.getText().equals(gerente.repositorioC().getCliente(i).getNome()))) {
 					podeCadastrar = false;
@@ -244,7 +241,17 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource().equals(pedir)) {
-			cL.show(cards, "Efetuar Pedido");
+			String restauranteEscolhido;
+			do {
+				restauranteEscolhido = "" + JOptionPane.showInputDialog(
+						"digite o nome do restaurante que deseja, abaixo listado\n" + gerente.listarRestaurantes());
+				if(restauranteEscolhido.equals("null")){
+					break;
+				}
+			} while (restauranteEscolhido.equals(""));
+			if (!restauranteEscolhido.equals("null")) {
+				cL.show(cards, "Efetuar Pedido");
+			}
 		}
 		if (e.getSource().equals(sair)) {
 			cL.show(cards, "Tela Sair");

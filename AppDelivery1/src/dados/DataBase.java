@@ -102,12 +102,10 @@ public class DataBase {
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
 				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
+				repositorioCliente.adicionar(clientes[i-1]);
 				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
 				i++;
 			}
-			repositorioCliente.setClientes(clientes);
-			repositorioCliente.setNumeroClientes(i-1);
-
 			return repositorioCliente;
 		} else {
 			return null;
@@ -175,16 +173,16 @@ public class DataBase {
 			ItemCardapio[]  itens = new ItemCardapio[150];
 			for (int i = 1; i < str.length; i++) {
 				stringSplit = str[i].split(";");
-				pedidos[i-1] = new Pedido(Long.parseLong(stringSplit[0]), Long.parseLong(stringSplit[1]),
-						Long.parseLong(stringSplit[2]));
-				pedidos[i - 1].setStatus(stringSplit[3]);
+				repositorioPedido.adicionar(Long.parseLong(stringSplit[0]), Long.parseLong(stringSplit[1])); 
+				repositorioPedido.setProximoId(Long.parseLong(stringSplit[2]));
+				repositorioPedido.getPedidos(i-1).setStatus(stringSplit[3]);
 				for (int j = 4; j < stringSplit.length; j++) {
 					stringSplit2 = stringSplit[j].split("/");
 					itens[j - 4] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));
 					itens[j - 4].setId(Long.parseLong(stringSplit2[0]));
 				}
-				repositorioPedido.setNumeroPedidos(i-1);
-				repositorioPedido.setPedidos(pedidos);
+//				repositorioPedido.setNumeroPedidos(i-1);
+//				repositorioPedido.setPedidos(pedidos);
 				repositorioPedido.getPedidos(i-1).setItens(itens);
 			}
 			return repositorioPedido;
