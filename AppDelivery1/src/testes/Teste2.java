@@ -34,7 +34,9 @@ public class Teste2 {
 //		ItemCardapio[] ara =DataBase.lerBasePedidos().getPedidos(0).getItens();
 //		System.out.println(ara[1]);
 		Gerente Teste = DataBase.lerBaseGerente();
-//		System.out.println(DataBase.lerBaseGerente().repositorioR().getNumeroRestaurantes());
+		System.out.println(DataBase.lerBaseClientes().getCliente(0));
+		System.out.println(DataBase.lerBaseGerente().repositorioC().getCliente(0));
+		System.out.println(Teste.repositorioC().getNumeroClientes());
 		
 	}
 }

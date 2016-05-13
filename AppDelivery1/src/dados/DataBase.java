@@ -98,7 +98,6 @@ public class DataBase {
 			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			int i;
-			int j;
 			String[] stringSplit;
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
@@ -107,7 +106,7 @@ public class DataBase {
 				i++;
 			}
 			repositorioCliente.setClientes(clientes);
-			repositorioCliente.setNumeroClientes(i);
+			repositorioCliente.setNumeroClientes(i-1);
 
 			return repositorioCliente;
 		} else {

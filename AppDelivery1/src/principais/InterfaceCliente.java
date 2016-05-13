@@ -44,7 +44,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		Gerente gerente = DataBase.lerBaseGerente();
-		System.out.println(gerente.repositorioR().getNumeroRestaurantes());
 		InterfaceCliente telaCliente = new InterfaceCliente(gerente);
 		telaCliente.janelas();
 	}
@@ -88,7 +87,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	public void janelaPedido() {
 		JPanel telaPedir = new JPanel(null);
 		cards.add(telaPedir, "Efetuar Pedido");
-		System.out.println(DataBase.lerBaseGerente().listarRestaurantes());
 		JLabel listaDeRestaurantes = new JLabel(DataBase.lerBaseGerente().listarRestaurantes());
 		listaDeRestaurantes.setBounds(200, 50, 210, 50);
 		telaPedir.add(listaDeRestaurantes);
@@ -199,7 +197,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(OkButtonCadastro)) {
 			int i = 0;
 			boolean podeCadastrar = true;
+			System.out.println(gerente.repositorioC().getNumeroClientes() + " " + gerente.repositorioC().getProximoId());
 			while (i < gerente.repositorioC().getNumeroClientes()) {
+				//bug aqui quando se usa o gerente recuperado
 				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().getCliente(i).getLogin())
 						|| campoCadastroNome.getText().equals(gerente.repositorioC().getCliente(i).getNome()))) {
 					podeCadastrar = false;
