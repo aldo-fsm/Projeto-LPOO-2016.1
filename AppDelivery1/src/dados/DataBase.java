@@ -68,7 +68,8 @@ public class DataBase {
 		String nome = "arquivos/repositorioRestaurante";
 		String str = Long.toString(restaurantes.getProximoId()) + "\n";
 		for (i = 0; i < restaurantes.getNumeroRestaurantes(); i++) {
-			str += restaurantes.getRestaurante(i).getProximoId() + ";" + restaurantes.getRestaurante(i).toString() + "\n";
+			str += restaurantes.getRestaurante(i).getProximoId() + ";" + restaurantes.getRestaurante(i).toString()
+					+ "\n";
 		}
 		gravarDados(nome, str);
 	}
@@ -96,16 +97,16 @@ public class DataBase {
 
 			RepositorioCliente repositorioCliente = new RepositorioCliente();
 			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
-			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			int i;
 			String[] stringSplit;
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
 				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
-				repositorioCliente.adicionar(clientes[i-1]);
+				repositorioCliente.adicionar(clientes[i - 1]);
 				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
 				i++;
 			}
+			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
 		} else {
 			return null;
@@ -150,7 +151,7 @@ public class DataBase {
 		}
 
 	}
-	
+
 	public static void salvarEstado(RepositorioPedido pedido) {
 		int i;
 		String nome = "arquivos/repositorioPedido";
@@ -162,32 +163,37 @@ public class DataBase {
 	}
 
 	public static RepositorioPedido lerBasePedidos() {
-		try {
+		String[] strings = lerDados("arquivos/repositorioPedido.txt");
+		if (!strings.equals(null)) {
 			RepositorioPedido repositorioPedido = new RepositorioPedido();
-			Pedido[] pedidos = new Pedido[RepositorioPedido.getMaxNumeroPedidos()];
-			String[] str = lerDados("arquivos/repositorioPedido.txt");
-			long proximoId = Long.parseLong(str[0]);
+			Pedido[] pedidos = new Pedido[RepositorioPedido.MAX_NUMERO_PEDIDOS];
+			long proximoId = Long.parseLong(strings[0]);
 			String[] stringSplit;
 			String[] stringSplit2;
 			repositorioPedido.setProximoId(proximoId);
-			ItemCardapio[]  itens = new ItemCardapio[150];
-			for (int i = 1; i < str.length; i++) {
-				stringSplit = str[i].split(";");
-				repositorioPedido.adicionar(Long.parseLong(stringSplit[0]), Long.parseLong(stringSplit[1])); 
-				repositorioPedido.setProximoId(Long.parseLong(stringSplit[2]));
-				repositorioPedido.getPedidos(i-1).setStatus(stringSplit[3]);
-				for (int j = 4; j < stringSplit.length; j++) {
+			ItemCardapio[] itens = new ItemCardapio[Cliente.MAX_ITENS_CARRINHO];
+			int i;
+			int j;
+			for (i = 1; i < strings.length; i++) {
+				stringSplit = strings[i].split(";");
+				pedidos[i - 1] = new Pedido(Long.parseLong(stringSplit[2]), Long.parseLong(stringSplit[1]));
+				pedidos[i - 1].setIdPedido(Long.parseLong(stringSplit[0]));
+				pedidos[i - 1].setStatus(stringSplit[3]);
+
+				for (j = 4; j < stringSplit.length; j++) {
 					stringSplit2 = stringSplit[j].split("/");
 					itens[j - 4] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));
 					itens[j - 4].setId(Long.parseLong(stringSplit2[0]));
 				}
-//				repositorioPedido.setNumeroPedidos(i-1);
-//				repositorioPedido.setPedidos(pedidos);
-				repositorioPedido.getPedidos(i-1).setItens(itens);
+				pedidos[i - 1].setNumeroItensPedido(j - 4);
+				pedidos[i-1].setItens(itens);
 			}
+			repositorioPedido.setProximoId(Long.parseLong(strings[0]));
+			repositorioPedido.setNumeroPedidos(i - 1);
+			repositorioPedido.setPedidos(pedidos);
 			return repositorioPedido;
 
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} else {
 			return null;
 		}
 	}

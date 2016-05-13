@@ -5,7 +5,7 @@ public class Cliente extends Usuario{
 
 	private long[] favoritos;
 	private ItemCardapio[] carrinho = new ItemCardapio[MAX_ITENS_CARRINHO];
-	private static final int MAX_ITENS_CARRINHO = 150;
+	public static final int MAX_ITENS_CARRINHO = 150;
 	private int numeroItensCarrinho = 0; // numero atual de itens no carrinho
 
 	public int getNumeroItensCarrinho() {

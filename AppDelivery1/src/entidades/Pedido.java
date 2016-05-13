@@ -6,17 +6,17 @@ public class Pedido {
 	private long idRestaurate;
 	private ItemCardapio[] itens = new ItemCardapio[150];
 	private Status status = Status.DEFAULT;
-
-	public Pedido(long idRestaurante, long idCliente, long idPedido) {
+	private int numeroItensPedido = 0;
+	
+	public Pedido(long idRestaurante, long idCliente) {
 		setIdRestaurate(idRestaurante);
 		setIdCliente(idCliente);
-		setIdPedido(idPedido);
 	}
 
 	@Override
 	public String toString() {
-		String stringPedido= idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
-		for (int i = 0; i<itens.length ; i++) {
+		String stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
+		for (int i = 0; i < numeroItensPedido; i++) {
 			stringPedido += ";" + itens[i];
 		}
 		return stringPedido;
@@ -24,7 +24,8 @@ public class Pedido {
 
 	@Override
 	public Pedido clone() {
-		Pedido copia = new Pedido(getIdRestaurate(), getIdCliente(), getIdPedido());
+		Pedido copia = new Pedido(getIdRestaurate(), getIdCliente());
+		copia.setIdPedido(idPedido);
 		copia.setStatus(getStatus());
 		copia.setItens(getItens());
 		return copia;
@@ -86,5 +87,13 @@ public class Pedido {
 		} else if (string.compareTo("REALIZADO") == 0) {
 			setStatus(Status.PREPARANDO);
 		}
+	}
+
+	public int getNumeroItensPedido() {
+		return numeroItensPedido;
+	}
+
+	public void setNumeroItensPedido(int numeroItensPedido) {
+		this.numeroItensPedido = numeroItensPedido;
 	}
 }

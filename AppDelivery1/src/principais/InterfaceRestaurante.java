@@ -1,5 +1,6 @@
 package principais;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import dados.DataBase;
 import entidades.ItemCardapio;
+import entidades.Pedido;
 import entidades.Restaurante;
 import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
@@ -25,7 +28,8 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private Restaurante restaurante;
 	private RepositorioRestaurante repositorio;
-	private RepositorioPedido pedidos;
+	private Pedido[] pedidos = new Pedido[RepositorioPedido.MAX_NUMERO_PEDIDOS];
+	private int numeroPedidos;
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
@@ -123,12 +127,13 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		// tela listar pedidos
 
 		areaTextoPedidos = new JTextArea();
+		JScrollPane scroll = new JScrollPane(areaTextoPedidos);
 		listarVoltarButton = new JButton("Voltar");
 		listarVoltarButton.addActionListener(this);
-		areaTextoPedidos.setBounds(200, 200, 400, 200);
+		scroll.setBounds(200, 200, 400, 200);
 		areaTextoPedidos.setEditable(false);
 		listarVoltarButton.setBounds(350, 500, 100, 30);
-		telaListarPedidos.add(areaTextoPedidos);
+		telaListarPedidos.add(scroll);
 		telaListarPedidos.add(listarVoltarButton);
 
 		cL.show(telas, "tela inicial");
@@ -164,12 +169,17 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	}
 
 	public void atualizarListaPedidos() {
-		pedidos = DataBase.lerBasePedidos();
-		for (int i = 0; i < pedidos.getNumeroPedidos(); i++) {
-			if (pedidos.getPedido(i).getIdRestaurate() != restaurante.getId()) {
-				pedidos.remover(i);
+		RepositorioPedido repositorioPedido = DataBase.lerBasePedidos();
+		Pedido pedido;
+		int j = 0;
+		for (int i = 0; i < repositorioPedido.getNumeroPedidos(); i++) {
+			pedido = repositorioPedido.getPedido(i);
+			if (restaurante.getId() == pedido.getIdRestaurate()) {
+				pedidos[j] = pedido;
+				j++;
 			}
 		}
+		numeroPedidos = j;
 	}
 
 	@Override
@@ -206,9 +216,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 				JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o item", "Erro",
 						JOptionPane.ERROR_MESSAGE);
-
 			}
-
 		}
 
 		if (e.getSource().equals(removerItemButton)) {
@@ -226,14 +234,14 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(listarPedidosButton)) {
 			atualizarListaPedidos();
-			if (pedidos.getNumeroPedidos() > 0) {
-				for (int i = 0; i < pedidos.getNumeroPedidos(); i++) {
-					areaTextoPedidos.append("\n" + pedidos.getPedido(i));
+			if (pedidos != null) {
+				for (int i = 0; i < numeroPedidos; i++) {
+					areaTextoPedidos.append(pedidos[i] + "\n");
 				}
 				cL.show(telas, "tela listar pedidos");
 			} else {
-				JOptionPane.showMessageDialog(this, "Não há nenhum Pedido", "Erro",
-						JOptionPane.INFORMATION_MESSAGE, null);
+				JOptionPane.showMessageDialog(this, "Não há nenhum Pedido", "Erro", JOptionPane.INFORMATION_MESSAGE,
+						null);
 			}
 		}
 
