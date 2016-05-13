@@ -96,7 +96,6 @@ public class DataBase {
 
 			RepositorioCliente repositorioCliente = new RepositorioCliente();
 			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
-			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			int i;
 			String[] stringSplit;
 			for (i = 1; i < strings.length; i++) {
@@ -106,6 +105,7 @@ public class DataBase {
 				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
 				i++;
 			}
+			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
 		} else {
 			return null;
@@ -169,7 +169,6 @@ public class DataBase {
 			long proximoId = Long.parseLong(str[0]);
 			String[] stringSplit;
 			String[] stringSplit2;
-			repositorioPedido.setProximoId(proximoId);
 			ItemCardapio[]  itens = new ItemCardapio[150];
 			for (int i = 1; i < str.length; i++) {
 				stringSplit = str[i].split(";");
@@ -183,6 +182,7 @@ public class DataBase {
 				}
 //				repositorioPedido.setNumeroPedidos(i-1);
 //				repositorioPedido.setPedidos(pedidos);
+				repositorioPedido.setProximoId(proximoId);
 				repositorioPedido.getPedidos(i-1).setItens(itens);
 			}
 			return repositorioPedido;

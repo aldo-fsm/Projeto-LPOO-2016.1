@@ -244,7 +244,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			String restauranteEscolhido;
 			do {
 				restauranteEscolhido = "" + JOptionPane.showInputDialog(
-						"digite o nome do restaurante que deseja, abaixo listado\n" + gerente.listarRestaurantes());
+						"digite o numero correspondente ao restaurante que deseja, abaixo listado\n" + gerente.listarRestaurantes());
 				if(restauranteEscolhido.equals("null")){
 					break;
 				}

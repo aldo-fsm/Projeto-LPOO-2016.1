@@ -44,10 +44,10 @@ public class Gerente {
 		String listaDeRestaurantes = "";
 		for (int i = 0; i < restaurantes.getNumeroRestaurantes(); i++) {
 			restaurante = restaurantes.getRestaurante(i);
-			listaDeRestaurantes = listaDeRestaurantes + i + ". " + restaurante.getId() + " " + restaurante.getNome()
-					+ "\n";
-//			System.out.println(i + ". " + restaurante.getId() + " " + restaurante.getNome()
-//			+ "\n");
+			listaDeRestaurantes = listaDeRestaurantes + restaurante.getId() + ". " + restaurante.getNome() + "\n";
+			// System.out.println(i + ". " + restaurante.getId() + " " +
+			// restaurante.getNome()
+			// + "\n");
 		}
 		return listaDeRestaurantes;
 	}
