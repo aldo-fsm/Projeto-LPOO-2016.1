@@ -56,6 +56,17 @@ public class RepositorioRestaurante {
 		return null;
 	}
 
+	public Restaurante getRestaurante(long id) {
+		int i = 0;
+		while (i < numeroRestaurantes) {
+			if (id == restaurantes[i].getId()) {
+				return restaurantes[i];
+			}
+			i++;
+		}
+		return null;
+	}
+
 	public int getNumeroRestaurantes() {
 		return numeroRestaurantes;
 	}
@@ -76,11 +87,11 @@ public class RepositorioRestaurante {
 		}
 		return copia;
 	}
-	
+
 	public Restaurante getCopia(long id) {
 		Restaurante[] copia = new Restaurante[numeroRestaurantes];
 		for (int i = 0; i < numeroRestaurantes; i++) {
-			if (restaurantes[i].getId()== id) {
+			if (restaurantes[i].getId() == id) {
 				copia[i] = restaurantes[i].clone();
 				return copia[i];
 			}

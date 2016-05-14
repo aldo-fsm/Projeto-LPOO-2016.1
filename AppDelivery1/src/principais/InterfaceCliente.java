@@ -45,6 +45,20 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaCliente.janelas();
 	}
 
+	public boolean soNumero(String texto){
+		if(texto==null){
+		return false;	
+		}
+		else{
+				for(char letra :texto.toCharArray()){
+					if(letra<'0'||letra>'9'){
+						return false;
+					} 
+				}
+				return true;
+		}
+	}
+	
 	public void janelaPrincipal() {
 		JPanel telaLogado = new JPanel(null);
 		cards.add(telaLogado, "Tela Principal");
@@ -218,24 +232,26 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(pedir)) {
 			String restauranteEscolhido;
+			int i;
+			boolean idIncorreto= true;
 			do {
 				restauranteEscolhido = "" + JOptionPane
 						.showInputDialog("digite o numero correspondente ao restaurante que deseja, abaixo listado\n"
 								+ gerente.listarRestaurantes());
 				if (restauranteEscolhido.equals("null")) {
 					break;
+				} 
+				i=0;
+				while(i < gerente.repositorioR().getNumeroRestaurantes()){
+				if(restauranteEscolhido.compareTo(String.valueOf(gerente.repositorioR().getRestaurante(i).getId()))==0){
+					idRestauranteEscolhido = Long.parseLong(restauranteEscolhido);
+					cL.show(cards, "Efetuar Pedido");
+					idIncorreto = false;
+					break;
 				}
-			} while (restauranteEscolhido.equals(""));
-			if (!restauranteEscolhido.equals("null")) {
-				int i = 0;
-				while (i < gerente.repositorioR().getNumeroRestaurantes()) {
-					if (restauranteEscolhido.equals(String.valueOf(gerente.repositorioR().getRestaurante(i).getId()))) {
-						idRestauranteEscolhido = Long.parseLong(restauranteEscolhido);
-						cL.show(cards, "Efetuar Pedido");
-						break;
-					}
+				i++;
 				}
-			}
+			} while (idIncorreto); 
 		}
 		if (e.getSource().equals(sair)) {
 			cL.show(cards, "Tela Inicial");
@@ -251,7 +267,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			DataBase.salvarEstado(gerente);
 		}
 		if(e.getSource().equals(efetuarPedido)){
-			
+			JOptionPane.showInputDialog("digite o numero correspondente ao item que deseja, abaixo listado\n"
+					+ gerente.repositorioR().getRestaurante(idRestauranteEscolhido));
 		}
 		if(e.getSource().equals(adicionarItem)){
 			
