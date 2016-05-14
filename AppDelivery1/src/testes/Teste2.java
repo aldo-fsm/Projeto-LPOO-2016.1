@@ -19,6 +19,7 @@ public class Teste2 {
 		// InterfaceCliente telaCliente = new InterfaceCliente(novo);
 		// telaCliente.janelas();
 		RepositorioPedido rP = new RepositorioPedido();
+		
 		rP.adicionar(new Pedido(12938, 2038));
 		ItemCardapio a = new ItemCardapio("la", 2.9);
 		a.setId(0);
@@ -29,11 +30,12 @@ public class Teste2 {
 		rP.getPedidos(0).setItens(veT);
 		rP.adicionar(new Pedido(1234, 12345566));
 		ItemCardapio[] ets = { a };
+		
 
 		rP.getPedido(1).setItens(ets);
 		DataBase.salvarEstado(rP);
-		ItemCardapio[] ara = DataBase.lerBasePedidos().getPedidos(1).getItens();
-		System.out.println(ara[0]);
+		ItemCardapio[] ara = DataBase.lerBasePedidos().getPedidos(0).getItens();
+		System.out.println(ara[1]);
 		// Gerente Teste = DataBase.lerBaseGerente();
 		// System.out.println(DataBase.lerBaseClientes().getCliente(0));
 		// System.out.println(DataBase.lerBaseGerente().repositorioC().getCliente(0));

@@ -7,7 +7,7 @@ public class Pedido {
 	private ItemCardapio[] itens = new ItemCardapio[150];
 	private Status status = Status.DEFAULT;
 	private int numeroItensPedido = 0;
-	
+
 	public Pedido(long idRestaurante, long idCliente) {
 		setIdRestaurate(idRestaurante);
 		setIdCliente(idCliente);
@@ -17,7 +17,7 @@ public class Pedido {
 	public String toString() {
 		String stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
 		for (int i = 0; i < numeroItensPedido; i++) {
-			stringPedido += ";" + itens[i];
+			stringPedido += ";" + itens[i].toString();
 		}
 		return stringPedido;
 	}
@@ -65,6 +65,7 @@ public class Pedido {
 
 	public void setItens(ItemCardapio[] itens) {
 		this.itens = itens;
+		numeroItensPedido = itens.length;
 	}
 
 	public Status getStatus() {

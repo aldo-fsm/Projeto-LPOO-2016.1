@@ -157,6 +157,7 @@ public class DataBase {
 		String str = Long.toString(pedido.getProximoId()) + "\n";
 		for (i = 0; i < pedido.getNumeroPedidos(); i++) {
 			str += pedido.getPedido(i).toString() + "\n";
+			
 		}
 		gravarDados(nome, str);
 	}
@@ -165,14 +166,13 @@ public class DataBase {
 		String[] strings = lerDados("arquivos/repositorioPedido.txt");
 		if (!strings.equals(null)) {
 			RepositorioPedido repositorioPedido = new RepositorioPedido();
-//			Pedido[] pedidos = new Pedido[RepositorioPedido.getMaxNumeroPedidos()];
 			String[] str = lerDados("arquivos/repositorioPedido.txt");
-			long proximoId = Long.parseLong(str[0]);
 			Pedido[] pedidos = new Pedido[RepositorioPedido.MAX_NUMERO_PEDIDOS];
+			long proximoId = Long.parseLong(strings[0]);
 			String[] stringSplit;
 			String[] stringSplit2;
+			ItemCardapio[]  itens;
 			repositorioPedido.setProximoId(proximoId);
-			ItemCardapio[] itens;
 			int i;
 			int j;
 			for (i = 1; i < strings.length; i++) {
@@ -187,13 +187,10 @@ public class DataBase {
 					itens[j - 4] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));
 					itens[j - 4].setId(Long.parseLong(stringSplit2[0]));
 				}
-//				repositorioPedido.setNumeroPedidos(i-1);
-//				repositorioPedido.setPedidos(pedidos);
-				repositorioPedido.setProximoId(proximoId);
-				repositorioPedido.getPedidos(i-1).setItens(itens);
 				pedidos[i - 1].setNumeroItensPedido(j - 4);
 				pedidos[i-1].setItens(itens);
-			}
+//				System.out.println(itens[i-4]);
+				}
 			repositorioPedido.setProximoId(Long.parseLong(strings[0]));
 			repositorioPedido.setNumeroPedidos(i - 1);
 			repositorioPedido.setPedidos(pedidos);
