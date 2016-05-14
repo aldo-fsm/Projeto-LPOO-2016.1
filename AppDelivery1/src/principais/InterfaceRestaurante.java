@@ -237,7 +237,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(listarPedidosButton)) {
 			atualizarListaPedidos();
-			if (numeroPedidos>0) {
+			if (numeroPedidos > 0) {
 				for (int i = 0; i < numeroPedidos; i++) {
 					areaTextoPedidos.append("  " + pedidos[i] + "\n");
 				}

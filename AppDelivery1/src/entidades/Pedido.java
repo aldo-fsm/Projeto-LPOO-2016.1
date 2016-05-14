@@ -17,7 +17,7 @@ public class Pedido {
 	public String toString() {
 		String stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
 		for (int i = 0; i < numeroItensPedido; i++) {
-			stringPedido += ";" + itens[i].toString();
+			stringPedido += ";" + itens[i];
 		}
 		return stringPedido;
 	}
@@ -65,7 +65,6 @@ public class Pedido {
 
 	public void setItens(ItemCardapio[] itens) {
 		this.itens = itens;
-		numeroItensPedido = itens.length;
 	}
 
 	public Status getStatus() {
