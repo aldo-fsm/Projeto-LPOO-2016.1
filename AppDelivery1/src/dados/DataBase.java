@@ -171,7 +171,7 @@ public class DataBase {
 			String[] stringSplit;
 			String[] stringSplit2;
 			repositorioPedido.setProximoId(proximoId);
-			ItemCardapio[] itens = new ItemCardapio[Cliente.MAX_ITENS_CARRINHO];
+			ItemCardapio[] itens;
 			int i;
 			int j;
 			for (i = 1; i < strings.length; i++) {
@@ -179,7 +179,8 @@ public class DataBase {
 				pedidos[i - 1] = new Pedido(Long.parseLong(stringSplit[2]), Long.parseLong(stringSplit[1]));
 				pedidos[i - 1].setIdPedido(Long.parseLong(stringSplit[0]));
 				pedidos[i - 1].setStatus(stringSplit[3]);
-
+				
+				itens = new ItemCardapio[Cliente.MAX_ITENS_CARRINHO];
 				for (j = 4; j < stringSplit.length; j++) {
 					stringSplit2 = stringSplit[j].split("/");
 					itens[j - 4] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));

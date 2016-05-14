@@ -1,7 +1,8 @@
 package principais;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,6 +23,7 @@ import entidades.Pedido;
 import entidades.Restaurante;
 import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
+import sun.misc.FormattedFloatingDecimal;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
@@ -115,6 +117,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		removerOkButton.addActionListener(this);
 		removerCancelarButton.addActionListener(this);
 		removerItemComboBox.addActionListener(this);
+		removerItemComboBox.setBackground(Color.WHITE);
 
 		removerItemComboBox.setBounds(290, 280, 220, 30);
 		removerOkButton.setBounds(290, 500, 100, 30);
@@ -142,22 +145,22 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	public boolean cadastrarItem() {
 
 		try {
-
-			String nome = JOptionPane.showInputDialog("Digite o nome do novo item");
-
-			if (nome == (null)) {
-				return true;
-			} else if (nome.equals("")) {
-				return false;
-			} else {
-				double preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o preco do item"));
+			String nome = JOptionPane.showInputDialog(this, "Digite o nome do novo item");
+			if (!nome.contains(";")) {
+				if (nome.equals("")) {
+					return false;
+				}
+				double preco = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite o preco do item"));
 				ItemCardapio item = new ItemCardapio(nome, preco);
 				restaurante.adicionarPrato(item);
 				atualizarDataBase();
 				return true;
+			} else {
+				JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+				return false;
 			}
-		} catch (NumberFormatException e) {
 
+		} catch (NumberFormatException e) {
 			return false;
 		} catch (NullPointerException e) {
 			return false;
@@ -188,7 +191,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (e.getSource().equals(loginOkButton)) {
 			repositorio = DataBase.LerBaseRestaurantes();
 			String login = campoTextoLogin.getText();
-			String senha = campoSenhaLogin.getText();
+			String senha = new String(campoSenhaLogin.getPassword());
 			for (int i = 0; i < repositorio.getNumeroRestaurantes(); i++) {
 				restaurante = repositorio.getRestaurante(i);
 				if (restaurante.getLogin().equals(login) && restaurante.getSenha().equals(senha)) {
@@ -214,7 +217,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (e.getSource().equals(cadastrarItemButton)) {
 			if (!cadastrarItem()) {
 
-				JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o item", "Erro",
+				JOptionPane.showMessageDialog(this, "Não foi possivel cadastrar o item", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -234,9 +237,9 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(listarPedidosButton)) {
 			atualizarListaPedidos();
-			if (pedidos != null) {
+			if (numeroPedidos>0) {
 				for (int i = 0; i < numeroPedidos; i++) {
-					areaTextoPedidos.append(pedidos[i] + "\n");
+					areaTextoPedidos.append("  " + pedidos[i] + "\n");
 				}
 				cL.show(telas, "tela listar pedidos");
 			} else {
