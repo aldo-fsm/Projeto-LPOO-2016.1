@@ -65,6 +65,7 @@ public class Pedido {
 
 	public void setItens(ItemCardapio[] itens) {
 		this.itens = itens;
+		numeroItensPedido = itens.length;
 	}
 
 	public Status getStatus() {
