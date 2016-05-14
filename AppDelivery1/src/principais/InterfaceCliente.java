@@ -139,6 +139,10 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		janelaPrincipal();
 	}
 
+	public void janelaAdicionarCarrinho(){
+		
+	}
+	
 	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(OkButtonLogin)) {
@@ -212,12 +216,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
-		
-		
-		
-		
-		
 		if (e.getSource().equals(pedir)) {
 			String restauranteEscolhido;
 			do {
@@ -232,7 +230,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				int i = 0;
 				while (i < gerente.repositorioR().getNumeroRestaurantes()) {
 					if (restauranteEscolhido.equals(String.valueOf(gerente.repositorioR().getRestaurante(i).getId()))) {
-						System.out.println("oioioioioi");
 						idRestauranteEscolhido = Long.parseLong(restauranteEscolhido);
 						cL.show(cards, "Efetuar Pedido");
 						break;
@@ -240,12 +237,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				}
 			}
 		}
-
-		
-		
-		
-		
-		
 		if (e.getSource().equals(sair)) {
 			cL.show(cards, "Tela Inicial");
 			int i = 0;
@@ -258,6 +249,15 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 			gerente.removerCliente(i);
 			DataBase.salvarEstado(gerente);
+		}
+		if(e.getSource().equals(efetuarPedido)){
+			
+		}
+		if(e.getSource().equals(adicionarItem)){
+			
+		}
+		if(e.getSource().equals(removerItem)){
+	
 		}
 	}
 }
