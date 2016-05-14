@@ -103,7 +103,6 @@ public class DataBase {
 				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
 				repositorioCliente.adicionar(clientes[i-1]);
 				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
-				i++;
 			}
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
@@ -164,7 +163,7 @@ public class DataBase {
 	public static RepositorioPedido lerBasePedidos() {
 		try {
 			RepositorioPedido repositorioPedido = new RepositorioPedido();
-			Pedido[] pedidos = new Pedido[RepositorioPedido.getMaxNumeroPedidos()];
+//			Pedido[] pedidos = new Pedido[RepositorioPedido.getMaxNumeroPedidos()];
 			String[] str = lerDados("arquivos/repositorioPedido.txt");
 			long proximoId = Long.parseLong(str[0]);
 			String[] stringSplit;

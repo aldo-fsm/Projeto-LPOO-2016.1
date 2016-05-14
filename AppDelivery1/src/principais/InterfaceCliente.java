@@ -30,26 +30,19 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private JButton removerItem = new JButton("Remover Item Do Carrinho");
 	private JButton efetuarPedido = new JButton("Efetuar Pedido");
 	private JButton pedir = new JButton("Pedir");
-	private JButton OkButtonSair = new JButton("Sair");
 	private JButton sair = new JButton("Deixar De ser Cliente");
 	private JTextField campoLogin = new JTextField();
-	private JTextField CampoLoginSair = new JTextField();
 	private JPasswordField campoSenhaLogin = new JPasswordField();
-	private JPasswordField CampoSenhaSair = new JPasswordField();
 	private JTextField campoCadastroLogin = new JTextField();
 	private JPasswordField campoCadastroSenha = new JPasswordField();
-	private Gerente gerente;
+	private long idRestauranteEscolhido;
+	private Gerente gerente = DataBase.lerBaseGerente();
 	private String senhaDoUsuario;
 	private String loginDoUsuario;
 
 	public static void main(String[] args) {
-		Gerente gerente = DataBase.lerBaseGerente();
-		InterfaceCliente telaCliente = new InterfaceCliente(gerente);
+		InterfaceCliente telaCliente = new InterfaceCliente();
 		telaCliente.janelas();
-	}
-
-	public InterfaceCliente(Gerente gerente) {
-		this.gerente = gerente;
 	}
 
 	public void janelaPrincipal() {
@@ -144,26 +137,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		janelaCadastro();
 		janelaPedido();
 		janelaPrincipal();
-		janelaSair();
-	}
-
-	public void janelaSair() {
-		JPanel telaSair = new JPanel(null);
-		cards.add(telaSair, "Tela Sair");
-		CampoLoginSair.setBounds(300, 350, 200, 30);
-		telaSair.add(CampoLoginSair);
-		CampoSenhaSair.setBounds(300, 400, 200, 30);
-		telaSair.add(CampoSenhaSair);
-		JLabel login = new JLabel("Login :");
-		login.setBounds(250, 350, 50, 30);
-		telaSair.add(login);
-		JLabel senha = new JLabel("Senha :");
-		senha.setBounds(250, 400, 50, 30);
-		telaSair.add(senha);
-		OkButtonSair.setBounds(350, 450, 100, 30);
-		OkButtonSair.addActionListener(this);
-		telaSair.add(OkButtonSair);
-
 	}
 
 	@SuppressWarnings("deprecation")
@@ -172,109 +145,119 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			int i = 0;
 			boolean logado = false;
 			Cliente[] listaDeClientes = gerente.repositorioC().getCliente();
-			while (i < gerente.repositorioC().getNumeroClientes()) {
-				System.out.println(listaDeClientes[i].getNome());
-				if (listaDeClientes[i].getNome().equals(campoLogin.getText())
+			while (i < gerente.repositorioC().getNumeroClientes()) {// confere se as informaçoes de login e senha condizem com algum dos usuarios do repositorio
+				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
 						&& listaDeClientes[i].getSenha().equals(campoSenhaLogin.getText())) {
-					cL.show(cards, "Tela Principal");
-					loginDoUsuario = campoLogin.getText();
-					campoLogin.setText("");
-					senhaDoUsuario = campoSenhaLogin.getText();
-					campoSenhaLogin.setText("");
-					logado = true;
+					cL.show(cards, "Tela Principal");// se condiz a tela principal e aberta
+					loginDoUsuario = campoLogin.getText();// o login e salvo caso o usuario deseje deixar de ser cliente
+					senhaDoUsuario = campoSenhaLogin.getText();// assim como a senha
+					campoLogin.setText("");// campo e apagado
+					campoSenhaLogin.setText("");// campo e apagado
+					logado = true;// informações validas
 					break;
 				}
 				i++;
 			}
 			if (!logado) {
 				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
-				campoSenhaLogin.setText("");
-				campoLogin.setText("");
+				campoSenhaLogin.setText("");// campo e apagado
+				campoLogin.setText("");// campo e apagado
 			}
 		}
 		if (e.getSource().equals(OkButtonCadastro)) {
 			int i = 0;
 			boolean podeCadastrar = true;
-			while (i < gerente.repositorioC().getNumeroClientes()) {
-				// bug aqui quando se usa o gerente recuperado
+			while (i < gerente.repositorioC().getNumeroClientes()) {// confere se as inforções de login e/ou nome ja foram utilizadas
 				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().getCliente(i).getLogin())
 						|| campoCadastroNome.getText().equals(gerente.repositorioC().getCliente(i).getNome()))) {
 					podeCadastrar = false;
 				}
 				i++;
 			}
-			if (podeCadastrar) {
+			if (podeCadastrar) {// caso nao tenha sido utilizada pode prosseguir com a execução do programa
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
-						&& !campoCadastroSenha.getText().equals("")) {
-					cL.show(cards, "Tela Principal");
+						&& !campoCadastroSenha.getText().equals("")) {// confere se os campos estão vazios
+					cL.show(cards, "Tela Principal");// vai para tela principal
 					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), campoCadastroNome.getText(),
-							campoCadastroSenha.getText()));
-
-					loginDoUsuario = campoCadastroLogin.getText();
-					campoCadastroLogin.setText("");
-					campoCadastroNome.setText("");
-					senhaDoUsuario = campoCadastroSenha.getText();
-					campoCadastroSenha.setText("");
+							campoCadastroSenha.getText())); // adiciona um novo cliente no repositorio do gerente informado
+					loginDoUsuario = campoCadastroLogin.getText();// salva na classe o login do cliente que deseja sair
+					senhaDoUsuario = campoCadastroSenha.getText();// salva na classe o senha do cliente que deseja sair
+					campoCadastroLogin.setText("");// apaga os campos de texto
+					campoCadastroNome.setText("");// apaga os campos de texto
+					campoCadastroSenha.setText("");// apaga os campos de texto
+					DataBase.salvarEstado(gerente);// salva o estado do sistema apos adicionado o cliente
 				} else {
 					JOptionPane.showMessageDialog(this, "Um ou mais campos esta(o) vazio(s)", "Erro",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
 				JOptionPane.showMessageDialog(this, "Informações ja utilizadas", "Erro", JOptionPane.ERROR_MESSAGE);
-				campoCadastroLogin.setText("");
-				campoCadastroNome.setText("");
-				campoCadastroSenha.setText("");
+				campoCadastroLogin.setText("");// apaga os campos de texto
+				campoCadastroNome.setText("");// apaga os campos de texto
+				campoCadastroSenha.setText("");// apaga os campos de texto
 			}
 		}
 		if (e.getSource().equals(logoutButton)) {
-			cL.show(cards, "Tela Inicial");
+			cL.show(cards, "Tela Inicial");// ao ser deslogado o usuario volta
+											// para pagina inicial
 		}
 		if (e.getSource().equals(opcaoCadastro)) {
-			cL.show(cards, "Tela De Cadastro");
+			cL.show(cards, "Tela De Cadastro");// ao escolher a opção cadastro abre-se a janela de cadastro
 		}
 		if (e.getSource().equals(opcaoLogin)) {
-			if (gerente.repositorioC().getNumeroClientes() != 0) {
+			if (gerente.repositorioC().getNumeroClientes() != 0) {// se houver cliente(s) a tela de login e aberta ao ser esta opção
 				cL.show(cards, "Tela De Login");
 			} else {
 				JOptionPane.showMessageDialog(this, "não e possivel logar, pois nao há clientes cadastrados", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		
+		
+		
+		
+		
 		if (e.getSource().equals(pedir)) {
 			String restauranteEscolhido;
 			do {
-				restauranteEscolhido = "" + JOptionPane.showInputDialog(
-						"digite o numero correspondente ao restaurante que deseja, abaixo listado\n" + gerente.listarRestaurantes());
-				if(restauranteEscolhido.equals("null")){
+				restauranteEscolhido = "" + JOptionPane
+						.showInputDialog("digite o numero correspondente ao restaurante que deseja, abaixo listado\n"
+								+ gerente.listarRestaurantes());
+				if (restauranteEscolhido.equals("null")) {
 					break;
 				}
 			} while (restauranteEscolhido.equals(""));
 			if (!restauranteEscolhido.equals("null")) {
-				cL.show(cards, "Efetuar Pedido");
-			}
-		}
-		if (e.getSource().equals(sair)) {
-			cL.show(cards, "Tela Sair");
-		}
-		if (e.getSource().equals(OkButtonSair)) {
-			int i = 0;
-			if (senhaDoUsuario.equals(CampoSenhaSair.getText()) && loginDoUsuario.equals(CampoLoginSair.getText())) {
-				cL.show(cards, "Tela Inicial");
-				while (i < gerente.repositorioC().getNumeroClientes()) {
-					if (gerente.repositorioC().getCliente(i).getNome().equals(loginDoUsuario)
-							&& gerente.repositorioC().getCliente(i).getSenha().equals(senhaDoUsuario)) {
+				int i = 0;
+				while (i < gerente.repositorioR().getNumeroRestaurantes()) {
+					if (restauranteEscolhido.equals(String.valueOf(gerente.repositorioR().getRestaurante(i).getId()))) {
+						System.out.println("oioioioioi");
+						idRestauranteEscolhido = Long.parseLong(restauranteEscolhido);
+						cL.show(cards, "Efetuar Pedido");
 						break;
 					}
 				}
-				gerente.removerCliente(i);
-				CampoLoginSair.setText("");
-				CampoSenhaSair.setText("");
-			} else {
-				JOptionPane.showMessageDialog(this, "Senha ou Login incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
-				CampoLoginSair.setText("");
-				CampoSenhaSair.setText("");
 			}
 		}
-	}
 
+		
+		
+		
+		
+		
+		if (e.getSource().equals(sair)) {
+			cL.show(cards, "Tela Inicial");
+			int i = 0;
+			while (i < gerente.repositorioC().getNumeroClientes()) {
+				if (gerente.repositorioC().getCliente(i).getLogin().equals(loginDoUsuario)
+						&& gerente.repositorioC().getCliente(i).getSenha().equals(senhaDoUsuario)) {
+					break;
+				}
+				i++;
+			}
+			gerente.removerCliente(i);
+			DataBase.salvarEstado(gerente);
+		}
+	}
 }

@@ -1,4 +1,2 @@
-4
-0;login5;senha5;cliente1
-1;login5;senha5;cliente2
-3;login5;senhaDeJose;Jose
+2
+1;a;a;a
