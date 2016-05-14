@@ -1,16 +1,12 @@
 package principais;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,7 +34,7 @@ public class InterfaceGraficaGerente extends JFrame implements ActionListener {
 
 		super("AppDelivery - Gerente");
 
-		gerente = DataBase.lerBaseGerente();
+		atualizarGerente();
 
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,11 +150,15 @@ public class InterfaceGraficaGerente extends JFrame implements ActionListener {
 		return true;
 	}
 
+	public void atualizarGerente() {
+		gerente = DataBase.lerBaseGerente();
+	}
+
 	public boolean adicionarPrato() {
 		JPanel painel = new JPanel(null);
 		painel.setPreferredSize(new Dimension(500, 300));
 
-		JLabel label1 = new JLabel("Escolha um restaurante");
+		JLabel label1 = new JLabel("Escolha um Restaurante");
 		JLabel label2 = new JLabel("Dados do Prato :");
 		JLabel label3 = new JLabel("Nome");
 		JLabel label4 = new JLabel("Preço");
@@ -188,25 +188,126 @@ public class InterfaceGraficaGerente extends JFrame implements ActionListener {
 		int n = JOptionPane.showOptionDialog(null, painel, "Adicionar prato", JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, null, null);
 		if (n == 0) {
-			try{
-			String nome = campoTextoNome.getText();
-			Double preco = Double.parseDouble(campoTextoPreco.getText());
+			try {
+				String nome = campoTextoNome.getText();
+				Double preco = Double.parseDouble(campoTextoPreco.getText());
 
-			if (nome == null || nome.equals("")) {
-				return false;
-			} else if (nome.contains(";") || nome.contains("/")) {
-				JOptionPane.showMessageDialog(this, " \" ; \" e \" / \" não são caracteres válidos");
+				if (nome == null || nome.equals("")) {
+					return false;
+				} else if (nome.contains(";") || nome.contains("/")) {
+					JOptionPane.showMessageDialog(this, " \" ; \" e \" / \" não são caracteres válidos");
+					return false;
+				}
+				gerente.adicionarPrato(cb.getSelectedIndex(), new ItemCardapio(nome, preco));
+				atualizarDataBase();
+				return true;
+			} catch (NumberFormatException e) {
 				return false;
 			}
-			gerente.adicionarPrato(cb.getSelectedIndex(), new ItemCardapio(nome, preco));
-			atualizarDataBase();
-			return true;
-			}catch(NumberFormatException e){
-				return false;
-			}
-			
-		}else{
+
+		} else {
 			return false;
+		}
+	}
+
+	public void removerPrato() {
+		atualizarGerente();
+		JPanel painel = new JPanel(null);
+		painel.setPreferredSize(new Dimension(500, 150));
+
+		JLabel label1 = new JLabel("Escolha um Restaurante");
+		JComboBox<String> cb = new JComboBox<String>();
+		cb.setBackground(Color.WHITE);
+
+		cb.setBounds(50, 40, 300, 30);
+		label1.setBounds(50, 10, 300, 20);
+
+		painel.add(cb);
+		painel.add(label1);
+
+		for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
+			Restaurante restaurante = gerente.repositorioR().getRestaurante(i);
+			cb.addItem("Nome : " + restaurante.getNome() + ",  id : " + restaurante.getId());
+		}
+
+		int n = JOptionPane.showOptionDialog(null, painel, "Remover Prato", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (n == 0) {
+			int iRest = cb.getSelectedIndex();
+			Restaurante restaurante = gerente.repositorioR().getRestaurante(iRest);
+			if (restaurante.getNumeroPratosCardapio() != 0) {
+				label1.setText("Escolha o item a ser removido");
+				cb.removeAllItems();
+				for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
+					ItemCardapio item = restaurante.getPratoCardapio(i);
+					cb.addItem("Nome : " + item.getNome() + ",  id : " + item.getId());
+				}
+				n = JOptionPane.showOptionDialog(null, painel, "Remover Prato", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (n == 0) {
+					gerente.removerPrato(iRest, cb.getSelectedIndex());
+					atualizarDataBase();
+				}
+			} else {
+				JOptionPane.showMessageDialog(this, "Este restaurante não possui nenhum prato");
+			}
+		}
+
+	}
+
+	public void removerRestaurante() {
+		atualizarGerente();
+		JPanel painel = new JPanel(null);
+		painel.setPreferredSize(new Dimension(500, 150));
+
+		JLabel label1 = new JLabel("Escolha o restaurante a ser removido");
+		JComboBox<String> cb = new JComboBox<String>();
+		cb.setBackground(Color.WHITE);
+
+		cb.setBounds(50, 40, 300, 30);
+		label1.setBounds(50, 10, 300, 20);
+
+		painel.add(cb);
+		painel.add(label1);
+
+		for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
+			Restaurante restaurante = gerente.repositorioR().getRestaurante(i);
+			cb.addItem("Nome : " + restaurante.getNome() + ",  id : " + restaurante.getId());
+		}
+
+		int n = JOptionPane.showOptionDialog(null, painel, "Remover Restaurante", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (n == 0) {
+			gerente.removerRestaurante(cb.getSelectedIndex());
+			atualizarDataBase();
+		}
+	}
+
+	public void removerCliente() {
+		atualizarGerente();
+		JPanel painel = new JPanel(null);
+		painel.setPreferredSize(new Dimension(500, 150));
+
+		JLabel label1 = new JLabel("Escolha o Cliente a ser removido");
+		JComboBox<String> cb = new JComboBox<String>();
+		cb.setBackground(Color.WHITE);
+
+		cb.setBounds(50, 40, 300, 30);
+		label1.setBounds(50, 10, 300, 20);
+
+		painel.add(cb);
+		painel.add(label1);
+
+		for (int i = 0; i < gerente.repositorioC().getNumeroClientes(); i++) {
+			Cliente cliente = gerente.repositorioC().getCliente(i);
+			cb.addItem("Nome : " + cliente.getNome() + ",  id : " + cliente.getId());
+		}
+
+		int n = JOptionPane.showOptionDialog(null, painel, "Remover Cliente", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (n == 0) {
+			gerente.removerCliente(cb.getSelectedIndex());
+			atualizarDataBase();
 		}
 	}
 
@@ -234,6 +335,15 @@ public class InterfaceGraficaGerente extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Não foi possivel cadastrar o prato", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
+		}
+		if (e.getSource().equals(removerPratoButton)) {
+			removerPrato();
+		}
+		if (e.getSource().equals(removerRestauranteButton)) {
+			removerRestaurante();
+		}
+		if (e.getSource().equals(removerClienteButton)) {
+			removerCliente();
 		}
 
 	}
