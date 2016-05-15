@@ -51,7 +51,7 @@ public class Cliente extends Usuario {
 				carrinho[id] = carrinho[id + 1];
 				id++;
 			}
-			numeroItensCarrinho--;
+			numeroItensCarrinho=id-1;
 		}
 	}
 
