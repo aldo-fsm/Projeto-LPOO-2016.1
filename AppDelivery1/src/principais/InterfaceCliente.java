@@ -230,7 +230,6 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		} while (idIncorreto);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(OkButtonLogin)) {
 			int i = 0;
@@ -248,14 +247,14 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 																	// do
 																	// repositorio
 				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
-						&& listaDeClientes[i].getSenha().equals(campoSenhaLogin.getText())) {
+						&& listaDeClientes[i].getSenha().equals(new String(campoSenhaLogin.getPassword()))) {
 					cL.show(cards, "Tela Principal");// se condiz a tela
 														// principal e aberta
 					loginDoUsuario = campoLogin.getText();// o login e salvo
 															// caso o usuario
 															// deseje deixar de
 															// ser cliente
-					senhaDoUsuario = campoSenhaLogin.getText();// assim como a
+					senhaDoUsuario = new String(campoSenhaLogin.getPassword());// assim como a
 																// senha
 					campoLogin.setText("");// campo e apagado
 					campoSenhaLogin.setText("");// campo e apagado
@@ -289,13 +288,13 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (podeCadastrar) {// caso nao tenha sido utilizada pode prosseguir
 								// com a execução do programa
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
-						&& !campoCadastroSenha.getText().equals("")) {// confere
+						&& !(new String(campoCadastroSenha.getPassword())).equals("")) {// confere
 																		// se os
 																		// campos
 																		// estão
 																		// vazios
 					cL.show(cards, "Tela Principal");// vai para tela principal
-					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), campoCadastroSenha.getText(),
+					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), new String(campoCadastroSenha.getPassword()),
 							campoCadastroNome.getText())); // adiciona um novo
 															// cliente no
 															// repositorio do
@@ -304,7 +303,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 																	// classe o
 																	// login do
 																	// cliente
-					senhaDoUsuario = campoCadastroSenha.getText();// salva na
+					senhaDoUsuario = new String(campoCadastroSenha.getPassword());// salva na
 																	// classe o
 																	// senha do
 																	// cliente
