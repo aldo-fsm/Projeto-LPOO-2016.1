@@ -71,14 +71,25 @@ public class RepositorioRestaurante {
 		return numeroRestaurantes;
 	}
 
-	public void listarCardapio(int id) {
+	public String listarCardapio(int id) {
 		Restaurante restaurante = getRestaurante(id);
+		String cardapio = "";
 		for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
-			System.out.println(i + ". " + restaurante.getPratoCardapio(i).getNome() + " -------- "
-					+ restaurante.getPratoCardapio(i).getPreco());
+			cardapio = cardapio + restaurante.getPratoCardapio(i).getId() + ". " + restaurante.getPratoCardapio(i).getNome() + " -------- "
+					+ restaurante.getPratoCardapio(i).getPreco()+"\n";
 		}
+		return cardapio;
 	}
-
+	
+	public String listarCardapio(long id) {
+		Restaurante restaurante = getRestaurante(id);
+		String cardapio = "";
+		for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
+			cardapio = cardapio + restaurante.getPratoCardapio(i).getId() + ". " + restaurante.getPratoCardapio(i).getNome() + " -------- "
+					+ restaurante.getPratoCardapio(i).getPreco()+"\n";
+		}
+		return cardapio;
+	}
 	// retorna uma copia de todos os itens do repositorio
 	public Restaurante[] copiar() {
 		Restaurante[] copia = new Restaurante[MAX_NUMERO_RESTAURANTES];

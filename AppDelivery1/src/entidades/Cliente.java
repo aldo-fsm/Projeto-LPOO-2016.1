@@ -1,7 +1,9 @@
 package entidades;
 
+import dados.DataBase;
+import repositorios.RepositorioPedido;
 
-public class Cliente extends Usuario{
+public class Cliente extends Usuario {
 
 	private long[] favoritos;
 	private ItemCardapio[] carrinho = new ItemCardapio[MAX_ITENS_CARRINHO];
@@ -15,9 +17,9 @@ public class Cliente extends Usuario{
 	public Cliente(String login, String senha, String nome) {
 		super(login, senha, nome);
 	}
-	
+
 	@Override
-	public Cliente clone(){
+	public Cliente clone() {
 		Cliente copia = new Cliente(getLogin(), getSenha(), getNome());
 		copia.setId(getId());
 		copia.setCarrinho(getCarrinho());
@@ -32,6 +34,14 @@ public class Cliente extends Usuario{
 			carrinho[numeroItensCarrinho] = item;
 			numeroItensCarrinho++;
 		}
+	}
+
+	public String listarCarrinho() {
+		String retorno = "";
+		for (int i = 0; i < numeroItensCarrinho; i++) {
+			retorno = retorno + carrinho[i].toString() + "\n";
+		}
+		return retorno;
 	}
 
 	// remove o item na posicao id do array carrinho
@@ -50,20 +60,18 @@ public class Cliente extends Usuario{
 	 * pedido
 	 */
 	public void efetuarPedido(long idRestaurante) {
-		String stringPedido;
-		stringPedido = getId() + "; " + idRestaurante + "; PREPARANDO;";
-		for (int n = 0; n < numeroItensCarrinho; n++) {
-			stringPedido = stringPedido+ "; " + (n + 1) + ". " + carrinho[n].getId() + "/" + carrinho[n].getNome()
-					+ "/" + carrinho[n].getPreco();
-		}
-
+		RepositorioPedido repositorio = DataBase.lerBasePedidos();
+		Pedido novoPedido = new Pedido(idRestaurante, getId());
+		novoPedido.setItens(carrinho);
+		repositorio.adicionar(novoPedido);
+		DataBase.salvarEstado(repositorio);
 	}
 
 	@Override
 	public String toString() {
 		return (getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome());
 	}
-	
+
 	public void cancelarPedido() {
 
 	}
@@ -78,6 +86,10 @@ public class Cliente extends Usuario{
 
 	public ItemCardapio[] getCarrinho() {
 		return carrinho;
+	}
+	
+	public ItemCardapio getCarrinho(int i) {
+		return carrinho[i];
 	}
 
 	public void setCarrinho(ItemCardapio[] carrinho) {

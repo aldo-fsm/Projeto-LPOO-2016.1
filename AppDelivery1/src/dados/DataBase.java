@@ -157,7 +157,6 @@ public class DataBase {
 		String str = Long.toString(pedido.getProximoId()) + "\n";
 		for (i = 0; i < pedido.getNumeroPedidos(); i++) {
 			str += pedido.getPedido(i).toString() + "\n";
-
 		}
 		gravarDados(nome, str);
 	}

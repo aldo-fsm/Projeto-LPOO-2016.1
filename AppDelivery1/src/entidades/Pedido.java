@@ -16,8 +16,10 @@ public class Pedido {
 	@Override
 	public String toString() {
 		String stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
-		for (int i = 0; i < numeroItensPedido; i++) {
-			stringPedido += ";" + itens[i];
+		int i;
+		//se achar um metodo melhor fala comigo cara, e que nao to conseguindo fazer o nomeroItensPedido funcionar corretamente
+		for (i = 0; i<itens.length; i++) {//mas na leitura, apesar de demorar mais, funciona da mesma maneira
+				stringPedido += ";" + itens[i];
 		}
 		return stringPedido;
 	}
@@ -65,7 +67,6 @@ public class Pedido {
 
 	public void setItens(ItemCardapio[] itens) {
 		this.itens = itens;
-		numeroItensPedido = itens.length;
 	}
 
 	public Status getStatus() {
@@ -97,4 +98,6 @@ public class Pedido {
 	public void setNumeroItensPedido(int numeroItensPedido) {
 		this.numeroItensPedido = numeroItensPedido;
 	}
+
+	
 }
