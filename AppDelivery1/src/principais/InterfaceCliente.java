@@ -152,8 +152,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		String itemRemovido;
 		boolean idIncorreto = true;
 		int numeroDoItem;
-		do {
-			// pede e le o id que o cliente digitou
+		do {// pede e le id que o cliente digita
 
 			// lista o cardapio do restaurante de id escolhido
 			itemRemovido = "" + JOptionPane
@@ -235,27 +234,24 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			int i = 0;
 			boolean logado = false;
 			Cliente[] listaDeClientes = gerente.repositorioC().getCliente();
-			while (i < gerente.repositorioC().getNumeroClientes()) {// confere
-																	// se as
-																	// informaçoes
-																	// de login
-																	// e senha
-																	// condizem
-																	// com algum
-																	// dos
-																	// usuarios
-																	// do
-																	// repositorio
+			while (i < gerente.repositorioC().getNumeroClientes()) {
+				/*
+				 * confere se as informaçoes de login e senha condizem com algum
+				 * dos usuarios do repositorio
+				 */
 				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
 						&& listaDeClientes[i].getSenha().equals(new String(campoSenhaLogin.getPassword()))) {
-					cL.show(cards, "Tela Principal");// se condiz a tela
-														// principal e aberta
-					loginDoUsuario = campoLogin.getText();// o login e salvo
-															// caso o usuario
-															// deseje deixar de
-															// ser cliente
-					senhaDoUsuario = new String(campoSenhaLogin.getPassword());// assim como a
-																// senha
+					cL.show(cards, "Tela Principal");
+					/*
+					 * se condiz a tela principal e aberta
+					 */
+					loginDoUsuario = campoLogin.getText();
+					/*
+					 * o login e salvo caso o usuario deseje deixar de ser
+					 * cliente
+					 */
+					senhaDoUsuario = new String(campoSenhaLogin.getPassword());
+					// assim como a senha
 					campoLogin.setText("");// campo e apagado
 					campoSenhaLogin.setText("");// campo e apagado
 					logado = true;// informações validas
@@ -272,41 +268,42 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(OkButtonCadastro)) {
 			int i = 0;
 			boolean podeCadastrar = true;
-			while (i < gerente.repositorioC().getNumeroClientes()) {// confere
-																	// se as
-																	// inforções
-																	// de login
-																	// e/ou nome
-																	// ja foram
-																	// utilizadas
+			while (i < gerente.repositorioC().getNumeroClientes()) {
+				/*
+				 * confere se as inforções de login e/ou nome ja foram
+				 * utilizadas
+				 */
 				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().getCliente(i).getLogin())
 						|| campoCadastroNome.getText().equals(gerente.repositorioC().getCliente(i).getNome()))) {
 					podeCadastrar = false;
 				}
 				i++;
 			}
-			if (podeCadastrar) {// caso nao tenha sido utilizada pode prosseguir
-								// com a execução do programa
+			if (podeCadastrar) {
+				/*
+				 * caso nao tenha sido utilizada pode prosseguir com a execução
+				 * do programa
+				 */
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
 						&& !(new String(campoCadastroSenha.getPassword())).equals("")) {// confere
-																		// se os
-																		// campos
-																		// estão
-																		// vazios
+					/*
+					 * se os campos estão vazios
+					 */
 					cL.show(cards, "Tela Principal");// vai para tela principal
-					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), new String(campoCadastroSenha.getPassword()),
-							campoCadastroNome.getText())); // adiciona um novo
-															// cliente no
-															// repositorio do
-															// gerente informado
-					loginDoUsuario = campoCadastroLogin.getText();// salva na
-																	// classe o
-																	// login do
-																	// cliente
-					senhaDoUsuario = new String(campoCadastroSenha.getPassword());// salva na
-																	// classe o
-																	// senha do
-																	// cliente
+					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(),
+							new String(campoCadastroSenha.getPassword()), campoCadastroNome.getText()));
+					/*
+					 * adiciona um novo cliente no repositorio do gerente
+					 * informado
+					 */
+					loginDoUsuario = campoCadastroLogin.getText();
+					/*
+					 * salva na classe o login do cliente
+					 */
+					senhaDoUsuario = new String(campoCadastroSenha.getPassword());
+					/*
+					 * salva na classe o senha do cliente
+					 */
 					campoCadastroLogin.setText("");// apaga os campos de texto
 					campoCadastroNome.setText("");// apaga os campos de texto
 					campoCadastroSenha.setText("");// apaga os campos de texto
@@ -332,13 +329,11 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 												// abre-se a janela de cadastro
 		}
 		if (e.getSource().equals(opcaoLogin)) {
-			if (gerente.repositorioC().getNumeroClientes() != 0) {// se houver
-																	// cliente(s)
-																	// a tela de
-																	// login e
-																	// aberta ao
-																	// ser esta
-																	// opção
+			if (gerente.repositorioC().getNumeroClientes() != 0) {
+				/*
+				 * se houver cliente(s) a tela de login e aberta ao ser esta
+				 * opção
+				 */
 				cL.show(cards, "Tela De Login");
 			} else {
 				JOptionPane.showMessageDialog(this, "não e possivel logar, pois nao há clientes cadastrados", "Erro",
