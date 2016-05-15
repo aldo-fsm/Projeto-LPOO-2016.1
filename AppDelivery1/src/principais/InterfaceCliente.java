@@ -211,34 +211,20 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				break;
 			}
 			i = 0;
-			while (i < gerente.repositorioR().getRestaurante(numeroRestauranteEscolhido).getNumeroPratosCardapio()) {// confere
-																														// se
-																														// o
-																														// id
-																														// digitado
-																														// pelo
-																														// cliente
-																														// corresponde
-																														// a
-																														// um
-																														// dos
-																														// ids
-																														// dos
-																														// pratos
+			while (i < gerente.repositorioR().getRestaurante(numeroRestauranteEscolhido).getNumeroPratosCardapio()) {
+				/*
+				 * confere se o id digitado pelo cliente corresponde a um dos
+				 * ids dos pratos
+				 */
 				if (itemEscolhido.compareTo(String.valueOf(gerente.repositorioR()
 						.getRestaurante(numeroRestauranteEscolhido).getPratoCardapio(i).getId())) == 0) {
 					idItemEscolhido = Long.parseLong(itemEscolhido);
 					numeroDoCliente = 0;
-					while (numeroDoCliente < gerente.repositorioC().getNumeroClientes()) {// identifica
-																							// o
-																							// cliete
-																							// que
-																							// possui
-																							// o
-																							// login
-																							// e
-																							// senha
-																							// informados
+					while (numeroDoCliente < gerente.repositorioC().getNumeroClientes()) {
+						/*
+						 * identifica o cliete que possui o login e senha
+						 * informados
+						 */
 						if (gerente.repositorioC().getCliente(numeroDoCliente).getLogin().equals(loginDoUsuario)
 								&& gerente.repositorioC().getCliente(numeroDoCliente).getSenha()
 										.equals(senhaDoUsuario)) {
@@ -247,7 +233,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 						numeroDoCliente++;
 					}
 					gerente.repositorioC().getCliente(numeroDoCliente).adicionarNoCarrinho(gerente.repositorioR()
-							.getRestaurante(numeroRestauranteEscolhido).getPratoCardapio(idItemEscolhido));
+							.getRestaurante((long) numeroRestauranteEscolhido).getPratoCardapio(idItemEscolhido));
 					DataBase.salvarEstado(gerente);// salva o estado do sistema
 					idIncorreto = false;
 					break;

@@ -170,6 +170,10 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
+	/*
+	 * ler dados do repositorio de pedidos salvos em arquivo e retorna um
+	 * RepositorioPedido com esses dados
+	 */
 	public static RepositorioPedido lerBasePedidos() {
 		String[] strings = lerDados("arquivos/repositorioPedido.txt");
 		if (!strings.equals(null)) {
@@ -207,6 +211,10 @@ public class DataBase {
 		}
 	}
 
+	/*
+	 * ler dados dos repositorios de clientes e de restaurantes salvos em
+	 * arquivo e retorna um Gerente com esses repositorios
+	 */
 	public static Gerente lerBaseGerente() {
 		Gerente recuperado = new Gerente();
 		recuperado.setRepositorioC(lerBaseClientes());
