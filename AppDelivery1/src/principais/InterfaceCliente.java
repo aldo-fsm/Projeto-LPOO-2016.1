@@ -153,17 +153,13 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		boolean idIncorreto = true;
 		int numeroDoItem;
 		do {
-			// pede e le id que o cliente digita
+			// pede e le o id que o cliente digitou
+
+			// lista o cardapio do restaurante de id escolhido
 			itemRemovido = "" + JOptionPane
 					.showInputDialog("digite o numero correspondente ao item que deseja remover, abaixo, listado\n"
-							+ gerente.repositorioC().getCliente(numeroDoCliente).listarCarrinho());// lista
-																									// o
-																									// cardapio
-																									// do
-																									// restaurante
-																									// de
-																									// id
-																									// escolhido
+							+ gerente.repositorioC().getCliente(numeroDoCliente).listarCarrinho());
+
 			if (itemRemovido.equals("null")) {// caso tenha apertado em cancelar
 												// a janela fecha
 				break;
@@ -224,7 +220,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 						numeroDoCliente++;
 					}
 					gerente.repositorioC().getCliente(numeroDoCliente).adicionarNoCarrinho(gerente.repositorioR()
-							.getRestaurante((long) numeroRestauranteEscolhido).getPratoCardapio(idItemEscolhido));
+							.getRestaurante(numeroRestauranteEscolhido).getPratoCardapio(idItemEscolhido));
 					DataBase.salvarEstado(gerente);// salva o estado do sistema
 					idIncorreto = false;
 					break;

@@ -1,3 +1,7 @@
-6
+10
 4;6;2;DEFAULT;0/Pizza/29.9;5/item/123.0;3/Arroz/5.9
 5;6;2;DEFAULT;0/Pizza/29.9;5/item/123.0;3/Arroz/5.9;5/item/123.0;3/Arroz/5.9
+6;16;8;DEFAULT;0/prato1/1.5;1/prato2/10.99
+7;16;8;DEFAULT;0/prato1/1.5
+8;16;2;DEFAULT;3/Arroz/5.9;0/Pizza/29.9;3/Arroz/5.9
+9;16;2;DEFAULT;3/Arroz/5.9

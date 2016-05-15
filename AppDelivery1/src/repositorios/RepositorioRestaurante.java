@@ -56,7 +56,7 @@ public class RepositorioRestaurante {
 		return null;
 	}
 
-	public Restaurante getRestaurante(long id) {
+	public Restaurante getRestauranteId(long id) {
 		int i = 0;
 		while (i < numeroRestaurantes) {
 			if (id == restaurantes[i].getId()) {
@@ -82,7 +82,7 @@ public class RepositorioRestaurante {
 	}
 	
 	public String listarCardapio(long id) {
-		Restaurante restaurante = getRestaurante(id);
+		Restaurante restaurante = getRestauranteId(id);
 		String cardapio = "";
 		for (int i = 0; i < restaurante.getNumeroPratosCardapio(); i++) {
 			cardapio = cardapio + restaurante.getPratoCardapio(i).getId() + ". " + restaurante.getPratoCardapio(i).getNome() + " -------- "
