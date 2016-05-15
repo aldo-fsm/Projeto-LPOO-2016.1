@@ -1,4 +1,4 @@
-8
-3;0;login2;senha2;restaurante2;1/aaa/123.0;2/prato/29.99
+9
+3;0;login2;senha2;restaurante2;2/prato/29.99
 8;2;login3;senha3;restaurante3;0/Pizza/29.9;3/Arroz/5.9;5/item/123.0
-6;5;a;a;restaurante1;5/nome do prato/99.99
+2;8;login1;senha1;restaurante1;0/prato1/1.5;1/prato2/10.99

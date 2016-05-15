@@ -62,7 +62,7 @@ public class DataBase {
 		return retorno;
 	}
 
-	// Salva em um arquivo de texto os dados do reposit�rio de restaurantes
+	// Salva em um arquivo de texto os dados do repositorio de restaurantes
 	public static void salvarEstado(RepositorioRestaurante restaurantes) {
 		int i;
 		String nome = "arquivos/repositorioRestaurante";
@@ -74,7 +74,7 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
-	// Salva em um arquivo de texto os dados do reposit�rio de clientes
+	// Salva em um arquivo de texto os dados do repositorio de clientes
 	public static void salvarEstado(RepositorioCliente clientes) {
 		int i;
 		String nome = "arquivos/repositorioCliente";
@@ -85,12 +85,16 @@ public class DataBase {
 		gravarDados(nome, str);
 	}
 
-	// Salva o estado dos reposit�rios do gerente
+	// Salva o estado dos repositorios do gerente
 	public static void salvarEstado(Gerente gerente) {
 		salvarEstado(gerente.repositorioC());
 		salvarEstado(gerente.repositorioR());
 	}
 
+	/*
+	 * ler dados do repositorio de clientes salvos em arquivo e retorna um
+	 * RepositorioCliente com esses dados
+	 */
 	public static RepositorioCliente lerBaseClientes() {
 		String[] strings = lerDados("arquivos/repositorioCliente.txt");
 		if (strings != null) {
@@ -112,6 +116,10 @@ public class DataBase {
 		}
 	}
 
+	/*
+	 * ler dados do repositorio de restaurantes salvos em arquivo e retorna um
+	 * RepositorioRestaurante com esses dados
+	 */
 	public static RepositorioRestaurante LerBaseRestaurantes() {
 		String[] strings = lerDados("arquivos/repositorioRestaurante.txt");
 		if (strings != null) {
@@ -151,6 +159,7 @@ public class DataBase {
 
 	}
 
+	// salva em um arquivo de texto os dados do repositorio de pedidos
 	public static void salvarEstado(RepositorioPedido pedido) {
 		int i;
 		String nome = "arquivos/repositorioPedido";
@@ -187,7 +196,6 @@ public class DataBase {
 				}
 				pedidos[i - 1].setItens(itens);
 				pedidos[i - 1].setNumeroItensPedido(j - 4);
-				System.out.println(j-4);
 			}
 			repositorioPedido.setProximoId(Long.parseLong(strings[0]));
 			repositorioPedido.setNumeroPedidos(i - 1);

@@ -17,10 +17,8 @@ public class Pedido {
 	public String toString() {
 		String stringPedido = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
 		int i;
-		System.out.println(numeroItensPedido);
-		//se achar um metodo melhor fala comigo cara, e que nao to conseguindo fazer o nomeroItensPedido funcionar corretamente
-		for (i = 0; i<numeroItensPedido; i++) {//mas na leitura, apesar de demorar mais, funciona da mesma maneira
-				stringPedido += ";" + itens[i];
+		for (i = 0; i < numeroItensPedido; i++) {
+			stringPedido += ";" + itens[i];
 		}
 		return stringPedido;
 	}
@@ -100,5 +98,4 @@ public class Pedido {
 		this.numeroItensPedido = numeroItensPedido;
 	}
 
-	
 }

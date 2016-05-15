@@ -11,10 +11,10 @@ import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
 
 public class Teste2 {
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		// Gerente novo = new Gerente();
-		// /*terei que mudar a estrutura da interface gerente para que possa
-		// interagir com o resto*/
+		// terei que mudar a estrutura da interface gerente para que possa
+		// interagir com o resto
 		// InterfaceGerente iGerente = new InterfaceGerente();
 		// InterfaceCliente telaCliente = new InterfaceCliente(novo);
 		// telaCliente.janelas();
@@ -41,5 +41,5 @@ public class Teste2 {
 		// System.out.println(DataBase.lerBaseGerente().repositorioC().getCliente(0));
 		// System.out.println(Teste.repositorioC().getNumeroClientes());
 
-	}
+	}*/
 }
