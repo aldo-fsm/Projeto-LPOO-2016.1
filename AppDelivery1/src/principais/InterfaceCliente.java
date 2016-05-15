@@ -31,6 +31,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private JButton efetuarPedido = new JButton("Efetuar Pedido");
 	private JButton pedir = new JButton("Pedir");
 	private JButton sair = new JButton("Deixar De ser Cliente");
+	private JButton voltar = new JButton("Voltar");
 	private JTextField campoLogin = new JTextField();
 	private JPasswordField campoSenhaLogin = new JPasswordField();
 	private JTextField campoCadastroLogin = new JTextField();
@@ -93,6 +94,10 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		removerItem.setBounds(295, 420, 210, 50);
 		removerItem.addActionListener(this);
 		telaPedir.add(removerItem);
+		voltar.setBounds(310, 500, 180, 30);
+		voltar.addActionListener(this);
+		telaPedir.add(voltar);
+		
 	}
 
 	private void janelaCadastro() {
@@ -329,6 +334,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}else{
 				JOptionPane.showMessageDialog(null, "não há itens para remover", "Erro", JOptionPane.ERROR_MESSAGE, null);
 			}
+		}
+		if(e.getSource().equals(voltar)){
+			cL.show(cards, "Tela Principal");
 		}
 	}
 }
