@@ -21,6 +21,7 @@ import entidades.Restaurante;
 
 public class InterfaceGerente extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1L;
 	private JButton cadastrarClienteButton;
 	private JButton removerClienteButton;
 	private JButton cadastrarRestauranteButton;

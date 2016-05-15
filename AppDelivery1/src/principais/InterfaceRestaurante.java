@@ -2,7 +2,6 @@ package principais;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +22,6 @@ import entidades.Pedido;
 import entidades.Restaurante;
 import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
-import sun.misc.FormattedFloatingDecimal;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
