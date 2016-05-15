@@ -299,8 +299,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 																		// estão
 																		// vazios
 					cL.show(cards, "Tela Principal");// vai para tela principal
-					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), campoCadastroNome.getText(),
-							campoCadastroSenha.getText())); // adiciona um novo
+					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(), campoCadastroSenha.getText(),
+							campoCadastroNome.getText())); // adiciona um novo
 															// cliente no
 															// repositorio do
 															// gerente informado

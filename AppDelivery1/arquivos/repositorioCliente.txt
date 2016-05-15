@@ -1,7 +1,6 @@
-14
+17
 8;login1;senha1;cliente1
 9;login2;senha2;cliente2
 10;login3;senha3;cliente3
-11;login4;cliente4;senha4
-12;login5;cliente5;senha5
-13;login6;cliente6;senha6
+15;login4;senha4;cliente4
+16;login5;senha5;cliente5
