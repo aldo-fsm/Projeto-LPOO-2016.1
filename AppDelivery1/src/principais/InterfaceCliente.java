@@ -169,20 +169,11 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				break;
 			}
 			numeroDoItem = 0;
-			while (numeroDoItem < gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho()) {// confere
-																												// se
-																												// o
-																												// id
-																												// digitado
-																												// pelo
-																												// cliente
-																												// corresponde
-																												// a
-																												// um
-																												// dos
-																												// ids
-																												// dos
-																												// pratos
+			while (numeroDoItem < gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho()) {
+				/*
+				 * confere se o id digitado pelo cliente corresponde a um dos
+				 * ids dos pratos
+				 */
 				if (itemRemovido.compareTo(String.valueOf(
 						gerente.repositorioC().getCliente(numeroDoCliente).getCarrinho(numeroDoItem).getId())) == 0) {
 					gerente.repositorioC().getCliente(numeroDoCliente).removerDoCarrinho(numeroDoItem);
