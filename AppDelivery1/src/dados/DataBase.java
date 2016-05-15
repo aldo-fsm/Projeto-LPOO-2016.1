@@ -187,6 +187,7 @@ public class DataBase {
 				}
 				pedidos[i - 1].setItens(itens);
 				pedidos[i - 1].setNumeroItensPedido(j - 4);
+				System.out.println(j-4);
 			}
 			repositorioPedido.setProximoId(Long.parseLong(strings[0]));
 			repositorioPedido.setNumeroPedidos(i - 1);

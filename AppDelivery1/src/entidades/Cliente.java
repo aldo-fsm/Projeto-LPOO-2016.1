@@ -63,6 +63,7 @@ public class Cliente extends Usuario {
 		RepositorioPedido repositorio = DataBase.lerBasePedidos();
 		Pedido novoPedido = new Pedido(idRestaurante, getId());
 		novoPedido.setItens(carrinho);
+		novoPedido.setNumeroItensPedido(numeroItensCarrinho);
 		repositorio.adicionar(novoPedido);
 		DataBase.salvarEstado(repositorio);
 	}
@@ -70,6 +71,10 @@ public class Cliente extends Usuario {
 	@Override
 	public String toString() {
 		return (getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome());
+	}
+
+	public void setNumeroItensCarrinho(int numeroItensCarrinho) {
+		this.numeroItensCarrinho = numeroItensCarrinho;
 	}
 
 	public void cancelarPedido() {

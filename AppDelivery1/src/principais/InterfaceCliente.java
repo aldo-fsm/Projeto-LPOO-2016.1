@@ -326,6 +326,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					if (itemRemovido
 							.compareTo(String.valueOf(gerente.repositorioC().getCliente(numeroDoCliente).getCarrinho(numeroDoItem).getId())) == 0) {
 						gerente.repositorioC().getCliente(numeroDoCliente).removerDoCarrinho(numeroDoItem);
+						gerente.repositorioC().getCliente(numeroDoCliente).setNumeroItensCarrinho(gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho()+1);
 						DataBase.salvarEstado(gerente);//salva o estado do sistema
 						idIncorreto = false;
 						break;
