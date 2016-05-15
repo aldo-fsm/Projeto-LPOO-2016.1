@@ -145,9 +145,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 
 	private void removerItem(){
 		String itemRemovido;
-		int i;
 		boolean idIncorreto = true;
-		int numeroDoItem = 0;
+		int numeroDoItem;
 		do {
 			//pede e le id que o cliente digita
 			itemRemovido = "" + JOptionPane.showInputDialog(
@@ -155,8 +154,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (itemRemovido.equals("null")) {//caso tenha apertado em cancelar a janela fecha
 				break;
 			}
-			i = 0;
-			while (i < gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho()) {//confere se o id digitado pelo cliente corresponde a um dos ids dos pratos
+			numeroDoItem = 0;
+			while (numeroDoItem < gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho()) {//confere se o id digitado pelo cliente corresponde a um dos ids dos pratos
 				if (itemRemovido
 						.compareTo(String.valueOf(gerente.repositorioC().getCliente(numeroDoCliente).getCarrinho(numeroDoItem).getId())) == 0) {
 					gerente.repositorioC().getCliente(numeroDoCliente).removerDoCarrinho(numeroDoItem);
@@ -165,7 +164,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					idIncorreto = false;
 					break;
 				}
-				i++;
+				numeroDoItem++;
 			}
 		} while (idIncorreto);
 	}
