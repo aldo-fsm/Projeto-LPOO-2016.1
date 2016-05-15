@@ -12,7 +12,7 @@ public class ItemCardapio {
 		setPreco(preco);
 
 	}
-	
+
 	@Override
 	public String toString() {
 		return (id + "/" + nome + "/" + preco);

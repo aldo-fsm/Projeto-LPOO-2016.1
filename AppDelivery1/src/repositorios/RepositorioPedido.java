@@ -5,15 +5,13 @@ import entidades.Pedido;
 public class RepositorioPedido {
 	private Pedido[] pedidos = new Pedido[MAX_NUMERO_PEDIDOS];
 	public static final int MAX_NUMERO_PEDIDOS = 100;
+	private int numeroPedidos = 0; // numero atual de pedidos
+	private long proximoId = 0;
 
 	public Pedido[] getPedidos() {
 		return pedidos;
 	}
 
-	public Pedido getPedidos(int id) {
-		return pedidos[id];
-	}
-	
 	public void setPedidos(Pedido[] pedidos) {
 		this.pedidos = pedidos;
 	}
@@ -22,8 +20,6 @@ public class RepositorioPedido {
 		this.numeroPedidos = numeroPedidos;
 	}
 
-	private int numeroPedidos = 0; // numero atual de pedidos
-	private long proximoId = 0;
 	public long getProximoId() {
 		return proximoId;
 	}
@@ -31,7 +27,6 @@ public class RepositorioPedido {
 	public void setProximoId(long proximoId) {
 		this.proximoId = proximoId;
 	}
-
 
 	// adiciona um pedido no final do array
 	public void adicionar(Pedido pedido) {

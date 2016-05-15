@@ -233,7 +233,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(OkButtonLogin)) {
 			int i = 0;
 			boolean logado = false;
-			Cliente[] listaDeClientes = gerente.repositorioC().getCliente();
+			Cliente[] listaDeClientes = gerente.repositorioC().getClientes();
 			while (i < gerente.repositorioC().getNumeroClientes()) {
 				/*
 				 * confere se as informaçoes de login e senha condizem com algum

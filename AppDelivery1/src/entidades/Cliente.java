@@ -51,7 +51,7 @@ public class Cliente extends Usuario {
 				carrinho[id] = carrinho[id + 1];
 				id++;
 			}
-			numeroItensCarrinho=id-1;
+			numeroItensCarrinho = id - 1;
 		}
 	}
 
@@ -93,7 +93,7 @@ public class Cliente extends Usuario {
 	public ItemCardapio[] getCarrinho() {
 		return carrinho;
 	}
-	
+
 	public ItemCardapio getCarrinho(int i) {
 		return carrinho[i];
 	}

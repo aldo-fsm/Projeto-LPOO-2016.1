@@ -52,8 +52,9 @@ public class RepositorioCliente {
 		}
 		return null;
 	}
-	public Cliente[] getCliente() {
-			return clientes;
+
+	public Cliente[] getClientes() {
+		return clientes;
 	}
 
 	// retorna uma copia de todos os itens do repositorio

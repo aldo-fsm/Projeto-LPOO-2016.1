@@ -79,14 +79,14 @@ public class Restaurante extends Usuario {
 
 	public ItemCardapio getPratoCardapio(long id) {
 		int i;
-		for(i=0;i<numeroPratosCardapio;i++){
-			if(cardapio[i].getId()== id){
+		for (i = 0; i < numeroPratosCardapio; i++) {
+			if (cardapio[i].getId() == id) {
 				break;
 			}
 		}
 		return cardapio[i];
 	}
-	
+
 	public int getNumeroPratosCardapio() {
 		return numeroPratosCardapio;
 	}
