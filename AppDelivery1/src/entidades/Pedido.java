@@ -90,6 +90,16 @@ public class Pedido {
 		}
 	}
 
+	public String listarItens() {
+		String lista = "";
+
+		for (int i = 0; i < numeroItensPedido; i++) {
+			lista += itens[i] + " ;  ";
+		}
+
+		return lista;
+	}
+
 	public int getNumeroItensPedido() {
 		return numeroItensPedido;
 	}

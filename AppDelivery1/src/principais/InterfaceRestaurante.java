@@ -236,8 +236,12 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (e.getSource().equals(listarPedidosButton)) {
 			atualizarListaPedidos();
 			if (numeroPedidos > 0) {
+				Pedido pedido;
 				for (int i = 0; i < numeroPedidos; i++) {
-					areaTextoPedidos.append("  " + pedidos[i] + "\n");
+					pedido = pedidos[i];
+					areaTextoPedidos.append("  " + "Id do pedido : " + pedido.getIdPedido() + "\n  Id do cliente : "
+							+ pedido.getIdCliente() + "\n  Itens : " + pedido.listarItens() + "\n  Status : "
+							+ pedido.getStatus() + "\n\n");
 				}
 				cL.show(telas, "tela listar pedidos");
 			} else {

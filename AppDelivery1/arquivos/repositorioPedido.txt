@@ -1,8 +1,5 @@
-11
-4;6;2;DEFAULT;0/Pizza/29.9;5/item/123.0;3/Arroz/5.9
-5;6;2;DEFAULT;0/Pizza/29.9;5/item/123.0;3/Arroz/5.9;5/item/123.0;3/Arroz/5.9
-6;16;8;DEFAULT;0/prato1/1.5;1/prato2/10.99
-7;16;8;DEFAULT;0/prato1/1.5
-8;16;2;DEFAULT;3/Arroz/5.9;0/Pizza/29.9;3/Arroz/5.9
-9;16;2;DEFAULT;3/Arroz/5.9
-10;16;0;DEFAULT;2/prato/29.99
+4
+0;0;0;DEFAULT;0/prato1/99.99;0/prato1/99.99;0/prato1/99.99
+1;0;0;DEFAULT;0/prato1/99.99;0/prato1/99.99;0/prato1/99.99
+2;0;0;DEFAULT;0/prato1/99.99;0/prato1/99.99
+3;1;0;DEFAULT;0/prato1/99.99;1/prato2/15.25;2/prato3/2.99

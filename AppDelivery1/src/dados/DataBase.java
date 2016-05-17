@@ -97,8 +97,7 @@ public class DataBase {
 	 */
 	public static RepositorioCliente lerBaseClientes() {
 		String[] strings = lerDados("arquivos/repositorioCliente.txt");
-		if (strings != null) {
-
+		try {
 			RepositorioCliente repositorioCliente = new RepositorioCliente();
 			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
 			int i;
@@ -111,8 +110,8 @@ public class DataBase {
 			}
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
-		} else {
-			return null;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return new RepositorioCliente();
 		}
 	}
 
@@ -122,7 +121,7 @@ public class DataBase {
 	 */
 	public static RepositorioRestaurante LerBaseRestaurantes() {
 		String[] strings = lerDados("arquivos/repositorioRestaurante.txt");
-		if (strings != null) {
+		try {
 
 			RepositorioRestaurante repositorioRestaurante = new RepositorioRestaurante();
 			Restaurante[] restaurantes = new Restaurante[RepositorioRestaurante.MAX_NUMERO_RESTAURANTES];
@@ -153,8 +152,8 @@ public class DataBase {
 			repositorioRestaurante.setNumeroRestaurantes(i - 1);
 
 			return repositorioRestaurante;
-		} else {
-			return null;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return new RepositorioRestaurante();
 		}
 
 	}
@@ -176,7 +175,7 @@ public class DataBase {
 	 */
 	public static RepositorioPedido lerBasePedidos() {
 		String[] strings = lerDados("arquivos/repositorioPedido.txt");
-		if (!strings.equals(null)) {
+		try {
 			RepositorioPedido repositorioPedido = new RepositorioPedido();
 			Pedido[] pedidos = new Pedido[RepositorioPedido.MAX_NUMERO_PEDIDOS];
 			long proximoId = Long.parseLong(strings[0]);
@@ -206,8 +205,8 @@ public class DataBase {
 			repositorioPedido.setPedidos(pedidos);
 			return repositorioPedido;
 
-		} else {
-			return null;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return new RepositorioPedido();
 		}
 	}
 
