@@ -122,4 +122,9 @@ public class Restaurante extends Usuario {
 		return proximoId;
 	}
 
+	@Override
+	public void validar() {
+		
+	}
+
 }

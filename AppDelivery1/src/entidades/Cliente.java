@@ -102,4 +102,9 @@ public class Cliente extends Usuario {
 		this.carrinho = carrinho;
 	}
 
+	@Override
+	public void validar() {
+		
+	}
+
 }
