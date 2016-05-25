@@ -1,11 +1,14 @@
 package entidades;
 
+import excecoes.IdInvalidoException;
+import excecoes.SenhaInvalidaException;
+
 public abstract class Usuario {
 
 	private String login;
 	private String senha;
 	private String nome;
-	private long id;
+	private long id = 1;
 
 	public Usuario(String login, String senha, String nome) {
 
@@ -15,8 +18,8 @@ public abstract class Usuario {
 
 	}
 
-	public abstract void validar();
-	
+	public abstract void validar() throws IdInvalidoException, SenhaInvalidaException;
+
 	public String getLogin() {
 		return login;
 	}

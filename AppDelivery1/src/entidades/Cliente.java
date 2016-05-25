@@ -1,6 +1,8 @@
 package entidades;
 
 import dados.DataBase;
+import excecoes.IdInvalidoException;
+import excecoes.SenhaInvalidaException;
 import repositorios.RepositorioPedido;
 
 public class Cliente extends Usuario {
@@ -103,8 +105,14 @@ public class Cliente extends Usuario {
 	}
 
 	@Override
-	public void validar() {
-		
+	public void validar() throws IdInvalidoException, SenhaInvalidaException {
+		if (getId() <= 0) {
+			throw new IdInvalidoException();
+		}
+		int numeroDigitosSenha = getSenha().length();
+		if (numeroDigitosSenha < 6 || numeroDigitosSenha > 10) {
+			throw new SenhaInvalidaException(" a senha deve ter no mínimo 6 dígitos e no máximo 10");
+		}
 	}
 
 }

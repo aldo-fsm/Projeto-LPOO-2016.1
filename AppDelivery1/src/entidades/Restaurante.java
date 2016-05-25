@@ -1,5 +1,11 @@
 package entidades;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import excecoes.IdInvalidoException;
+import excecoes.SenhaInvalidaException;
+
 public class Restaurante extends Usuario {
 
 	private Pedido[] pedidosEspera = new Pedido[MAX_PEDIDOS_ESPERA];
@@ -123,8 +129,27 @@ public class Restaurante extends Usuario {
 	}
 
 	@Override
-	public void validar() {
-		
+	public void validar() throws IdInvalidoException, SenhaInvalidaException {
+		if (getId() <= 0) {
+			throw new IdInvalidoException();
+		}
+		int numeroDigitosSenha = getSenha().length();
+		if (numeroDigitosSenha < 10 || numeroDigitosSenha > 18) {
+			throw new SenhaInvalidaException("a senha deve ter no mínimo 10 dígitos e no máximo 18");
+		}
+		Pattern padraoNumeros = Pattern.compile("[0-9]");
+		Pattern padraoLetras = Pattern.compile("[a-z]");
+		Matcher m1 = padraoLetras.matcher(getSenha().toLowerCase());
+		Matcher m2 = padraoNumeros.matcher(getSenha());
+		if (!(m1.find() && m2.find())) {
+			throw new SenhaInvalidaException("a senha deve conter pelo menos uma letra e um numero");
+		}
+		Pattern p = Pattern.compile("\\W");
+		Matcher m3 = p.matcher(getSenha());
+		if (m3.find()) {
+			throw new SenhaInvalidaException("a senha deve conter apenas letras e numeros");
+		}
+
 	}
 
 }
