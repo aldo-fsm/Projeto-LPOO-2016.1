@@ -41,7 +41,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
 		setLayout(null);
-		setResizable(false);
+		
 
 		cadastrarClienteButton = new JButton("Cadastrar Cliente");
 		removerClienteButton = new JButton("Remover Cliente");
@@ -71,6 +71,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		add(adicionarPratoButton);
 		add(removerPratoButton);
 
+		getContentPane().setSize(800, 600);
+		setResizable(false);
 	}
 
 	public void atualizarDataBase() {
@@ -83,7 +85,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (nome == null || nome.equals("")) {
 			return false;
 		} else if (nome.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+			JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 			return false;
 		}
 
@@ -91,12 +93,12 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (login == null || login.equals("")) {
 			return false;
 		} else if (login.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+			JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 			return false;
 		} else {
 			for (int i = 0; i < gerente.repositorioC().getNumeroClientes(); i++) {
 				if (gerente.repositorioC().getCliente(i).getLogin().equals(login)) {
-					JOptionPane.showMessageDialog(this, "Este login não está disponivel");
+					JOptionPane.showMessageDialog(this, "Este login nï¿½o estï¿½ disponivel");
 					return false;
 				}
 			}
@@ -105,7 +107,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (senha == null || senha.equals("")) {
 			return false;
 		} else if (senha.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+			JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 			return false;
 		}
 
@@ -120,7 +122,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (nome == null || nome.equals("")) {
 			return false;
 		} else if (nome.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+			JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 			return false;
 		}
 
@@ -128,12 +130,12 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (login == null || login.equals("")) {
 			return false;
 		} else if (login.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+			JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 			return false;
 		} else {
 			for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
 				if (gerente.repositorioR().getRestaurante(i).getLogin().equals(login)) {
-					JOptionPane.showMessageDialog(this, "Este login não está disponivel");
+					JOptionPane.showMessageDialog(this, "Este login nï¿½o estï¿½ disponivel");
 					return false;
 				}
 			}
@@ -142,7 +144,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (senha == null || senha.equals("")) {
 			return false;
 		} else if (senha.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+			JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 			return false;
 		}
 
@@ -162,7 +164,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		JLabel label1 = new JLabel("Escolha um Restaurante");
 		JLabel label2 = new JLabel("Dados do Prato :");
 		JLabel label3 = new JLabel("Nome");
-		JLabel label4 = new JLabel("Preço");
+		JLabel label4 = new JLabel("Preï¿½o");
 		JComboBox<String> cb = new JComboBox<String>();
 		JTextField campoTextoNome = new JTextField();
 		JTextField campoTextoPreco = new JTextField();
@@ -196,7 +198,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 				if (nome == null || nome.equals("")) {
 					return false;
 				} else if (nome.contains(";") || nome.contains("/")) {
-					JOptionPane.showMessageDialog(this, " \" ; \" e \" / \" não são caracteres válidos");
+					JOptionPane.showMessageDialog(this, " \" ; \" e \" / \" nï¿½o sï¿½o caracteres vï¿½lidos");
 					return false;
 				}
 				gerente.adicionarPrato(cb.getSelectedIndex(), new ItemCardapio(nome, preco));
@@ -250,7 +252,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 					atualizarDataBase();
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Este restaurante não possui nenhum prato");
+				JOptionPane.showMessageDialog(this, "Este restaurante nï¿½o possui nenhum prato");
 			}
 		}
 
@@ -321,19 +323,19 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(cadastrarClienteButton)) {
 			if (!cadastrarCliente()) {
-				JOptionPane.showMessageDialog(this, "Não foi possivel cadastrar o Cliente", "Erro",
+				JOptionPane.showMessageDialog(this, "Nï¿½o foi possivel cadastrar o Cliente", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource().equals(cadastrarRestauranteButton)) {
 			if (!cadastrarRestaurante()) {
-				JOptionPane.showMessageDialog(this, "Não foi possivel cadastrar o Restaurante", "Erro",
+				JOptionPane.showMessageDialog(this, "Nï¿½o foi possivel cadastrar o Restaurante", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource().equals(adicionarPratoButton)) {
 			if (!adicionarPrato()) {
-				JOptionPane.showMessageDialog(this, "Não foi possivel cadastrar o prato", "Erro",
+				JOptionPane.showMessageDialog(this, "Nï¿½o foi possivel cadastrar o prato", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}

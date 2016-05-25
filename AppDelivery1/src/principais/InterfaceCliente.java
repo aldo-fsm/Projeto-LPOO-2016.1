@@ -1,3 +1,4 @@
+
 package principais;
 
 import java.awt.CardLayout;
@@ -139,13 +140,13 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
-		setResizable(false);
 		add(cards);
 		janelaInicial();
 		janelaLogin();
 		janelaCadastro();
 		janelaPedido();
 		janelaPrincipal();
+		setResizable(false);
 	}
 
 	private void removerItem() {
@@ -236,7 +237,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			Cliente[] listaDeClientes = gerente.repositorioC().getClientes();
 			while (i < gerente.repositorioC().getNumeroClientes()) {
 				/*
-				 * confere se as informaçoes de login e senha condizem com algum
+				 * confere se as informaï¿½oes de login e senha condizem com algum
 				 * dos usuarios do repositorio
 				 */
 				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
@@ -254,7 +255,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					// assim como a senha
 					campoLogin.setText("");// campo e apagado
 					campoSenhaLogin.setText("");// campo e apagado
-					logado = true;// informações validas
+					logado = true;// informaï¿½ï¿½es validas
 					break;
 				}
 				i++;
@@ -270,7 +271,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			boolean podeCadastrar = true;
 			while (i < gerente.repositorioC().getNumeroClientes()) {
 				/*
-				 * confere se as inforções de login e/ou nome ja foram
+				 * confere se as inforï¿½ï¿½es de login e/ou nome ja foram
 				 * utilizadas
 				 */
 				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().getCliente(i).getLogin())
@@ -281,13 +282,13 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 			if (podeCadastrar) {
 				/*
-				 * caso nao tenha sido utilizada pode prosseguir com a execução
+				 * caso nao tenha sido utilizada pode prosseguir com a execuï¿½ï¿½o
 				 * do programa
 				 */
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
 						&& !(new String(campoCadastroSenha.getPassword())).equals("")) {// confere
 					/*
-					 * se os campos estão vazios
+					 * se os campos estï¿½o vazios
 					 */
 					cL.show(cards, "Tela Principal");// vai para tela principal
 					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(),
@@ -314,7 +315,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Informações ja utilizadas", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Informaï¿½ï¿½es ja utilizadas", "Erro", JOptionPane.ERROR_MESSAGE);
 				campoCadastroLogin.setText("");// apaga os campos de texto
 				campoCadastroNome.setText("");// apaga os campos de texto
 				campoCadastroSenha.setText("");// apaga os campos de texto
@@ -325,18 +326,18 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 											// para pagina inicial
 		}
 		if (e.getSource().equals(opcaoCadastro)) {
-			cL.show(cards, "Tela De Cadastro");// ao escolher a opção cadastro
+			cL.show(cards, "Tela De Cadastro");// ao escolher a opï¿½ï¿½o cadastro
 												// abre-se a janela de cadastro
 		}
 		if (e.getSource().equals(opcaoLogin)) {
 			if (gerente.repositorioC().getNumeroClientes() != 0) {
 				/*
 				 * se houver cliente(s) a tela de login e aberta ao ser esta
-				 * opção
+				 * opï¿½ï¿½o
 				 */
 				cL.show(cards, "Tela De Login");
 			} else {
-				JOptionPane.showMessageDialog(this, "não e possivel logar, pois nao há clientes cadastrados", "Erro",
+				JOptionPane.showMessageDialog(this, "nï¿½o e possivel logar, pois nao hï¿½ clientes cadastrados", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -383,7 +384,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				gerente.repositorioC().getCliente(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
 				cL.show(cards, "Tela Principal");
 			} else {
-				JOptionPane.showMessageDialog(null, "não há itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
+				JOptionPane.showMessageDialog(null, "nï¿½o hï¿½ itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
 			}
 		}
@@ -394,7 +395,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() != 0) {
 				removerItem();
 			} else {
-				JOptionPane.showMessageDialog(null, "não há itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,
+				JOptionPane.showMessageDialog(null, "nï¿½o hï¿½ itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
 			}
 		}

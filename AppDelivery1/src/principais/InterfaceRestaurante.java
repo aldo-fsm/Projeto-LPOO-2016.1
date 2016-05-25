@@ -2,6 +2,7 @@ package principais;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -55,13 +56,13 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
-		setResizable(false);
+		
 
 		JPanel telaInicial = new JPanel(null);
 		JPanel telaLogado = new JPanel(null);
 		JPanel telaRemover = new JPanel(null);
 		JPanel telaListarPedidos = new JPanel(null);
-
+		
 		telas.add(telaLogado, "logado");
 		telas.add(telaInicial, "tela inicial");
 		telas.add(telaRemover, "tela remover");
@@ -138,6 +139,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaListarPedidos.add(listarVoltarButton);
 
 		cL.show(telas, "tela inicial");
+		setResizable(false);
 	}
 
 	public boolean cadastrarItem() {
@@ -154,7 +156,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				atualizarDataBase();
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
+				JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
 				return false;
 			}
 
@@ -215,7 +217,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (e.getSource().equals(cadastrarItemButton)) {
 			if (!cadastrarItem()) {
 
-				JOptionPane.showMessageDialog(this, "Não foi possivel cadastrar o item", "Erro",
+				JOptionPane.showMessageDialog(this, "Nï¿½o foi possivel cadastrar o item", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -228,7 +230,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				}
 				cL.show(telas, "tela remover");
 			} else {
-				JOptionPane.showMessageDialog(this, "Não há nenhum item cadastrado", "Erro",
+				JOptionPane.showMessageDialog(this, "Nï¿½o hï¿½ nenhum item cadastrado", "Erro",
 						JOptionPane.INFORMATION_MESSAGE, null);
 			}
 		}
@@ -245,7 +247,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				}
 				cL.show(telas, "tela listar pedidos");
 			} else {
-				JOptionPane.showMessageDialog(this, "Não há nenhum Pedido", "Erro", JOptionPane.INFORMATION_MESSAGE,
+				JOptionPane.showMessageDialog(this, "Nï¿½o hï¿½ nenhum Pedido", "Erro", JOptionPane.INFORMATION_MESSAGE,
 						null);
 			}
 		}
