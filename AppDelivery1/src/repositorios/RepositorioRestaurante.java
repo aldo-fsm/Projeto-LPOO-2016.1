@@ -1,8 +1,12 @@
 package repositorios;
 
 import entidades.Restaurante;
+import excecoes.IdInvalidoException;
+import excecoes.RepositorioCheioException;
+import excecoes.SenhaInvalidaException;
+import interfaces.InterfaceRepositorioRestaurante;
 
-public class RepositorioRestaurante {
+public class RepositorioRestaurante implements InterfaceRepositorioRestaurante {
 
 	private Restaurante[] restaurantes = new Restaurante[MAX_NUMERO_RESTAURANTES];
 	public static final int MAX_NUMERO_RESTAURANTES = 100;
@@ -14,12 +18,15 @@ public class RepositorioRestaurante {
 	}
 
 	// adiciona um restaurante no final do array
-	public void adicionar(Restaurante restaurante) {
+	public void adicionar(Restaurante restaurante) throws IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
 		if (numeroRestaurantes < MAX_NUMERO_RESTAURANTES) {
+			restaurante.setId(proximoId);
+			restaurante.validar();
 			this.restaurantes[numeroRestaurantes] = restaurante;
-			this.restaurantes[numeroRestaurantes].setId(proximoId);
 			numeroRestaurantes++;
 			proximoId++;
+		}else{
+			throw new RepositorioCheioException();
 		}
 	}
 
@@ -35,9 +42,12 @@ public class RepositorioRestaurante {
 	}
 
 	// altera a senha do restaurante na posicao id do array
-	public void alterarSenha(int id, String novaSenha) {
+	public void alterarSenha(int id, String novaSenha) throws IdInvalidoException, SenhaInvalidaException {
 		if (id >= 0 && id < numeroRestaurantes) {
-			restaurantes[id].setSenha(novaSenha);
+			Restaurante restaurante = restaurantes[id].clone();
+			restaurante.setSenha(novaSenha);
+			restaurante.validar();
+			restaurantes[id] = restaurante;
 		}
 	}
 

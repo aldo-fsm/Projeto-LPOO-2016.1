@@ -1,8 +1,12 @@
 package repositorios;
 
 import entidades.Cliente;
+import excecoes.IdInvalidoException;
+import excecoes.RepositorioCheioException;
+import excecoes.SenhaInvalidaException;
+import interfaces.InterfaceRepositorioCliente;
 
-public class RepositorioCliente {
+public class RepositorioCliente implements InterfaceRepositorioCliente{
 
 	private Cliente[] clientes = new Cliente[MAX_NUMERO_CLIENTES];
 	public static final int MAX_NUMERO_CLIENTES = 100;
@@ -10,13 +14,15 @@ public class RepositorioCliente {
 	private long proximoId = 1; // proximo id disponivel
 
 	// adiciona um cliente no final do array
-	public void adicionar(Cliente cliente) {
+	public void adicionar(Cliente cliente) throws IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
 		if (numeroClientes < MAX_NUMERO_CLIENTES) {
 			cliente.setId(proximoId);
+			cliente.validar();
 			this.clientes[numeroClientes] = cliente;
-			this.clientes[numeroClientes].setId(proximoId);
 			numeroClientes++;
 			proximoId++;
+		}else{
+			throw new RepositorioCheioException();
 		}
 	}
 
@@ -32,9 +38,11 @@ public class RepositorioCliente {
 	}
 
 	// altera a senha do cliente na posicao id do array
-	public void alterarSenha(int id, String novaSenha) {
+	public void alterarSenha(int id, String novaSenha) throws IdInvalidoException, SenhaInvalidaException {
 		if (id >= 0 && id < numeroClientes) {
-			clientes[id].setSenha(novaSenha);
+			Cliente cliente = clientes[id].clone();
+			cliente.validar();
+			clientes[id] = cliente;
 		}
 	}
 

@@ -1,15 +1,21 @@
 package entidades;
 
 import repositorios.RepositorioRestaurante;
+import excecoes.IdInvalidoException;
+import excecoes.RepositorioCheioException;
+import excecoes.SenhaInvalidaException;
+import interfaces.InterfaceRepositorioCliente;
+import interfaces.InterfaceRepositorioRestaurante;
 import repositorios.RepositorioCliente;
 
 public class Gerente {
 
-	private RepositorioCliente clientes = new RepositorioCliente();
-	private RepositorioRestaurante restaurantes = new RepositorioRestaurante();
+	private InterfaceRepositorioCliente clientes = new RepositorioCliente();
+	private InterfaceRepositorioRestaurante restaurantes = new RepositorioRestaurante();
 
 	// adiciona um cliente no repositorio
-	public void adicionarCliente(Cliente cliente) {
+	public void adicionarCliente(Cliente cliente)
+			throws IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
 		clientes.adicionar(cliente);
 	}
 
@@ -29,7 +35,8 @@ public class Gerente {
 	}
 
 	// adiciona um restaurante no repositorio
-	public void adicionarRestaurante(Restaurante restaurante) {
+	public void adicionarRestaurante(Restaurante restaurante)
+			throws IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
 		restaurantes.adicionar(restaurante);
 	}
 
@@ -67,12 +74,12 @@ public class Gerente {
 
 	// retorna o repositorio de clientes
 	public RepositorioCliente repositorioC() {
-		return clientes;
+		return (RepositorioCliente) clientes;
 	}
 
 	// retorna o repositorio de restaurantes
 	public RepositorioRestaurante repositorioR() {
-		return restaurantes;
+		return (RepositorioRestaurante) restaurantes;
 	}
 
 	// atribui ao repositorio de clientes

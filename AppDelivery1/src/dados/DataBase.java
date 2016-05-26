@@ -105,9 +105,11 @@ public class DataBase {
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
 				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
-				repositorioCliente.adicionar(clientes[i - 1]);
+				//repositorioCliente.adicionar(clientes[i - 1]);
 				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
 			}
+			repositorioCliente.setClientes(clientes);
+			repositorioCliente.setNumeroClientes(i-1);
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
 		} catch (ArrayIndexOutOfBoundsException e) {

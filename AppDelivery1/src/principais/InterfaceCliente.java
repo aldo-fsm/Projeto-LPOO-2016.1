@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import dados.DataBase;
 import entidades.Cliente;
 import entidades.Gerente;
+import excecoes.IdInvalidoException;
+import excecoes.RepositorioCheioException;
+import excecoes.SenhaInvalidaException;
 
 public class InterfaceCliente extends JFrame implements ActionListener {
 
@@ -237,8 +240,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			Cliente[] listaDeClientes = gerente.repositorioC().getClientes();
 			while (i < gerente.repositorioC().getNumeroClientes()) {
 				/*
-				 * confere se as informa�oes de login e senha condizem com algum
-				 * dos usuarios do repositorio
+				 * confere se as informa�oes de login e senha condizem com
+				 * algum dos usuarios do repositorio
 				 */
 				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
 						&& listaDeClientes[i].getSenha().equals(new String(campoSenhaLogin.getPassword()))) {
@@ -282,17 +285,26 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 			if (podeCadastrar) {
 				/*
-				 * caso nao tenha sido utilizada pode prosseguir com a execu��o
-				 * do programa
+				 * caso nao tenha sido utilizada pode prosseguir com a
+				 * execu��o do programa
 				 */
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
 						&& !(new String(campoCadastroSenha.getPassword())).equals("")) {// confere
 					/*
 					 * se os campos est�o vazios
 					 */
-					cL.show(cards, "Tela Principal");// vai para tela principal
-					gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(),
-							new String(campoCadastroSenha.getPassword()), campoCadastroNome.getText()));
+					try {
+						gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(),
+								new String(campoCadastroSenha.getPassword()), campoCadastroNome.getText()));
+						cL.show(cards, "Tela Principal");// vai para tela
+															// principal
+					} catch (IdInvalidoException e1) {
+						JOptionPane.showMessageDialog(this, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+					} catch (SenhaInvalidaException e1) {
+						JOptionPane.showMessageDialog(this, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+					} catch (RepositorioCheioException e1) {
+						JOptionPane.showMessageDialog(this, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+					}
 					/*
 					 * adiciona um novo cliente no repositorio do gerente
 					 * informado
@@ -326,7 +338,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 											// para pagina inicial
 		}
 		if (e.getSource().equals(opcaoCadastro)) {
-			cL.show(cards, "Tela De Cadastro");// ao escolher a op��o cadastro
+			cL.show(cards, "Tela De Cadastro");// ao escolher a op��o
+												// cadastro
 												// abre-se a janela de cadastro
 		}
 		if (e.getSource().equals(opcaoLogin)) {
@@ -337,8 +350,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				 */
 				cL.show(cards, "Tela De Login");
 			} else {
-				JOptionPane.showMessageDialog(this, "n�o e possivel logar, pois nao h� clientes cadastrados", "Erro",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "n�o e possivel logar, pois nao h� clientes cadastrados",
+						"Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource().equals(pedir)) {
