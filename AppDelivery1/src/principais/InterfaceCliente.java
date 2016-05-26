@@ -22,23 +22,31 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 
 	// atributos de interface
 	private static final long serialVersionUID = 1L;
-	private JTextField campoCadastroNome = new JTextField();
 	private CardLayout cL = new CardLayout();
 	private JPanel cards = new JPanel(cL);
-	private JButton logoutButton = new JButton("Logout");
-	private JButton OkButtonLogin = new JButton("OK");
-	private JButton OkButtonCadastro = new JButton("OK");
+	//variaveis da tela inicial
 	private JButton opcaoLogin = new JButton("Fazer Login");
 	private JButton opcaoCadastro = new JButton("Cadastrar");
-	private JButton adicionarItem = new JButton("Adicionar Item Ao Carrinho");
-	private JButton removerItem = new JButton("Remover Item Do Carrinho");
-	private JButton efetuarPedido = new JButton("Efetuar Pedido");
-	private JButton pedir = new JButton("Pedir");
-	private JButton sair = new JButton("Deixar De ser Cliente");
-	private JButton voltar = new JButton("Voltar");
+	//variaveis de login
+	private JButton OkButtonLogin = new JButton("OK");
+	private JButton CancelarLogin = new JButton("cancelar");
 	private JTextField campoLogin = new JTextField();
 	private JPasswordField campoSenhaLogin = new JPasswordField();
+	
+	private JButton pedir = new JButton("Pedir");
+	private JButton sair = new JButton("Deixar De ser Cliente");
+	private JButton logoutButton = new JButton("Logout");
+	
+	//variaveis de pedir
+	private JButton voltar = new JButton("Voltar");
+	private JButton efetuarPedido = new JButton("Efetuar Pedido");
+	private JButton removerItem = new JButton("Remover Item Do Carrinho");
+	private JButton adicionarItem = new JButton("Adicionar Item Ao Carrinho");
+	//variaveis de cadastro
 	private JTextField campoCadastroLogin = new JTextField();
+	private JTextField campoCadastroNome = new JTextField();
+	private JButton OkButtonCadastro = new JButton("OK");
+	private JButton CancelarCadastro = new JButton("cancelar");
 	private JPasswordField campoCadastroSenha = new JPasswordField();
 	// atributos de escolha do cliente e carregamento do gerente
 	private long idRestauranteEscolhido;
@@ -240,7 +248,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			Cliente[] listaDeClientes = gerente.repositorioC().getClientes();
 			while (i < gerente.repositorioC().getNumeroClientes()) {
 				/*
-				 * confere se as informaï¿½oes de login e senha condizem com
+				 * confere se as informaçoes de login e senha condizem com
 				 * algum dos usuarios do repositorio
 				 */
 				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
@@ -258,7 +266,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					// assim como a senha
 					campoLogin.setText("");// campo e apagado
 					campoSenhaLogin.setText("");// campo e apagado
-					logado = true;// informaï¿½ï¿½es validas
+					logado = true;// informaçoes validas
 					break;
 				}
 				i++;
@@ -286,12 +294,12 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (podeCadastrar) {
 				/*
 				 * caso nao tenha sido utilizada pode prosseguir com a
-				 * execuï¿½ï¿½o do programa
+				 * execução do programa
 				 */
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
 						&& !(new String(campoCadastroSenha.getPassword())).equals("")) {// confere
 					/*
-					 * se os campos estï¿½o vazios
+					 * se os campos estïverem vazios
 					 */
 					try {
 						gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(),
@@ -327,7 +335,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				JOptionPane.showMessageDialog(this, "Informaï¿½ï¿½es ja utilizadas", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Informaçoes ja utilizadas", "Erro", JOptionPane.ERROR_MESSAGE);
 				campoCadastroLogin.setText("");// apaga os campos de texto
 				campoCadastroNome.setText("");// apaga os campos de texto
 				campoCadastroSenha.setText("");// apaga os campos de texto
@@ -338,7 +346,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 											// para pagina inicial
 		}
 		if (e.getSource().equals(opcaoCadastro)) {
-			cL.show(cards, "Tela De Cadastro");// ao escolher a opï¿½ï¿½o
+			cL.show(cards, "Tela De Cadastro");// ao escolher a opïçao
 												// cadastro
 												// abre-se a janela de cadastro
 		}
@@ -346,7 +354,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (gerente.repositorioC().getNumeroClientes() != 0) {
 				/*
 				 * se houver cliente(s) a tela de login e aberta ao ser esta
-				 * opï¿½ï¿½o
+				 * opiçao
 				 */
 				cL.show(cards, "Tela De Login");
 			} else {
@@ -402,7 +410,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				}
 				cL.show(cards, "Tela Principal");
 			} else {
-				JOptionPane.showMessageDialog(null, "nï¿½o hï¿½ itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
+				JOptionPane.showMessageDialog(null, "nao ha itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
 			}
 		}
@@ -413,7 +421,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() != 0) {
 				removerItem();
 			} else {
-				JOptionPane.showMessageDialog(null, "nï¿½o hï¿½ itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,
+				JOptionPane.showMessageDialog(null, "nao ha itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
 			}
 		}

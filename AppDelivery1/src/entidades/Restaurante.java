@@ -137,15 +137,15 @@ public class Restaurante extends Usuario {
 		if (numeroDigitosSenha < 10 || numeroDigitosSenha > 18) {
 			throw new SenhaInvalidaException("a senha deve ter no mínimo 10 dígitos e no máximo 18");
 		}
-		Pattern padraoNumeros = Pattern.compile("[0-9]");
-		Pattern padraoLetras = Pattern.compile("[a-z]");
-		Matcher m1 = padraoLetras.matcher(getSenha().toLowerCase());
-		Matcher m2 = padraoNumeros.matcher(getSenha());
+		Pattern padraoNumeros = Pattern.compile("[0-9]");//cria um padrao de nmeros
+		Pattern padraoLetras = Pattern.compile("[a-z]");//cria um padrão de letras 
+		Matcher m1 = padraoLetras.matcher(getSenha().toLowerCase());//compara o padrao de letras a senha minuscula
+		Matcher m2 = padraoNumeros.matcher(getSenha());///compara o padrao de numeros com a senha 
 		if (!(m1.find() && m2.find())) {
 			throw new SenhaInvalidaException("a senha deve conter pelo menos uma letra e um numero");
 		}
-		Pattern p = Pattern.compile("\\W");
-		Matcher m3 = p.matcher(getSenha());
+		Pattern p = Pattern.compile("\\W");//padrão de simbolos
+		Matcher m3 = p.matcher(getSenha());//confere se algum simbolo aparece na senha
 		if (m3.find()) {
 			throw new SenhaInvalidaException("a senha deve conter apenas letras e numeros");
 		}

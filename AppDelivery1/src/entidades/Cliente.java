@@ -1,5 +1,8 @@
 package entidades;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import dados.DataBase;
 import excecoes.IdInvalidoException;
 import excecoes.RepositorioCheioException;
@@ -113,6 +116,11 @@ public class Cliente extends Usuario {
 		int numeroDigitosSenha = getSenha().length();
 		if (numeroDigitosSenha < 6 || numeroDigitosSenha > 10) {
 			throw new SenhaInvalidaException(" a senha deve ter no mínimo 6 dígitos e no máximo 10");
+		}
+		Pattern p = Pattern.compile("\\W");//padrão de simbolos
+		Matcher m3 = p.matcher(getSenha());//confere se algum simbolo aparece na senha
+		if (m3.find()) {
+			throw new SenhaInvalidaException("a senha deve conter apenas letras e numeros");
 		}
 	}
 

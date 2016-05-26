@@ -114,6 +114,8 @@ public class DataBase {
 			return repositorioCliente;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return new RepositorioCliente();
+		}catch (NumberFormatException e){
+			return new RepositorioCliente();
 		}
 	}
 
@@ -155,6 +157,8 @@ public class DataBase {
 
 			return repositorioRestaurante;
 		} catch (ArrayIndexOutOfBoundsException e) {
+			return new RepositorioRestaurante();
+		}catch (NumberFormatException e){
 			return new RepositorioRestaurante();
 		}
 
@@ -208,6 +212,8 @@ public class DataBase {
 			return repositorioPedido;
 
 		} catch (ArrayIndexOutOfBoundsException e) {
+			return new RepositorioPedido();
+		}catch (NumberFormatException e){
 			return new RepositorioPedido();
 		}
 	}
