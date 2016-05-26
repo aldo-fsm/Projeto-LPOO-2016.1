@@ -1,8 +1,11 @@
 package repositorios;
 
 import entidades.Pedido;
+import excecoes.RepositorioCheioException;
+import interfaces.InterfaceRepositorioPedido;
 
-public class RepositorioPedido {
+public class RepositorioPedido implements InterfaceRepositorioPedido {
+
 	private Pedido[] pedidos = new Pedido[MAX_NUMERO_PEDIDOS];
 	public static final int MAX_NUMERO_PEDIDOS = 100;
 	private int numeroPedidos = 0; // numero atual de pedidos
@@ -29,12 +32,14 @@ public class RepositorioPedido {
 	}
 
 	// adiciona um pedido no final do array
-	public void adicionar(Pedido pedido) {
+	public void adicionar(Pedido pedido) throws RepositorioCheioException {
 		if (numeroPedidos < MAX_NUMERO_PEDIDOS) {
 			this.pedidos[numeroPedidos] = pedido;
 			this.pedidos[numeroPedidos].setIdPedido(proximoId);
 			numeroPedidos++;
 			proximoId++;
+		}else{
+			throw new RepositorioCheioException();
 		}
 	}
 
