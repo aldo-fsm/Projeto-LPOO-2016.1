@@ -2,6 +2,7 @@ package entidades;
 
 import dados.DataBase;
 import excecoes.IdInvalidoException;
+import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
 import repositorios.RepositorioPedido;
 
@@ -61,7 +62,7 @@ public class Cliente extends Usuario {
 	 * transforma a estrutura do carrinho em uma estrutura que representa um
 	 * pedido
 	 */
-	public void efetuarPedido(long idRestaurante) {
+	public void efetuarPedido(long idRestaurante) throws RepositorioCheioException {
 		RepositorioPedido repositorio = DataBase.lerBasePedidos();
 		Pedido novoPedido = new Pedido(idRestaurante, getId());
 		novoPedido.setItens(carrinho);

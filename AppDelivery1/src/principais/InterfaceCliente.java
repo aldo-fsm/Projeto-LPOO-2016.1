@@ -394,7 +394,12 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(efetuarPedido)) {
 			if (gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() > 0) {
-				gerente.repositorioC().getCliente(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
+				try {
+					gerente.repositorioC().getCliente(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
+				} catch (RepositorioCheioException e1) {
+					JOptionPane.showMessageDialog(this, "Este restaurante atingiu o numero maximo de pedidos", "Erro",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				cL.show(cards, "Tela Principal");
 			} else {
 				JOptionPane.showMessageDialog(null, "n�o h� itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
