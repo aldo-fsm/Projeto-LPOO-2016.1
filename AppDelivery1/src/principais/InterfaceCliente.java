@@ -19,20 +19,22 @@ import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
 
 public class InterfaceCliente extends JFrame implements ActionListener {
-
 	// atributos de interface
 	private static final long serialVersionUID = 1L;
 	private CardLayout cL = new CardLayout();
 	private JPanel cards = new JPanel(cL);
+	
 	//variaveis da tela inicial
 	private JButton opcaoLogin = new JButton("Fazer Login");
 	private JButton opcaoCadastro = new JButton("Cadastrar");
+	
 	//variaveis de login
 	private JButton OkButtonLogin = new JButton("OK");
 	private JButton CancelarLogin = new JButton("cancelar");
 	private JTextField campoLogin = new JTextField();
 	private JPasswordField campoSenhaLogin = new JPasswordField();
 	
+	//variaveis da tela principal
 	private JButton pedir = new JButton("Pedir");
 	private JButton sair = new JButton("Deixar De ser Cliente");
 	private JButton logoutButton = new JButton("Logout");
@@ -42,12 +44,14 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private JButton efetuarPedido = new JButton("Efetuar Pedido");
 	private JButton removerItem = new JButton("Remover Item Do Carrinho");
 	private JButton adicionarItem = new JButton("Adicionar Item Ao Carrinho");
+	
 	//variaveis de cadastro
 	private JTextField campoCadastroLogin = new JTextField();
 	private JTextField campoCadastroNome = new JTextField();
 	private JButton OkButtonCadastro = new JButton("OK");
 	private JButton CancelarCadastro = new JButton("cancelar");
 	private JPasswordField campoCadastroSenha = new JPasswordField();
+	
 	// atributos de escolha do cliente e carregamento do gerente
 	private long idRestauranteEscolhido;
 	private Gerente gerente = DataBase.lerBaseGerente();
