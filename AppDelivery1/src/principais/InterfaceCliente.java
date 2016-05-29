@@ -2,6 +2,7 @@
 package principais;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -29,27 +30,27 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private JButton opcaoCadastro = new JButton("Cadastrar");
 	
 	//variaveis de login
-	private JButton OkButtonLogin = new JButton("OK");
-	private JButton CancelarLogin = new JButton("cancelar");
+	private JButton okButtonLogin = new JButton("OK");
+	private JButton cancelarLogin = new JButton("cancelar");
 	private JTextField campoLogin = new JTextField();
 	private JPasswordField campoSenhaLogin = new JPasswordField();
 	
 	//variaveis da tela principal
 	private JButton pedir = new JButton("Pedir");
-	private JButton sair = new JButton("Deixar De ser Cliente");
+	private JButton sair = new JButton("Sair"); 
 	private JButton logoutButton = new JButton("Logout");
 	
 	//variaveis de pedir
 	private JButton voltar = new JButton("Voltar");
-	private JButton efetuarPedido = new JButton("Efetuar Pedido");
-	private JButton removerItem = new JButton("Remover Item Do Carrinho");
-	private JButton adicionarItem = new JButton("Adicionar Item Ao Carrinho");
+	private JButton efetuarPedido = new JButton("Fazer Pedido");
+	private JButton removerItem = new JButton("Remover Do Carrinho");
+	private JButton adicionarItem = new JButton("Adicionar Ao Carrinho");
 	
 	//variaveis de cadastro
 	private JTextField campoCadastroLogin = new JTextField();
 	private JTextField campoCadastroNome = new JTextField();
-	private JButton OkButtonCadastro = new JButton("OK");
-	private JButton CancelarCadastro = new JButton("cancelar");
+	private JButton okButtonCadastro = new JButton("OK");
+	private JButton cancelarCadastro = new JButton("cancelar");
 	private JPasswordField campoCadastroSenha = new JPasswordField();
 	
 	// atributos de escolha do cliente e carregamento do gerente
@@ -68,15 +69,22 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private void janelaPrincipal() {
 		JPanel telaLogado = new JPanel(null);
 		cards.add(telaLogado, "Tela Principal");
-		logoutButton.setBounds(300, 500, 200, 30);
+		logoutButton.setBounds(295, 360, 210, 50);
 		logoutButton.addActionListener(this);
+		logoutButton.setBackground(new Color(150,250, 250));
+		logoutButton.setForeground(Color.WHITE);
 		telaLogado.add(logoutButton);
 		pedir.setBounds(295, 300, 210, 50);
 		pedir.addActionListener(this);
+		pedir.setBackground(new Color(150,250, 250));
+		pedir.setForeground(Color.WHITE);
 		telaLogado.add(pedir);
-		sair.setBounds(300, 460, 200, 30);
+		sair.setBounds(295, 420, 210, 50);
 		sair.addActionListener(this);
+		sair.setBackground(new Color(150,250, 250));
+		sair.setForeground(Color.WHITE);
 		telaLogado.add(sair);
+		telaLogado.setBackground(new Color(130, 210, 135));
 	}
 
 	private void janelaLogin() {
@@ -88,32 +96,50 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaLogin.add(campoSenhaLogin);
 		JLabel login = new JLabel("Login :");
 		login.setBounds(250, 350, 50, 30);
+		login.setForeground(Color.WHITE);
 		telaLogin.add(login);
 		JLabel senha = new JLabel("Senha :");
 		senha.setBounds(250, 400, 50, 30);
+		senha.setForeground(Color.WHITE);
 		telaLogin.add(senha);
-		OkButtonLogin.setBounds(350, 450, 100, 30);
-		OkButtonLogin.addActionListener(this);
-		telaLogin.add(OkButtonLogin);
+		okButtonLogin.setBounds(285, 450, 100, 30);
+		okButtonLogin.addActionListener(this);
+		okButtonLogin.setBackground(new Color(150,250, 250));
+		okButtonLogin.setForeground(Color.WHITE);
+		telaLogin.add(okButtonLogin);
+		cancelarLogin.setBounds(415, 450, 100, 30);
+		cancelarLogin.addActionListener(this);
+		cancelarLogin.setBackground(new Color(150,250, 250));
+		cancelarLogin.setForeground(Color.WHITE);
+		telaLogin.add(cancelarLogin);
+		telaLogin.setBackground(new Color(130, 210, 135));
 	}
 
 	private void janelaPedido() {
 		JPanel telaPedir = new JPanel(null);
 		cards.add(telaPedir, "Efetuar Pedido");
 		telaPedir.add(logoutButton);
-		efetuarPedido.setBounds(295, 300, 210, 50);
+		efetuarPedido.setBounds(295, 240, 210, 50);
 		efetuarPedido.addActionListener(this);
+		efetuarPedido.setBackground(new Color(150,250, 250));
+		efetuarPedido.setForeground(Color.WHITE);
 		telaPedir.add(efetuarPedido);
-		adicionarItem.setBounds(295, 360, 210, 50);
+		adicionarItem.setBounds(295, 300, 210, 50);
 		adicionarItem.addActionListener(this);
+		adicionarItem.setBackground(new Color(150,250, 250));
+		adicionarItem.setForeground(Color.WHITE);
 		telaPedir.add(adicionarItem);
-		removerItem.setBounds(295, 420, 210, 50);
+		removerItem.setBounds(295, 360, 210, 50);
 		removerItem.addActionListener(this);
+		removerItem.setBackground(new Color(150,250, 250));
+		removerItem.setForeground(Color.WHITE);
 		telaPedir.add(removerItem);
-		voltar.setBounds(310, 500, 180, 30);
+		voltar.setBounds(295, 420, 210, 50);
 		voltar.addActionListener(this);
+		voltar.setBackground(new Color(150,250, 250));
+		voltar.setForeground(Color.WHITE);
 		telaPedir.add(voltar);
-
+		telaPedir.setBackground(new Color(130, 210, 135));
 	}
 
 	private void janelaCadastro() {
@@ -125,18 +151,29 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaCadastro.add(campoCadastroLogin);
 		campoCadastroSenha.setBounds(300, 400, 200, 30);
 		telaCadastro.add(campoCadastroSenha);
-		OkButtonCadastro.setBounds(350, 450, 100, 30);
-		OkButtonCadastro.addActionListener(this);
-		telaCadastro.add(OkButtonCadastro);
+		okButtonCadastro.setBounds(285, 450, 100, 30);
+		okButtonCadastro.addActionListener(this);
+		okButtonCadastro.setBackground(new Color(150,250, 250));
+		okButtonCadastro.setForeground(Color.WHITE);
+		telaCadastro.add(okButtonCadastro);
+		cancelarCadastro.setBounds(415, 450, 100, 30);
+		cancelarCadastro.addActionListener(this);
+		cancelarCadastro.setBackground(new Color(150,250, 250));
+		cancelarCadastro.setForeground(Color.WHITE);
+		telaCadastro.add(cancelarCadastro);
 		JLabel nomeCadastro = new JLabel("nome: ");
 		nomeCadastro.setBounds(250, 300, 50, 30);
+		nomeCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(nomeCadastro);
 		JLabel loginCadastro = new JLabel("Login :");
 		loginCadastro.setBounds(250, 350, 50, 30);
+		loginCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(loginCadastro);
 		JLabel senhaCadastro = new JLabel("Senha :");
 		senhaCadastro.setBounds(250, 400, 50, 30);
+		senhaCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(senhaCadastro);
+		telaCadastro.setBackground(new Color(130, 210, 135));
 	}
 
 	private void janelaInicial() {
@@ -144,10 +181,15 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		cards.add(telaInicial, "Tela Inicial");
 		opcaoCadastro.setBounds(290, 420, 220, 50);
 		opcaoCadastro.addActionListener(this);
+		opcaoCadastro.setBackground(new Color(150,250, 250));
+		opcaoCadastro.setForeground(Color.WHITE);
 		telaInicial.add(opcaoCadastro);
 		opcaoLogin.setBounds(290, 350, 220, 50);
 		opcaoLogin.addActionListener(this);
+		opcaoLogin.setBackground(new Color(150,250, 250));
+		opcaoLogin.setForeground(Color.WHITE);
 		telaInicial.add(opcaoLogin);
+		telaInicial.setBackground(new Color(130, 210, 135));
 	}
 
 	// metodo apresenta toda a interface do cliente
@@ -246,7 +288,18 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(OkButtonLogin)) {
+		if (e.getSource().equals(cancelarLogin)) {
+			cL.show(cards, "Tela Inicial");
+			campoLogin.setText("");// campo e apagado
+			campoSenhaLogin.setText("");// campo e apagado
+		}
+		if (e.getSource().equals(cancelarCadastro)) {
+			cL.show(cards, "Tela Inicial");
+			campoCadastroLogin.setText("");// campo e apagado
+			campoCadastroNome.setText("");// campo e apagado
+			campoCadastroSenha.setText("");// campo e apagado
+		}
+		if (e.getSource().equals(okButtonLogin)) {
 			int i = 0;
 			boolean logado = false;
 			Cliente[] listaDeClientes = gerente.repositorioC().getClientes();
@@ -281,7 +334,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				campoLogin.setText("");// campo e apagado
 			}
 		}
-		if (e.getSource().equals(OkButtonCadastro)) {
+		if (e.getSource().equals(okButtonCadastro)) {
 			int i = 0;
 			boolean podeCadastrar = true;
 			while (i < gerente.repositorioC().getNumeroClientes()) {
