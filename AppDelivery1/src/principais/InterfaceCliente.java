@@ -415,7 +415,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				 */
 				cL.show(cards, "Tela De Login");
 			} else {
-				JOptionPane.showMessageDialog(this, "nï¿½o e possivel logar, pois nao hï¿½ clientes cadastrados",
+				JOptionPane.showMessageDialog(this, "não é possivel logar, pois não há clientes cadastrados",
 						"Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -467,7 +467,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				}
 				cL.show(cards, "Tela Principal");
 			} else {
-				JOptionPane.showMessageDialog(null, "nao ha itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
+				JOptionPane.showMessageDialog(null, "não há itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
 			}
 		}
@@ -478,7 +478,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() != 0) {
 				removerItem();
 			} else {
-				JOptionPane.showMessageDialog(null, "nao ha itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,
+				JOptionPane.showMessageDialog(null, "não há itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
 			}
 		}

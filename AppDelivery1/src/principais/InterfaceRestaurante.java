@@ -156,7 +156,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				atualizarDataBase();
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(this, " \" ; \" nï¿½o ï¿½ um caractere vï¿½lido");
+				JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere vï¿½lido");
 				return false;
 			}
 
@@ -217,7 +217,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (e.getSource().equals(cadastrarItemButton)) {
 			if (!cadastrarItem()) {
 
-				JOptionPane.showMessageDialog(this, "Nï¿½o foi possivel cadastrar o item", "Erro",
+				JOptionPane.showMessageDialog(this, "Nao foi possivel cadastrar o item", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -230,7 +230,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				}
 				cL.show(telas, "tela remover");
 			} else {
-				JOptionPane.showMessageDialog(this, "Nï¿½o hï¿½ nenhum item cadastrado", "Erro",
+				JOptionPane.showMessageDialog(this, "Nao ha nenhum item cadastrado", "Erro",
 						JOptionPane.INFORMATION_MESSAGE, null);
 			}
 		}
@@ -247,7 +247,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 				}
 				cL.show(telas, "tela listar pedidos");
 			} else {
-				JOptionPane.showMessageDialog(this, "Nï¿½o hï¿½ nenhum Pedido", "Erro", JOptionPane.INFORMATION_MESSAGE,
+				JOptionPane.showMessageDialog(this, "Nao ha nenhum Pedido", "Erro", JOptionPane.INFORMATION_MESSAGE,
 						null);
 			}
 		}

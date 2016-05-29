@@ -87,7 +87,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (nome == null || nome.equals("")) {
 			return false;
 		} else if (nome.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" nao e um caractere valido");
+			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere valido");
 			return false;
 		}
 
@@ -95,12 +95,12 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (login == null || login.equals("")) {
 			return false;
 		} else if (login.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" nao e um caractere valido");
+			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
 			return false;
 		} else {
 			for (int i = 0; i < gerente.repositorioC().getNumeroClientes(); i++) {
 				if (gerente.repositorioC().getCliente(i).getLogin().equals(login)) {
-					JOptionPane.showMessageDialog(this, "Este login nao esta disponivel");
+					JOptionPane.showMessageDialog(this, "Este login não está disponivel");
 					return false;
 				}
 			}
@@ -109,7 +109,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (senha == null || senha.equals("")) {
 			return false;
 		} else if (senha.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" nao e um caractere valido");
+			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere valido");
 			return false;
 		}
 
@@ -135,7 +135,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (nome == null || nome.equals("")) {
 			return false;
 		} else if (nome.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" nao e um caractere valido");
+			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
 			return false;
 		}
 
@@ -143,7 +143,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		if (login == null || login.equals("")) {
 			return false;
 		} else if (login.contains(";")) {
-			JOptionPane.showMessageDialog(this, " \" ; \" nao e um caractere valido");
+			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere valido");
 			return false;
 		} else {
 			for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
