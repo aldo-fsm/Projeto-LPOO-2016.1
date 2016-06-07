@@ -19,6 +19,7 @@ public class Restaurante extends Usuario {
 		super(login, senha, nome);
 	}
 
+	
 	// lista o id de cada pedido em espera
 	public void listarPedidos() {
 		for (int i = 0; i < MAX_PEDIDOS_ESPERA; i++) {
