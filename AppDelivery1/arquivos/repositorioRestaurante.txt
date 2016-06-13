@@ -1,4 +1,4 @@
 6
-3;2;login1;senharestaurante1;restaurante1;0/nome do prato1/9999.0;1/item/99.99;2/aaaa/999.0
+4;2;login1;senharestaurante1;restaurante1;0/nome do prato1/9999.0;1/item/99.99;2/aaaa/999.0;3/aaa/11.0
 1;3;login2;senharestaurante2;restaurante2;0/prato/12.35
 0;5;login3;senharestaurante2;restaurante2

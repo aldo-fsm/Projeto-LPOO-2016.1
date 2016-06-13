@@ -2,7 +2,6 @@ package principais;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,7 +20,6 @@ import dados.DataBase;
 import entidades.ItemCardapio;
 import entidades.Pedido;
 import entidades.Restaurante;
-import repositorios.RepositorioPedido;
 import repositorios.RepositorioRestaurante;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
@@ -29,8 +27,6 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private Restaurante restaurante;
 	private RepositorioRestaurante repositorio;
-	private Pedido[] pedidos = new Pedido[RepositorioPedido.MAX_NUMERO_PEDIDOS];
-	private int numeroPedidos;
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
@@ -171,20 +167,6 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		DataBase.salvarEstado(repositorio);
 	}
 
-	public void atualizarListaPedidos() {
-		RepositorioPedido repositorioPedido = DataBase.lerBasePedidos();
-		Pedido pedido;
-		int j = 0;
-		for (int i = 0; i < repositorioPedido.getNumeroPedidos(); i++) {
-			pedido = repositorioPedido.getPedido(i);
-			if (restaurante.getId() == pedido.getIdRestaurate()) {
-				pedidos[j] = pedido;
-				j++;
-			}
-		}
-		numeroPedidos = j;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -236,11 +218,11 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource().equals(listarPedidosButton)) {
-			atualizarListaPedidos();
-			if (numeroPedidos > 0) {
+			restaurante.atualizarListaPedidos();
+			if (restaurante.getNumeroPedidosEspera() > 0) {
 				Pedido pedido;
-				for (int i = 0; i < numeroPedidos; i++) {
-					pedido = pedidos[i];
+				for (int i = 0; i < restaurante.getNumeroPedidosEspera(); i++) {
+					pedido = restaurante.getPedidoEspera(i);
 					areaTextoPedidos.append("  " + "Id do pedido : " + pedido.getIdPedido() + "\n  Id do cliente : "
 							+ pedido.getIdCliente() + "\n  Itens : " + pedido.listarItens() + "\n  Status : "
 							+ pedido.getStatus() + "\n\n");

@@ -3,8 +3,10 @@ package entidades;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dados.DataBase;
 import excecoes.IdInvalidoException;
 import excecoes.SenhaInvalidaException;
+import repositorios.RepositorioPedido;
 
 public class Restaurante extends Usuario {
 
@@ -12,6 +14,7 @@ public class Restaurante extends Usuario {
 	private ItemCardapio[] cardapio = new ItemCardapio[MAX_PRATOS];
 	public static final int MAX_PRATOS = 150;
 	private static final int MAX_PEDIDOS_ESPERA = 100;
+	private int numeroPedidosEspera = 0;
 	private int numeroPratosCardapio = 0; // numero atual de pratos no cardapio
 	private long proximoId = 0; // proximo id disponivel para itens no cardapio
 
@@ -19,7 +22,6 @@ public class Restaurante extends Usuario {
 		super(login, senha, nome);
 	}
 
-	
 	// lista o id de cada pedido em espera
 	public void listarPedidos() {
 		for (int i = 0; i < MAX_PEDIDOS_ESPERA; i++) {
@@ -41,6 +43,20 @@ public class Restaurante extends Usuario {
 
 	public void setCardapio(ItemCardapio[] cardapio) {
 		this.cardapio = cardapio;
+	}
+
+	public void atualizarListaPedidos() {
+		RepositorioPedido repositorioPedido = DataBase.lerBasePedidos();
+		Pedido pedido;
+		int j = 0;
+		for (int i = 0; i < repositorioPedido.getNumeroPedidos(); i++) {
+			pedido = repositorioPedido.getPedido(i);
+			if (getId() == pedido.getIdRestaurate()) {
+				pedidosEspera[j] = pedido;
+				j++;
+			}
+		}
+		numeroPedidosEspera = j;
 	}
 
 	// adiciona um prato no final do array cardapio
@@ -68,12 +84,14 @@ public class Restaurante extends Usuario {
 
 	}
 
-	public void confirmarEnvio() {
-
-	}
-
-	public Pedido[] getPedidosEspera() {
-		return pedidosEspera;
+	public void confirmarEnvio(int id) {
+		RepositorioPedido repositorio = DataBase.lerBasePedidos();
+		if (id >= 0 && id < repositorio.getNumeroPedidos()) {
+			Pedido pedido = repositorio.getPedido(id);
+			if (pedido.getIdRestaurate() == this.getId()) {
+				pedido.setStatus(Status.ENVIADO);
+			}
+		}
 	}
 
 	public void setPedidosEspera(Pedido[] pedidosEspera) {
@@ -138,19 +156,39 @@ public class Restaurante extends Usuario {
 		if (numeroDigitosSenha < 10 || numeroDigitosSenha > 18) {
 			throw new SenhaInvalidaException("a senha deve ter no mínimo 10 dígitos e no máximo 18");
 		}
-		Pattern padraoNumeros = Pattern.compile("[0-9]");//cria um padrao de nmeros
-		Pattern padraoLetras = Pattern.compile("[a-z]");//cria um padrão de letras 
-		Matcher m1 = padraoLetras.matcher(getSenha().toLowerCase());//compara o padrao de letras a senha minuscula
-		Matcher m2 = padraoNumeros.matcher(getSenha());///compara o padrao de numeros com a senha 
+		Pattern padraoNumeros = Pattern.compile("[0-9]");// cria um padrao de
+															// nmeros
+		Pattern padraoLetras = Pattern.compile("[a-z]");// cria um padrão de
+														// letras
+		Matcher m1 = padraoLetras.matcher(getSenha().toLowerCase());// compara o
+																	// padrao de
+																	// letras a
+																	// senha
+																	// minuscula
+		Matcher m2 = padraoNumeros.matcher(getSenha());/// compara o padrao de
+														/// numeros com a senha
 		if (!(m1.find() && m2.find())) {
 			throw new SenhaInvalidaException("a senha deve conter pelo menos uma letra e um numero");
 		}
-		Pattern p = Pattern.compile("\\W");//padrão de simbolos
-		Matcher m3 = p.matcher(getSenha());//confere se algum simbolo aparece na senha
+		Pattern p = Pattern.compile("\\W");// padrão de simbolos
+		Matcher m3 = p.matcher(getSenha());// confere se algum simbolo aparece
+											// na senha
 		if (m3.find()) {
 			throw new SenhaInvalidaException("a senha deve conter apenas letras e numeros");
 		}
 
+	}
+
+	public int getNumeroPedidosEspera() {
+		return numeroPedidosEspera;
+	}
+
+	public void setNumeroPedidosEspera(int numeroPedidosEspera) {
+		this.numeroPedidosEspera = numeroPedidosEspera;
+	}
+
+	public Pedido getPedidoEspera(int i) {
+		return pedidosEspera[i];
 	}
 
 }
