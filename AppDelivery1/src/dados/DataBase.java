@@ -30,7 +30,7 @@ public class DataBase {
 			gravarArq.printf(str);
 			arq.close();
 		} catch (IOException e) {
-			System.out.println("Erro na gravaï¿½ï¿½o do arquivo ...");
+			System.out.println("Erro na gravação do arquivo ...");
 		}
 	}
 
@@ -60,6 +60,10 @@ public class DataBase {
 			e.printStackTrace();
 		}
 		return retorno;
+	}
+
+	public void exportarCSV() {
+
 	}
 
 	// Salva em um arquivo de texto os dados do repositorio de restaurantes
@@ -105,16 +109,16 @@ public class DataBase {
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
 				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
-				//repositorioCliente.adicionar(clientes[i - 1]);
+				// repositorioCliente.adicionar(clientes[i - 1]);
 				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
 			}
 			repositorioCliente.setClientes(clientes);
-			repositorioCliente.setNumeroClientes(i-1);
+			repositorioCliente.setNumeroClientes(i - 1);
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return new RepositorioCliente();
-		}catch (NumberFormatException e){
+		} catch (NumberFormatException e) {
 			return new RepositorioCliente();
 		}
 	}
@@ -158,7 +162,7 @@ public class DataBase {
 			return repositorioRestaurante;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return new RepositorioRestaurante();
-		}catch (NumberFormatException e){
+		} catch (NumberFormatException e) {
 			return new RepositorioRestaurante();
 		}
 
@@ -213,7 +217,7 @@ public class DataBase {
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return new RepositorioPedido();
-		}catch (NumberFormatException e){
+		} catch (NumberFormatException e) {
 			return new RepositorioPedido();
 		}
 	}
