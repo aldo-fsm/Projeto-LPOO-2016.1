@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.ArrayList;
+
 import excecoes.IdInvalidoException;
 import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
@@ -16,7 +18,7 @@ public interface IRepositorio <T> {
 	
 	public T get(int id);
 
-	public T[] copiar();
+	public ArrayList<T> copiar();
 
 	public T getCopia(int id);
 
@@ -28,5 +30,5 @@ public interface IRepositorio <T> {
 
 	public void setNumeroElementos(int numeroElementos);
 
-	public void setElementos(T[] elementos);
+	void setElementos(ArrayList<T> elementos);
 }
