@@ -71,7 +71,7 @@ public class Cliente extends Usuario {
 		novoPedido.setItens(carrinho);
 		novoPedido.setNumeroItensPedido(numeroItensCarrinho);
 		repositorio.adicionar(novoPedido);
-		DataBase.salvarEstado(repositorio);
+		DataBase.salvarEstadoPedido(repositorio);
 		this.setNumeroItensCarrinho(0);
 	}
 

@@ -223,12 +223,12 @@ public class DataBase {
 	}
 
 	// salva em um arquivo de texto os dados do repositorio de pedidos
-	public static void salvarEstado(Repositorio<Pedido> pedido) {
+	public static void salvarEstadoPedido(Repositorio<Pedido> pedidos) {
 		int i;
 		String nome = "arquivos/repositorioPedido";
-		String str = Long.toString(pedido.getProximoId()) + "\n";
-		for (i = 0; i < pedido.getNumeroElementos(); i++) {
-			str += pedido.get(i).toString() + "\n";
+		String str = Long.toString(pedidos.getProximoId()) + "\n";
+		for (i = 0; i < pedidos.getNumeroElementos(); i++) {
+			str += pedidos.get(i).toString() + "\n";
 		}
 		gravarDados(nome, str);
 	}

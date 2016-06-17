@@ -2,6 +2,7 @@ package principais;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,6 +37,8 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	private JButton listarPedidosButton;
 	private JButton logoutButton;
 	private JButton listarVoltarButton;
+	private JButton ConfirmarEnvioButton;
+	private JButton CancelarPedidoButton;
 
 	private JTextArea areaTextoPedidos;
 
@@ -85,20 +88,29 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaInicial.add(loginOkButton);
 
 		// tela logado
+		ConfirmarEnvioButton = new JButton("Confirmar Envio");
+		CancelarPedidoButton = new JButton("Cancelar Pedido");
 		cadastrarItemButton = new JButton("Adicionar Item no Cardapio");
 		removerItemButton = new JButton("Remover Item do Cardapio");
 		listarPedidosButton = new JButton("Listar Pedidos em Espera");
 		logoutButton = new JButton("Logout");
-
+		
+		ConfirmarEnvioButton.addActionListener(this);
+		CancelarPedidoButton.addActionListener(this);
 		cadastrarItemButton.addActionListener(this);
 		removerItemButton.addActionListener(this);
 		listarPedidosButton.addActionListener(this);
 		logoutButton.addActionListener(this);
 
+		ConfirmarEnvioButton.setBounds(290, 140, 220, 50);
+		CancelarPedidoButton.setBounds(290, 210, 220, 50);
 		cadastrarItemButton.setBounds(290, 280, 220, 50);
 		removerItemButton.setBounds(290, 350, 220, 50);
 		listarPedidosButton.setBounds(290, 420, 220, 50);
 		logoutButton.setBounds(300, 500, 200, 30);
+		
+		telaLogado.add(ConfirmarEnvioButton);
+		telaLogado.add(CancelarPedidoButton);
 		telaLogado.add(cadastrarItemButton);
 		telaLogado.add(removerItemButton);
 		telaLogado.add(listarPedidosButton);
@@ -136,6 +148,71 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 		cL.show(telas, "tela inicial");
 		setResizable(false);
+	}
+	
+	public void confirmarEnvio() {
+		restaurante.atualizarListaPedidos();
+		JPanel painel = new JPanel(null);
+		painel.setPreferredSize(new Dimension(500, 150));
+
+		JLabel label1 = new JLabel("Escolha o pedido a ser confirmado");
+		JComboBox<String> cb = new JComboBox<String>();
+		cb.setBackground(Color.WHITE);
+
+		cb.setBounds(50, 40, 300, 30);
+		label1.setBounds(50, 10, 300, 20);
+
+		painel.add(cb);
+		painel.add(label1);
+
+		for (int i = 0; i < restaurante.getNumeroPedidosEspera(); i++) {
+			Pedido pedido = restaurante.getPedidoEspera(i);
+			cb.addItem("id : " + pedido.getIdPedido() + ",  id do cliente : " + pedido.getIdCliente());
+		}
+
+		int n = JOptionPane.showOptionDialog(null, painel, "Confirmar Envio", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (n == 0) {
+			Pedido pedido = restaurante.getPedidoEspera(cb.getSelectedIndex());
+			Repositorio<Pedido> repositorioPedidos = DataBase.lerBasePedidos();
+			for(int i = 0;i<repositorioPedidos.getNumeroElementos();i++){
+				if(repositorioPedidos.get(i).getIdPedido()== pedido.getIdPedido()){
+					restaurante.confirmarEnvio(i);
+				}
+			}
+		}
+	}
+	public void cancelarPedido() {
+		restaurante.atualizarListaPedidos();
+		JPanel painel = new JPanel(null);
+		painel.setPreferredSize(new Dimension(500, 150));
+
+		JLabel label1 = new JLabel("Escolha o pedido a ser cancelado");
+		JComboBox<String> cb = new JComboBox<String>();
+		cb.setBackground(Color.WHITE);
+
+		cb.setBounds(50, 40, 300, 30);
+		label1.setBounds(50, 10, 300, 20);
+
+		painel.add(cb);
+		painel.add(label1);
+
+		for (int i = 0; i < restaurante.getNumeroPedidosEspera(); i++) {
+			Pedido pedido = restaurante.getPedidoEspera(i);
+			cb.addItem("id : " + pedido.getIdPedido() + ",  id do cliente : " + pedido.getIdCliente());
+		}
+
+		int n = JOptionPane.showOptionDialog(null, painel, "Cancelar Pedido", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (n == 0) {
+			Pedido pedido = restaurante.getPedidoEspera(cb.getSelectedIndex());
+			Repositorio<Pedido> repositorioPedidos = DataBase.lerBasePedidos();
+			for(int i = 0;i<repositorioPedidos.getNumeroElementos();i++){
+				if(repositorioPedidos.get(i).getIdPedido()== pedido.getIdPedido()){
+					restaurante.cancelarPedido(i);
+				}
+			}
+		}
 	}
 
 	public boolean cadastrarItem() {
@@ -246,6 +323,12 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (e.getSource().equals(listarVoltarButton)) {
 			cL.show(telas, "logado");
 			areaTextoPedidos.setText(null);
+		}
+		if(e.getSource().equals(ConfirmarEnvioButton)){
+			confirmarEnvio();
+		}
+		if(e.getSource().equals(CancelarPedidoButton)){
+			cancelarPedido();
 		}
 
 	}

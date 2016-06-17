@@ -80,16 +80,24 @@ public class Restaurante extends Usuario {
 		}
 	}
 
-	public void cancelarPedido() {
-
+	public void cancelarPedido(int id) {
+		Repositorio<Pedido> repositorio = DataBase.lerBasePedidos();
+		if (id >= 0 && id < repositorio.getNumeroElementos()) {
+			Pedido pedido = repositorio.get(id);
+			if (pedido.getIdRestaurate() == this.getId()) {
+				pedido.setStatus(Status.CANCELADO);
+				DataBase.salvarEstadoPedido(repositorio);
+			}
+		}
 	}
 
 	public void confirmarEnvio(int id) {
 		Repositorio<Pedido> repositorio = DataBase.lerBasePedidos();
-		if (id >= 0 && id < repositorio.getNumeroElementos()){
+		if (id >= 0 && id < repositorio.getNumeroElementos()) {
 			Pedido pedido = repositorio.get(id);
 			if (pedido.getIdRestaurate() == this.getId()) {
 				pedido.setStatus(Status.ENVIADO);
+				DataBase.salvarEstadoPedido(repositorio);
 			}
 		}
 	}
@@ -116,25 +124,24 @@ public class Restaurante extends Usuario {
 		return numeroPratosCardapio;
 	}
 
-//	public String[] listarCardapio() {
-//		String[] retorno = new String[numeroPratosCardapio];
-//		for (int i = 0; i < numeroPratosCardapio; i++) {
-//			retorno[i] = cardapio[i].getNome();
-//		}
-//
-//		return retorno;
-//	}
+	// public String[] listarCardapio() {
+	// String[] retorno = new String[numeroPratosCardapio];
+	// for (int i = 0; i < numeroPratosCardapio; i++) {
+	// retorno[i] = cardapio[i].getNome();
+	// }
+	//
+	// return retorno;
+	// }
 
 	public String listarCardapio() {
 		String cardapio = "";
 		for (int i = 0; i < getNumeroPratosCardapio(); i++) {
-			cardapio = cardapio + getPratoCardapio(i).getId() + ". "
-					+ getPratoCardapio(i).getNome() + " -------- "
+			cardapio = cardapio + getPratoCardapio(i).getId() + ". " + getPratoCardapio(i).getNome() + " -------- "
 					+ getPratoCardapio(i).getPreco() + "\n";
 		}
 		return cardapio;
 	}
-	
+
 	@Override
 	public String toString() {
 		String stringRestaurante;

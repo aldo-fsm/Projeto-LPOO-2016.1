@@ -1,6 +1,6 @@
 package entidades;
 
-public class Pedido implements Cloneable{
+public class Pedido implements Cloneable {
 	private long idCliente;
 	private long idPedido;
 	private long idRestaurate;
@@ -77,16 +77,18 @@ public class Pedido implements Cloneable{
 	}
 
 	public void setStatus(String string) {
-		if (string.compareTo("DEFAULT") == 0) {
+		if (string.equals("DEFAULT")) {
 			setStatus(Status.DEFAULT);
-		} else if (string.compareTo("DEFAULT") == 0) {
+		} else if (string.equals("CANCELADO")) {
+			setStatus(Status.CANCELADO);
+		} else if (string.equals("ENTREGUE")) {
 			setStatus(Status.ENTREGUE);
-		} else if (string.compareTo("ENTREGUE") == 0) {
+		} else if (string.equals("ENVIADO")) {
 			setStatus(Status.ENVIADO);
-		} else if (string.compareTo("ENVIADO") == 0) {
-			setStatus(Status.REALIZADO);
-		} else if (string.compareTo("REALIZADO") == 0) {
+		} else if (string.equals("PREPARANDO")) {
 			setStatus(Status.PREPARANDO);
+		} else if (string.equals("REALIZADO")) {
+			setStatus(Status.REALIZADO);
 		}
 	}
 

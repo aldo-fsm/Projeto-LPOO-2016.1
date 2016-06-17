@@ -6,7 +6,7 @@ import excecoes.IdInvalidoException;
 import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
 
-public interface IRepositorio <T> {
+public interface IRepositorio <T extends Cloneable> {
 	
 	public static final int MAX_NUMERO_ELEMENTOS = 100;
 
