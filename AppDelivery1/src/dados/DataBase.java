@@ -65,7 +65,7 @@ public class DataBase {
 		try {
 			String exportada = null;
 			if (lerBasePedidos().getNumeroElementos() != 0) {
-				exportada = "idPedido,idCliente,idRestaurate,status\n";
+				exportada = "idPedido;idCliente;idRestaurate;status\n";
 			}
 			for (int i = 0; i < lerBasePedidos().getElementos().size(); i++) {
 				exportada = exportada + lerBasePedidos().get(i).toExport() + "\n";
@@ -85,7 +85,7 @@ public class DataBase {
 		try {
 			String exportada = null;
 			if (LerBaseRestaurantes().getNumeroElementos() != 0) {
-				exportada = "Id,Nome,Login,Senha\n";
+				exportada = "Id;Nome;Login;Senha\n";
 			}
 			for (int i = 0; i < LerBaseRestaurantes().getElementos().size(); i++) {
 				exportada = exportada + LerBaseRestaurantes().get(i).toExport() + "\n";
@@ -105,10 +105,10 @@ public class DataBase {
 		try {
 			String exportada = null;
 			if (lerBaseClientes().getNumeroElementos() != 0) {
-				exportada = "Id,Login,Senha,Nome\n";
+				exportada = "Id;Login;Senha;Nome\n";
 			}
 			for (int i = 0; i < lerBaseClientes().getElementos().size(); i++) {
-				exportada = exportada + lerBaseClientes().get(i).toExport() + "\n";
+				exportada = exportada + lerBaseClientes().get(i) + "\n";
 			}
 			arq = new FileWriter("Planilha De Clientes.csv");
 			PrintWriter gravarArq = new PrintWriter(arq);

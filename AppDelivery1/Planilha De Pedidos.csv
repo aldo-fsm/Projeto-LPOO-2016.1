@@ -1,4 +1,4 @@
-idPedido,idCliente,idRestaurate,status
-0,4,2,DEFAULT
-1,2,2,DEFAULT
+idPedido;idCliente;idRestaurate;status
+0;4;2;DEFAULT
+1;2;2;DEFAULT
 

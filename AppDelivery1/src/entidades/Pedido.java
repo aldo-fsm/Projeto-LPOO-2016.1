@@ -109,7 +109,7 @@ public class Pedido implements Cloneable{
 	}
 
 	public String toExport() {
-		String exportada = idPedido + "," + idCliente + "," + idRestaurate + "," + status;
+		String exportada = idPedido + ";" + idCliente + ";" + idRestaurate + ";" + status;
 		return exportada;
 	}
 

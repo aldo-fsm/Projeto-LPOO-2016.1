@@ -116,15 +116,6 @@ public class Restaurante extends Usuario {
 		return numeroPratosCardapio;
 	}
 
-//	public String[] listarCardapio() {
-//		String[] retorno = new String[numeroPratosCardapio];
-//		for (int i = 0; i < numeroPratosCardapio; i++) {
-//			retorno[i] = cardapio[i].getNome();
-//		}
-//
-//		return retorno;
-//	}
-
 	public String listarCardapio() {
 		String cardapio = "";
 		for (int i = 0; i < getNumeroPratosCardapio(); i++) {
@@ -202,7 +193,7 @@ public class Restaurante extends Usuario {
 	}
 
 	public String toExport() {
-		String exportada = getId() + "," + getLogin() + "," + getSenha() + "," + getNome();
+		String exportada = getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome();
 		return exportada;
 	}
 }
