@@ -59,9 +59,22 @@ public class DataBase {
 		}
 		return retorno;
 	}
-
-	public void exportarCSV() {
-		
+	
+	private static String exportado(){
+		String exportada = null;
+		exportada = "ProximoId , Elementos";//definir string a ser salva no arquivo csv
+		return exportada;
+	}
+	public static void exportarCSV() {
+		FileWriter arq;
+		try {
+			arq = new FileWriter("Planilha.csv");
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println(exportado());
+			arq.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Salva em um arquivo de texto os dados do repositorio de restaurantes
@@ -70,8 +83,7 @@ public class DataBase {
 		String nome = "arquivos/repositorioRestaurante";
 		String str = Long.toString(restaurante.getProximoId()) + "\n";
 		for (i = 0; i < restaurante.getNumeroElementos(); i++) {
-			str += restaurante.get(i).getProximoId() + ";" + restaurante.get(i).toString()
-					+ "\n";
+			str += restaurante.get(i).getProximoId() + ";" + restaurante.get(i).toString() + "\n";
 		}
 		gravarDados(nome, str);
 	}
@@ -139,7 +151,7 @@ public class DataBase {
 			for (i = 1; i < strings.length; i++) {
 
 				stringSplit = strings[i].split(";");
-				restaurantes.add(i - 1 ,new Restaurante(stringSplit[2], stringSplit[3], stringSplit[4]));
+				restaurantes.add(i - 1, new Restaurante(stringSplit[2], stringSplit[3], stringSplit[4]));
 				restaurantes.get(i - 1).setProximoId(Long.parseLong(stringSplit[0]));
 				restaurantes.get(i - 1).setId(Long.parseLong(stringSplit[1]));
 
@@ -182,7 +194,7 @@ public class DataBase {
 		String[] strings = lerDados("arquivos/repositorioPedido.txt");
 		try {
 			Repositorio<Pedido> repositorioPedido = new Repositorio<Pedido>();
-			ArrayList<Pedido> pedidos= new ArrayList<Pedido>();
+			ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 			long proximoId = Long.parseLong(strings[0]);
 			String[] stringSplit;
 			String[] stringSplit2;
@@ -192,7 +204,7 @@ public class DataBase {
 			int j;
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
-				pedidos.add(i - 1,new Pedido(Long.parseLong(stringSplit[2]), Long.parseLong(stringSplit[1])));
+				pedidos.add(i - 1, new Pedido(Long.parseLong(stringSplit[2]), Long.parseLong(stringSplit[1])));
 				pedidos.get(i - 1).setIdPedido(Long.parseLong(stringSplit[0]));
 				pedidos.get(i - 1).setStatus(stringSplit[3]);
 

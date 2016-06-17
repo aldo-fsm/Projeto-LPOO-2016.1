@@ -3,6 +3,7 @@ package testes;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dados.DataBase;
 import entidades.Cliente;
 import excecoes.IdInvalidoException;
 import excecoes.RepositorioCheioException;
@@ -21,11 +22,12 @@ public class Teste3 {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		Repositorio<Cliente> a= new Repositorio<Cliente>();
-		a.adicionar(new Cliente("aw543535564654", "a792nnj", "545645646674vvt"));
-		System.out.println(a.get(0).getNome());
-		ArrayList<Cliente> b = a.copiar();
-		a.get(0).setNome("aryell");
-		System.out.println(b.get(0).getNome());
+//		Repositorio<Cliente> a= new Repositorio<Cliente>();
+//		a.adicionar(new Cliente("aw543535564654", "a792nnj", "545645646674vvt"));
+//		System.out.println(a.get(0).getNome());
+//		ArrayList<Cliente> b = a.copiar();
+//		a.get(0).setNome("aryell");
+//		System.out.println(b.get(0).getNome());
+		DataBase.exportarCSV();
 	}
 }
