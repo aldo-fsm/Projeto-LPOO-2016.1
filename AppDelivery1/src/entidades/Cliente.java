@@ -15,7 +15,7 @@ public class Cliente extends Usuario {
 	private ItemCardapio[] carrinho = new ItemCardapio[MAX_ITENS_CARRINHO];
 	public static final int MAX_ITENS_CARRINHO = 150;
 	private int numeroItensCarrinho = 0; // numero atual de itens no carrinho
-
+	
 	public int getNumeroItensCarrinho() {
 		return numeroItensCarrinho;
 	}
@@ -78,10 +78,6 @@ public class Cliente extends Usuario {
 	@Override
 	public String toString() {
 		return (getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome());
-	}
-	
-	public String toExport() {
-		return (getId() + "," + getLogin() + "," + getSenha() + "," + getNome());
 	}
 	
 	public void setNumeroItensCarrinho(int numeroItensCarrinho) {
