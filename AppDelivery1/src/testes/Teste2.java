@@ -1,16 +1,9 @@
 package testes;
 
-import dados.DataBase;
-import entidades.Gerente;
-import entidades.ItemCardapio;
-import entidades.Pedido;
+
 import entidades.Restaurante;
 import excecoes.IdInvalidoException;
 import excecoes.SenhaInvalidaException;
-import principais.InterfaceCliente;
-import principais.InterfaceGerente;
-import repositorios.RepositorioPedido;
-import repositorios.RepositorioRestaurante;
 
 public class Teste2 {
 

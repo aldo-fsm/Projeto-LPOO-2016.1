@@ -1,14 +1,5 @@
 package testes;
 
-
-import entidades.Gerente;
-import entidades.ItemCardapio;
-import dados.DataBase;
-import entidades.Cliente;
-import entidades.Restaurante;
-import repositorios.RepositorioCliente;
-import repositorios.RepositorioRestaurante;
-
 public class Teste1 {
 /*	public static void main(String[] args) {
 

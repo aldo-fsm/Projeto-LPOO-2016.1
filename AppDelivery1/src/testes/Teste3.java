@@ -1,14 +1,10 @@
 package testes;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import dados.DataBase;
-import entidades.Cliente;
 import excecoes.IdInvalidoException;
 import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
-import repositorios.Repositorio;
 
 public class Teste3 {
 	public static void main(String[] args) throws IOException, IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
@@ -16,10 +12,8 @@ public class Teste3 {
 //		try {
 //			r.validar();
 //		} catch (IdInvalidoException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		} catch (SenhaInvalidaException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //		Repositorio<Cliente> a= new Repositorio<Cliente>();
