@@ -3,7 +3,7 @@ package entidades;
 import excecoes.IdInvalidoException;
 import excecoes.SenhaInvalidaException;
 
-public abstract class Usuario {
+public abstract class Usuario implements Cloneable{
 
 	private String login;
 	private String senha;

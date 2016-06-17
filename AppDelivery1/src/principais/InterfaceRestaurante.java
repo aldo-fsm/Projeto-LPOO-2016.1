@@ -20,13 +20,13 @@ import dados.DataBase;
 import entidades.ItemCardapio;
 import entidades.Pedido;
 import entidades.Restaurante;
-import repositorios.RepositorioRestaurante;
+import repositorios.Repositorio;
 
 public class InterfaceRestaurante extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Restaurante restaurante;
-	private RepositorioRestaurante repositorio;
+	private Repositorio<Restaurante> repositorio;
 
 	private JButton loginOkButton;
 	private JButton cadastrarItemButton;
@@ -164,7 +164,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 	}
 
 	public void atualizarDataBase() {
-		DataBase.salvarEstado(repositorio);
+		DataBase.salvarEstadoRestaurante(repositorio);
 	}
 
 	@Override
@@ -174,8 +174,8 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 			repositorio = DataBase.LerBaseRestaurantes();
 			String login = campoTextoLogin.getText();
 			String senha = new String(campoSenhaLogin.getPassword());
-			for (int i = 0; i < repositorio.getNumeroRestaurantes(); i++) {
-				restaurante = repositorio.getRestaurante(i);
+			for (int i = 0; i < repositorio.getNumeroElementos(); i++) {
+				restaurante = repositorio.get(i);
 				if (restaurante.getLogin().equals(login) && restaurante.getSenha().equals(senha)) {
 					break;
 				}

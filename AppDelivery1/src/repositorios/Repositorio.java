@@ -1,13 +1,16 @@
 package repositorios;
 
-import java.util.ArrayList;
+import entidades.Pedido;
+import entidades.Cliente;
 import entidades.Usuario;
-import excecoes.IdInvalidoException;
-import excecoes.RepositorioCheioException;
-import excecoes.SenhaInvalidaException;
+import java.util.ArrayList;
+import entidades.Restaurante;
 import interfaces.IRepositorio;
+import excecoes.IdInvalidoException;
+import excecoes.SenhaInvalidaException;
+import excecoes.RepositorioCheioException;
 
-public class Repositorio<T> implements IRepositorio<T> {
+public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 
 	private ArrayList<T> elementos = new ArrayList<T>();
 	private long proximoId = 1;
@@ -46,17 +49,32 @@ public class Repositorio<T> implements IRepositorio<T> {
 
 	@Override
 	public T get(int id) {
-		return elementos.get(id);
-	}
-
-	@SuppressWarnings({ "unchecked"})
-	public ArrayList<T> copiar() {
-		return(ArrayList<T>)elementos.clone();
+		if (elementos.size() > id) {
+			return elementos.get(id);
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
+	public ArrayList<T> copiar() {
+		if (elementos.size() > 0) {
+			ArrayList<T> copia = new ArrayList<T>();
+			for (int i = 0; i < elementos.size(); i++) {
+				if (elementos.get(0) instanceof Cliente) {
+					copia.add((T) ((Cliente) elementos.get(i)).clone());
+				} else if (elementos.get(0) instanceof Restaurante) {
+					copia.add((T) ((Restaurante) elementos.get(i)).clone());
+				} else if (elementos.get(0) instanceof Pedido) {
+					copia.add((T) ((Pedido) elementos.get(i)).clone());
+				}
+			}
+			return copia;
+		}
+		return new ArrayList<T>();
+	}
+
 	public T getCopia(int id) {
-		return ((ArrayList<T>)elementos.clone()).get(id);
+		return copiar().get(id);
 	}
 
 	public int getNumeroElementos() {
@@ -69,11 +87,6 @@ public class Repositorio<T> implements IRepositorio<T> {
 
 	public long getProximoId() {
 		return proximoId;
-	}
-	
-	
-	public void setNumeroElementos(int numeroElementos) {
-
 	}
 
 	public void setElementos(ArrayList<T> elementos) {

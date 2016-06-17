@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,35 +26,35 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private CardLayout cL = new CardLayout();
 	private JPanel cards = new JPanel(cL);
-	
-	//variaveis da tela inicial
+
+	// variaveis da tela inicial
 	private JButton opcaoLogin = new JButton("Fazer Login");
 	private JButton opcaoCadastro = new JButton("Cadastrar");
-	
-	//variaveis de login
+
+	// variaveis de login
 	private JButton okButtonLogin = new JButton("OK");
 	private JButton cancelarLogin = new JButton("cancelar");
 	private JTextField campoLogin = new JTextField();
 	private JPasswordField campoSenhaLogin = new JPasswordField();
-	
-	//variaveis da tela principal
+
+	// variaveis da tela principal
 	private JButton pedir = new JButton("Pedir");
-	private JButton sair = new JButton("Sair"); 
+	private JButton sair = new JButton("Sair");
 	private JButton logoutButton = new JButton("Logout");
-	
-	//variaveis de pedir
+
+	// variaveis de pedir
 	private JButton voltar = new JButton("Voltar");
 	private JButton efetuarPedido = new JButton("Fazer Pedido");
 	private JButton removerItem = new JButton("Remover Do Carrinho");
 	private JButton adicionarItem = new JButton("Adicionar Ao Carrinho");
-	
-	//variaveis de cadastro
+
+	// variaveis de cadastro
 	private JTextField campoCadastroLogin = new JTextField();
 	private JTextField campoCadastroNome = new JTextField();
 	private JButton okButtonCadastro = new JButton("OK");
 	private JButton cancelarCadastro = new JButton("cancelar");
 	private JPasswordField campoCadastroSenha = new JPasswordField();
-	
+
 	// atributos de escolha do cliente e carregamento do gerente
 	private long idRestauranteEscolhido;
 	private Gerente gerente = DataBase.lerBaseGerente();
@@ -71,17 +73,17 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		cards.add(telaLogado, "Tela Principal");
 		logoutButton.setBounds(295, 360, 210, 50);
 		logoutButton.addActionListener(this);
-		logoutButton.setBackground(new Color(150,250, 250));
+		logoutButton.setBackground(new Color(150, 250, 250));
 		logoutButton.setForeground(Color.WHITE);
 		telaLogado.add(logoutButton);
 		pedir.setBounds(295, 300, 210, 50);
 		pedir.addActionListener(this);
-		pedir.setBackground(new Color(150,250, 250));
+		pedir.setBackground(new Color(150, 250, 250));
 		pedir.setForeground(Color.WHITE);
 		telaLogado.add(pedir);
 		sair.setBounds(295, 420, 210, 50);
 		sair.addActionListener(this);
-		sair.setBackground(new Color(150,250, 250));
+		sair.setBackground(new Color(150, 250, 250));
 		sair.setForeground(Color.WHITE);
 		telaLogado.add(sair);
 		telaLogado.setBackground(new Color(130, 210, 135));
@@ -104,12 +106,12 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaLogin.add(senha);
 		okButtonLogin.setBounds(285, 450, 100, 30);
 		okButtonLogin.addActionListener(this);
-		okButtonLogin.setBackground(new Color(150,250, 250));
+		okButtonLogin.setBackground(new Color(150, 250, 250));
 		okButtonLogin.setForeground(Color.WHITE);
 		telaLogin.add(okButtonLogin);
 		cancelarLogin.setBounds(415, 450, 100, 30);
 		cancelarLogin.addActionListener(this);
-		cancelarLogin.setBackground(new Color(150,250, 250));
+		cancelarLogin.setBackground(new Color(150, 250, 250));
 		cancelarLogin.setForeground(Color.WHITE);
 		telaLogin.add(cancelarLogin);
 		telaLogin.setBackground(new Color(130, 210, 135));
@@ -121,22 +123,22 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaPedir.add(logoutButton);
 		efetuarPedido.setBounds(295, 240, 210, 50);
 		efetuarPedido.addActionListener(this);
-		efetuarPedido.setBackground(new Color(150,250, 250));
+		efetuarPedido.setBackground(new Color(150, 250, 250));
 		efetuarPedido.setForeground(Color.WHITE);
 		telaPedir.add(efetuarPedido);
 		adicionarItem.setBounds(295, 300, 210, 50);
 		adicionarItem.addActionListener(this);
-		adicionarItem.setBackground(new Color(150,250, 250));
+		adicionarItem.setBackground(new Color(150, 250, 250));
 		adicionarItem.setForeground(Color.WHITE);
 		telaPedir.add(adicionarItem);
 		removerItem.setBounds(295, 360, 210, 50);
 		removerItem.addActionListener(this);
-		removerItem.setBackground(new Color(150,250, 250));
+		removerItem.setBackground(new Color(150, 250, 250));
 		removerItem.setForeground(Color.WHITE);
 		telaPedir.add(removerItem);
 		voltar.setBounds(295, 420, 210, 50);
 		voltar.addActionListener(this);
-		voltar.setBackground(new Color(150,250, 250));
+		voltar.setBackground(new Color(150, 250, 250));
 		voltar.setForeground(Color.WHITE);
 		telaPedir.add(voltar);
 		telaPedir.setBackground(new Color(130, 210, 135));
@@ -153,12 +155,12 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaCadastro.add(campoCadastroSenha);
 		okButtonCadastro.setBounds(285, 450, 100, 30);
 		okButtonCadastro.addActionListener(this);
-		okButtonCadastro.setBackground(new Color(150,250, 250));
+		okButtonCadastro.setBackground(new Color(150, 250, 250));
 		okButtonCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(okButtonCadastro);
 		cancelarCadastro.setBounds(415, 450, 100, 30);
 		cancelarCadastro.addActionListener(this);
-		cancelarCadastro.setBackground(new Color(150,250, 250));
+		cancelarCadastro.setBackground(new Color(150, 250, 250));
 		cancelarCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(cancelarCadastro);
 		JLabel nomeCadastro = new JLabel("nome: ");
@@ -181,12 +183,12 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		cards.add(telaInicial, "Tela Inicial");
 		opcaoCadastro.setBounds(290, 420, 220, 50);
 		opcaoCadastro.addActionListener(this);
-		opcaoCadastro.setBackground(new Color(150,250, 250));
+		opcaoCadastro.setBackground(new Color(150, 250, 250));
 		opcaoCadastro.setForeground(Color.WHITE);
 		telaInicial.add(opcaoCadastro);
 		opcaoLogin.setBounds(290, 350, 220, 50);
 		opcaoLogin.addActionListener(this);
-		opcaoLogin.setBackground(new Color(150,250, 250));
+		opcaoLogin.setBackground(new Color(150, 250, 250));
 		opcaoLogin.setForeground(Color.WHITE);
 		telaInicial.add(opcaoLogin);
 		telaInicial.setBackground(new Color(130, 210, 135));
@@ -215,23 +217,23 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			// lista o cardapio do restaurante de id escolhido
 			itemRemovido = "" + JOptionPane
 					.showInputDialog("digite o numero correspondente ao item que deseja remover, abaixo, listado\n"
-							+ gerente.repositorioC().getCliente(numeroDoCliente).listarCarrinho());
+							+ gerente.repositorioC().get(numeroDoCliente).listarCarrinho());
 
 			if (itemRemovido.equals("null")) {// caso tenha apertado em cancelar
 												// a janela fecha
 				break;
 			}
 			numeroDoItem = 0;
-			while (numeroDoItem < gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho()) {
+			while (numeroDoItem < gerente.repositorioC().get(numeroDoCliente).getNumeroItensCarrinho()) {
 				/*
 				 * confere se o id digitado pelo cliente corresponde a um dos
 				 * ids dos pratos
 				 */
-				if (itemRemovido.compareTo(String.valueOf(
-						gerente.repositorioC().getCliente(numeroDoCliente).getCarrinho(numeroDoItem).getId())) == 0) {
-					gerente.repositorioC().getCliente(numeroDoCliente).removerDoCarrinho(numeroDoItem);
-					gerente.repositorioC().getCliente(numeroDoCliente).setNumeroItensCarrinho(
-							gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() + 1);
+				if (itemRemovido.compareTo(String
+						.valueOf(gerente.repositorioC().get(numeroDoCliente).getCarrinho(numeroDoItem).getId())) == 0) {
+					gerente.repositorioC().get(numeroDoCliente).removerDoCarrinho(numeroDoItem);
+					gerente.repositorioC().get(numeroDoCliente).setNumeroItensCarrinho(
+							gerente.repositorioC().get(numeroDoCliente).getNumeroItensCarrinho() + 1);
 					DataBase.salvarEstado(gerente);// salva o estado do sistema
 					idIncorreto = false;
 					break;
@@ -249,35 +251,34 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		do {// pede e le id que o cliente digita
 			itemEscolhido = ""
 					+ JOptionPane.showInputDialog("digite o numero correspondente ao item que deseja, abaixo listado\n"
-							+ gerente.repositorioR().listarCardapio(idRestauranteEscolhido));
+							+ gerente.repositorioR().get(numeroRestauranteEscolhido).listarCardapio());
 			if (itemEscolhido.equals("null")) {// caso tenha apertado em
 												// cancelar a janela fecha
 				break;
 			}
 			i = 0;
-			while (i < gerente.repositorioR().getRestaurante(numeroRestauranteEscolhido).getNumeroPratosCardapio()) {
+			while (i < gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPratosCardapio()) {
 				/*
 				 * confere se o id digitado pelo cliente corresponde a um dos
 				 * ids dos pratos
 				 */
-				if (itemEscolhido.compareTo(String.valueOf(gerente.repositorioR()
-						.getRestaurante(numeroRestauranteEscolhido).getPratoCardapio(i).getId())) == 0) {
+				if (itemEscolhido.compareTo(String.valueOf(
+						gerente.repositorioR().get(numeroRestauranteEscolhido).getPratoCardapio(i).getId())) == 0) {
 					idItemEscolhido = Long.parseLong(itemEscolhido);
 					numeroDoCliente = 0;
-					while (numeroDoCliente < gerente.repositorioC().getNumeroClientes()) {
+					while (numeroDoCliente < gerente.repositorioC().getNumeroElementos()) {
 						/*
 						 * identifica o cliete que possui o login e senha
 						 * informados
 						 */
-						if (gerente.repositorioC().getCliente(numeroDoCliente).getLogin().equals(loginDoUsuario)
-								&& gerente.repositorioC().getCliente(numeroDoCliente).getSenha()
-										.equals(senhaDoUsuario)) {
+						if (gerente.repositorioC().get(numeroDoCliente).getLogin().equals(loginDoUsuario)
+								&& gerente.repositorioC().get(numeroDoCliente).getSenha().equals(senhaDoUsuario)) {
 							break;
 						}
 						numeroDoCliente++;
 					}
-					gerente.repositorioC().getCliente(numeroDoCliente).adicionarNoCarrinho(gerente.repositorioR()
-							.getRestaurante(numeroRestauranteEscolhido).getPratoCardapio(idItemEscolhido));
+					gerente.repositorioC().get(numeroDoCliente).adicionarNoCarrinho(
+							gerente.repositorioR().get(numeroRestauranteEscolhido).getPratoCardapio(idItemEscolhido));
 					DataBase.salvarEstado(gerente);// salva o estado do sistema
 					idIncorreto = false;
 					break;
@@ -302,14 +303,14 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(okButtonLogin)) {
 			int i = 0;
 			boolean logado = false;
-			Cliente[] listaDeClientes = gerente.repositorioC().getClientes();
-			while (i < gerente.repositorioC().getNumeroClientes()) {
+			ArrayList<Cliente> listaDeClientes = gerente.repositorioC().copiar();
+			while (i < gerente.repositorioC().getNumeroElementos()) {
 				/*
-				 * confere se as informaçoes de login e senha condizem com
-				 * algum dos usuarios do repositorio
+				 * confere se as informaçoes de login e senha condizem com algum
+				 * dos usuarios do repositorio
 				 */
-				if (listaDeClientes[i].getLogin().equals(campoLogin.getText())
-						&& listaDeClientes[i].getSenha().equals(new String(campoSenhaLogin.getPassword()))) {
+				if (listaDeClientes.get(i).getLogin().equals(campoLogin.getText())
+						&& listaDeClientes.get(i).getSenha().equals(new String(campoSenhaLogin.getPassword()))) {
 					cL.show(cards, "Tela Principal");
 					/*
 					 * se condiz a tela principal e aberta
@@ -337,21 +338,21 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(okButtonCadastro)) {
 			int i = 0;
 			boolean podeCadastrar = true;
-			while (i < gerente.repositorioC().getNumeroClientes()) {
+			while (i < gerente.repositorioC().getNumeroElementos()) {
 				/*
 				 * confere se as inforï¿½ï¿½es de login e/ou nome ja foram
 				 * utilizadas
 				 */
-				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().getCliente(i).getLogin())
-						|| campoCadastroNome.getText().equals(gerente.repositorioC().getCliente(i).getNome()))) {
+				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().get(i).getLogin())
+						|| campoCadastroNome.getText().equals(gerente.repositorioC().get(i).getNome()))) {
 					podeCadastrar = false;
 				}
 				i++;
 			}
 			if (podeCadastrar) {
 				/*
-				 * caso nao tenha sido utilizada pode prosseguir com a
-				 * execução do programa
+				 * caso nao tenha sido utilizada pode prosseguir com a execução
+				 * do programa
 				 */
 				if (!campoCadastroLogin.getText().equals("") && !campoCadastroNome.getText().equals("")
 						&& !(new String(campoCadastroSenha.getPassword())).equals("")) {// confere
@@ -408,15 +409,15 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 												// abre-se a janela de cadastro
 		}
 		if (e.getSource().equals(opcaoLogin)) {
-			if (gerente.repositorioC().getNumeroClientes() != 0) {
+			if (gerente.repositorioC().getNumeroElementos() != 0) {
 				/*
 				 * se houver cliente(s) a tela de login e aberta ao ser esta
 				 * opiçao
 				 */
 				cL.show(cards, "Tela De Login");
 			} else {
-				JOptionPane.showMessageDialog(this, "não é possivel logar, pois não há clientes cadastrados",
-						"Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "não é possivel logar, pois não há clientes cadastrados", "Erro",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource().equals(pedir)) {
@@ -431,9 +432,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					break;
 				}
 				i = 0;
-				while (i < gerente.repositorioR().getNumeroRestaurantes()) {
-					if (restauranteEscolhido
-							.compareTo(String.valueOf(gerente.repositorioR().getRestaurante(i).getId())) == 0) {
+				while (i < gerente.repositorioR().getNumeroElementos()) {
+					if (restauranteEscolhido.compareTo(String.valueOf(gerente.repositorioR().get(i).getId())) == 0) {
 						idRestauranteEscolhido = Long.parseLong(restauranteEscolhido);
 						cL.show(cards, "Efetuar Pedido");
 						numeroRestauranteEscolhido = i;
@@ -447,9 +447,9 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		if (e.getSource().equals(sair)) {
 			cL.show(cards, "Tela Inicial");
 			int i = 0;
-			while (i < gerente.repositorioC().getNumeroClientes()) {
-				if (gerente.repositorioC().getCliente(i).getLogin().equals(loginDoUsuario)
-						&& gerente.repositorioC().getCliente(i).getSenha().equals(senhaDoUsuario)) {
+			while (i < gerente.repositorioC().getNumeroElementos()) {
+				if (gerente.repositorioC().get(i).getLogin().equals(loginDoUsuario)
+						&& gerente.repositorioC().get(i).getSenha().equals(senhaDoUsuario)) {
 					break;
 				}
 				i++;
@@ -458,12 +458,14 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			DataBase.salvarEstado(gerente);
 		}
 		if (e.getSource().equals(efetuarPedido)) {
-			if (gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() > 0) {
+			if (gerente.repositorioC().get(numeroDoCliente).getNumeroItensCarrinho() > 0) {
 				try {
-					gerente.repositorioC().getCliente(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
+					gerente.repositorioC().get(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
 				} catch (RepositorioCheioException e1) {
 					JOptionPane.showMessageDialog(this, "Este restaurante atingiu o numero maximo de pedidos", "Erro",
 							JOptionPane.ERROR_MESSAGE);
+				} catch (IdInvalidoException | SenhaInvalidaException e1) {
+					e1.printStackTrace();
 				}
 				cL.show(cards, "Tela Principal");
 			} else {
@@ -475,7 +477,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			adicionarItem();
 		}
 		if (e.getSource().equals(removerItem)) {
-			if (gerente.repositorioC().getCliente(numeroDoCliente).getNumeroItensCarrinho() != 0) {
+			if (gerente.repositorioC().get(numeroDoCliente).getNumeroItensCarrinho() != 0) {
 				removerItem();
 			} else {
 				JOptionPane.showMessageDialog(null, "não há itens para remover", "Erro", JOptionPane.ERROR_MESSAGE,

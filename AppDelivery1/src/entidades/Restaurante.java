@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import dados.DataBase;
 import excecoes.IdInvalidoException;
 import excecoes.SenhaInvalidaException;
-import repositorios.RepositorioPedido;
+import repositorios.Repositorio;
 
 public class Restaurante extends Usuario {
 
@@ -46,11 +46,11 @@ public class Restaurante extends Usuario {
 	}
 
 	public void atualizarListaPedidos() {
-		RepositorioPedido repositorioPedido = DataBase.lerBasePedidos();
+		Repositorio<Pedido> repositorioPedido = DataBase.lerBasePedidos();
 		Pedido pedido;
 		int j = 0;
-		for (int i = 0; i < repositorioPedido.getNumeroPedidos(); i++) {
-			pedido = repositorioPedido.getPedido(i);
+		for (int i = 0; i < repositorioPedido.getNumeroElementos(); i++) {
+			pedido = repositorioPedido.get(i);
 			if (getId() == pedido.getIdRestaurate()) {
 				pedidosEspera[j] = pedido;
 				j++;
@@ -85,9 +85,9 @@ public class Restaurante extends Usuario {
 	}
 
 	public void confirmarEnvio(int id) {
-		RepositorioPedido repositorio = DataBase.lerBasePedidos();
-		if (id >= 0 && id < repositorio.getNumeroPedidos()) {
-			Pedido pedido = repositorio.getPedido(id);
+		Repositorio<Pedido> repositorio = DataBase.lerBasePedidos();
+		if (id >= 0 && id < repositorio.getNumeroElementos()){
+			Pedido pedido = repositorio.get(id);
 			if (pedido.getIdRestaurate() == this.getId()) {
 				pedido.setStatus(Status.ENVIADO);
 			}
@@ -116,15 +116,25 @@ public class Restaurante extends Usuario {
 		return numeroPratosCardapio;
 	}
 
-	public String[] listarCardapio() {
-		String[] retorno = new String[numeroPratosCardapio];
-		for (int i = 0; i < numeroPratosCardapio; i++) {
-			retorno[i] = cardapio[i].getNome();
+//	public String[] listarCardapio() {
+//		String[] retorno = new String[numeroPratosCardapio];
+//		for (int i = 0; i < numeroPratosCardapio; i++) {
+//			retorno[i] = cardapio[i].getNome();
+//		}
+//
+//		return retorno;
+//	}
+
+	public String listarCardapio() {
+		String cardapio = "";
+		for (int i = 0; i < getNumeroPratosCardapio(); i++) {
+			cardapio = cardapio + getPratoCardapio(i).getId() + ". "
+					+ getPratoCardapio(i).getNome() + " -------- "
+					+ getPratoCardapio(i).getPreco() + "\n";
 		}
-
-		return retorno;
+		return cardapio;
 	}
-
+	
 	@Override
 	public String toString() {
 		String stringRestaurante;
@@ -190,5 +200,4 @@ public class Restaurante extends Usuario {
 	public Pedido getPedidoEspera(int i) {
 		return pedidosEspera[i];
 	}
-
 }

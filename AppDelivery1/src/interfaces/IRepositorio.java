@@ -28,7 +28,5 @@ public interface IRepositorio <T> {
 
 	public long getProximoId();
 
-	public void setNumeroElementos(int numeroElementos);
-
 	void setElementos(ArrayList<T> elementos);
 }

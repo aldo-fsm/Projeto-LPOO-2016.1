@@ -98,8 +98,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere válido");
 			return false;
 		} else {
-			for (int i = 0; i < gerente.repositorioC().getNumeroClientes(); i++) {
-				if (gerente.repositorioC().getCliente(i).getLogin().equals(login)) {
+			for (int i = 0; i < gerente.repositorioC().getNumeroElementos(); i++) {
+				if (gerente.repositorioC().get(i).getLogin().equals(login)) {
 					JOptionPane.showMessageDialog(this, "Este login não está disponivel");
 					return false;
 				}
@@ -146,8 +146,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(this, " \" ; \" não é um caractere valido");
 			return false;
 		} else {
-			for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
-				if (gerente.repositorioR().getRestaurante(i).getLogin().equals(login)) {
+			for (int i = 0; i < gerente.repositorioR().getNumeroElementos();i++) {
+				if (gerente.repositorioR().get(i).getLogin().equals(login)) {
 					JOptionPane.showMessageDialog(this, "Este login nao esta disponivel");
 					return false;
 				}
@@ -202,8 +202,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		label2.setBounds(50, 90, 300, 20);
 		label3.setBounds(10, 150, 300, 20);
 		label4.setBounds(10, 180, 300, 20);
-		for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
-			Restaurante restaurante = gerente.repositorioR().getRestaurante(i);
+		for (int i = 0; i < gerente.repositorioR().getNumeroElementos(); i++) {
+			Restaurante restaurante = gerente.repositorioR().get(i);
 			cb.addItem("Nome : " + restaurante.getNome() + ", " + "id : " + restaurante.getId());
 		}
 		painel.add(cb);
@@ -253,8 +253,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		painel.add(cb);
 		painel.add(label1);
 
-		for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
-			Restaurante restaurante = gerente.repositorioR().getRestaurante(i);
+		for (int i = 0; i < gerente.repositorioR().getNumeroElementos(); i++) {
+			Restaurante restaurante = gerente.repositorioR().get(i);
 			cb.addItem("Nome : " + restaurante.getNome() + ",  id : " + restaurante.getId());
 		}
 
@@ -262,7 +262,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 				JOptionPane.QUESTION_MESSAGE, null, null, null);
 		if (n == 0) {
 			int iRest = cb.getSelectedIndex();
-			Restaurante restaurante = gerente.repositorioR().getRestaurante(iRest);
+			Restaurante restaurante = gerente.repositorioR().get(iRest);
 			if (restaurante.getNumeroPratosCardapio() != 0) {
 				label1.setText("Escolha o item a ser removido");
 				cb.removeAllItems();
@@ -298,8 +298,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		painel.add(cb);
 		painel.add(label1);
 
-		for (int i = 0; i < gerente.repositorioR().getNumeroRestaurantes(); i++) {
-			Restaurante restaurante = gerente.repositorioR().getRestaurante(i);
+		for (int i = 0; i < gerente.repositorioR().getNumeroElementos(); i++) {
+			Restaurante restaurante = gerente.repositorioR().get(i);
 			cb.addItem("Nome : " + restaurante.getNome() + ",  id : " + restaurante.getId());
 		}
 
@@ -313,7 +313,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 
 	public void removerCliente() {
 		atualizarGerente();
-		if (gerente.repositorioC().getNumeroClientes() > 0) {
+		if (gerente.repositorioC().getNumeroElementos() > 0) {
 			JPanel painel = new JPanel(null);
 			painel.setPreferredSize(new Dimension(500, 150));
 
@@ -327,8 +327,8 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 			painel.add(cb);
 			painel.add(label1);
 
-			for (int i = 0; i < gerente.repositorioC().getNumeroClientes(); i++) {
-				Cliente cliente = gerente.repositorioC().getCliente(i);
+			for (int i = 0; i < gerente.repositorioC().getNumeroElementos(); i++) {
+				Cliente cliente = gerente.repositorioC().get(i);
 				cb.addItem("Nome : " + cliente.getNome() + ",  id : " + cliente.getId());
 			}
 

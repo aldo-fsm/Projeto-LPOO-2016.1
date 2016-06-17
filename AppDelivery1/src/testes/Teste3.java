@@ -1,10 +1,9 @@
 package testes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import dados.DataBase;
 import entidades.Cliente;
-import entidades.Restaurante;
 import excecoes.IdInvalidoException;
 import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
@@ -24,7 +23,9 @@ public class Teste3 {
 //		}
 		Repositorio<Cliente> a= new Repositorio<Cliente>();
 		a.adicionar(new Cliente("aw543535564654", "a792nnj", "545645646674vvt"));
-		System.out.println(a.copiar().get(0).getNome());
-		
+		System.out.println(a.get(0).getNome());
+		ArrayList<Cliente> b = a.copiar();
+		a.get(0).setNome("aryell");
+		System.out.println(b.get(0).getNome());
 	}
 }

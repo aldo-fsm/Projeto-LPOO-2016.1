@@ -14,9 +14,7 @@ import entidades.Gerente;
 import entidades.ItemCardapio;
 import entidades.Pedido;
 import entidades.Restaurante;
-import repositorios.RepositorioCliente;
-import repositorios.RepositorioPedido;
-import repositorios.RepositorioRestaurante;
+import repositorios.Repositorio;
 
 public class DataBase {
 
@@ -67,59 +65,57 @@ public class DataBase {
 	}
 
 	// Salva em um arquivo de texto os dados do repositorio de restaurantes
-	public static void salvarEstado(RepositorioRestaurante restaurantes) {
+	public static void salvarEstadoRestaurante(Repositorio<Restaurante> restaurante) {
 		int i;
 		String nome = "arquivos/repositorioRestaurante";
-		String str = Long.toString(restaurantes.getProximoId()) + "\n";
-		for (i = 0; i < restaurantes.getNumeroRestaurantes(); i++) {
-			str += restaurantes.getRestaurante(i).getProximoId() + ";" + restaurantes.getRestaurante(i).toString()
+		String str = Long.toString(restaurante.getProximoId()) + "\n";
+		for (i = 0; i < restaurante.getNumeroElementos(); i++) {
+			str += restaurante.get(i).getProximoId() + ";" + restaurante.get(i).toString()
 					+ "\n";
 		}
 		gravarDados(nome, str);
 	}
 
 	// Salva em um arquivo de texto os dados do repositorio de clientes
-	public static void salvarEstado(RepositorioCliente clientes) {
+	public static void salvarEstadoCliente(Repositorio<Cliente> clientes) {
 		int i;
 		String nome = "arquivos/repositorioCliente";
 		String str = Long.toString(clientes.getProximoId()) + "\n";
-		for (i = 0; i < clientes.getNumeroClientes(); i++) {
-			str += clientes.getCliente(i).toString() + "\n";
+		for (i = 0; i < clientes.getNumeroElementos(); i++) {
+			str += clientes.get(i).toString() + "\n";
 		}
 		gravarDados(nome, str);
 	}
 
 	// Salva o estado dos repositorios do gerente
 	public static void salvarEstado(Gerente gerente) {
-		salvarEstado(gerente.repositorioC());
-		salvarEstado(gerente.repositorioR());
+		salvarEstadoCliente(gerente.repositorioC());
+		salvarEstadoRestaurante(gerente.repositorioR());
 	}
 
 	/*
 	 * ler dados do repositorio de clientes salvos em arquivo e retorna um
 	 * RepositorioCliente com esses dados
 	 */
-	public static RepositorioCliente lerBaseClientes() {
+	public static Repositorio<Cliente> lerBaseClientes() {
 		String[] strings = lerDados("arquivos/repositorioCliente.txt");
 		try {
-			RepositorioCliente repositorioCliente = new RepositorioCliente();
-			Cliente[] clientes = new Cliente[RepositorioCliente.MAX_NUMERO_CLIENTES];
+			Repositorio<Cliente> repositorioCliente = new Repositorio<Cliente>();
+			ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 			int i;
 			String[] stringSplit;
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
-				clientes[i - 1] = new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]);
-				// repositorioCliente.adicionar(clientes[i - 1]);
-				clientes[i - 1].setId(Long.parseLong(stringSplit[0]));
+				clientes.add(i - 1, new Cliente(stringSplit[1], stringSplit[2], stringSplit[3]));
+				clientes.get(i - 1).setId(Long.parseLong(stringSplit[0]));
 			}
-			repositorioCliente.setClientes(clientes);
-			repositorioCliente.setNumeroClientes(i - 1);
+			repositorioCliente.setElementos(clientes);
 			repositorioCliente.setProximoId(Long.parseLong(strings[0]));
 			return repositorioCliente;
 		} catch (ArrayIndexOutOfBoundsException e) {
-			return new RepositorioCliente();
+			return new Repositorio<Cliente>();
 		} catch (NumberFormatException e) {
-			return new RepositorioCliente();
+			return new Repositorio<Cliente>();
 		}
 	}
 
@@ -127,12 +123,12 @@ public class DataBase {
 	 * ler dados do repositorio de restaurantes salvos em arquivo e retorna um
 	 * RepositorioRestaurante com esses dados
 	 */
-	public static RepositorioRestaurante LerBaseRestaurantes() {
+	public static Repositorio<Restaurante> LerBaseRestaurantes() {
 		String[] strings = lerDados("arquivos/repositorioRestaurante.txt");
 		try {
 
-			RepositorioRestaurante repositorioRestaurante = new RepositorioRestaurante();
-			Restaurante[] restaurantes = new Restaurante[RepositorioRestaurante.MAX_NUMERO_RESTAURANTES];
+			Repositorio<Restaurante> repositorioRestaurante = new Repositorio<Restaurante>();
+			ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
 			ItemCardapio[] cardapio;
 
 			repositorioRestaurante.setProximoId(Long.parseLong(strings[0]));
@@ -143,9 +139,9 @@ public class DataBase {
 			for (i = 1; i < strings.length; i++) {
 
 				stringSplit = strings[i].split(";");
-				restaurantes[i - 1] = new Restaurante(stringSplit[2], stringSplit[3], stringSplit[4]);
-				restaurantes[i - 1].setProximoId(Long.parseLong(stringSplit[0]));
-				restaurantes[i - 1].setId(Long.parseLong(stringSplit[1]));
+				restaurantes.add(i - 1 ,new Restaurante(stringSplit[2], stringSplit[3], stringSplit[4]));
+				restaurantes.get(i - 1).setProximoId(Long.parseLong(stringSplit[0]));
+				restaurantes.get(i - 1).setId(Long.parseLong(stringSplit[1]));
 
 				cardapio = new ItemCardapio[Restaurante.MAX_PRATOS];
 				for (j = 5; j < stringSplit.length; j++) {
@@ -153,28 +149,27 @@ public class DataBase {
 					cardapio[j - 5] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));
 					cardapio[j - 5].setId(Long.parseLong(stringSplit2[0]));
 				}
-				restaurantes[i - 1].setNumeroPratosCardapio(j - 5);
-				restaurantes[i - 1].setCardapio(cardapio);
+				restaurantes.get(i - 1).setNumeroPratosCardapio(j - 5);
+				restaurantes.get(i - 1).setCardapio(cardapio);
 			}
-			repositorioRestaurante.setRestaurantes(restaurantes);
-			repositorioRestaurante.setNumeroRestaurantes(i - 1);
+			repositorioRestaurante.setElementos(restaurantes);
 
 			return repositorioRestaurante;
 		} catch (ArrayIndexOutOfBoundsException e) {
-			return new RepositorioRestaurante();
+			return new Repositorio<Restaurante>();
 		} catch (NumberFormatException e) {
-			return new RepositorioRestaurante();
+			return new Repositorio<Restaurante>();
 		}
 
 	}
 
 	// salva em um arquivo de texto os dados do repositorio de pedidos
-	public static void salvarEstado(RepositorioPedido pedido) {
+	public static void salvarEstado(Repositorio<Pedido> pedido) {
 		int i;
 		String nome = "arquivos/repositorioPedido";
 		String str = Long.toString(pedido.getProximoId()) + "\n";
-		for (i = 0; i < pedido.getNumeroPedidos(); i++) {
-			str += pedido.getPedido(i).toString() + "\n";
+		for (i = 0; i < pedido.getNumeroElementos(); i++) {
+			str += pedido.get(i).toString() + "\n";
 		}
 		gravarDados(nome, str);
 	}
@@ -183,11 +178,11 @@ public class DataBase {
 	 * ler dados do repositorio de pedidos salvos em arquivo e retorna um
 	 * RepositorioPedido com esses dados
 	 */
-	public static RepositorioPedido lerBasePedidos() {
+	public static Repositorio<Pedido> lerBasePedidos() {
 		String[] strings = lerDados("arquivos/repositorioPedido.txt");
 		try {
-			RepositorioPedido repositorioPedido = new RepositorioPedido();
-			Pedido[] pedidos = new Pedido[RepositorioPedido.MAX_NUMERO_PEDIDOS];
+			Repositorio<Pedido> repositorioPedido = new Repositorio<Pedido>();
+			ArrayList<Pedido> pedidos= new ArrayList<Pedido>();
 			long proximoId = Long.parseLong(strings[0]);
 			String[] stringSplit;
 			String[] stringSplit2;
@@ -197,9 +192,9 @@ public class DataBase {
 			int j;
 			for (i = 1; i < strings.length; i++) {
 				stringSplit = strings[i].split(";");
-				pedidos[i - 1] = new Pedido(Long.parseLong(stringSplit[2]), Long.parseLong(stringSplit[1]));
-				pedidos[i - 1].setIdPedido(Long.parseLong(stringSplit[0]));
-				pedidos[i - 1].setStatus(stringSplit[3]);
+				pedidos.add(i - 1,new Pedido(Long.parseLong(stringSplit[2]), Long.parseLong(stringSplit[1])));
+				pedidos.get(i - 1).setIdPedido(Long.parseLong(stringSplit[0]));
+				pedidos.get(i - 1).setStatus(stringSplit[3]);
 
 				itens = new ItemCardapio[Cliente.MAX_ITENS_CARRINHO];
 				for (j = 4; j < stringSplit.length; j++) {
@@ -207,18 +202,17 @@ public class DataBase {
 					itens[j - 4] = new ItemCardapio(stringSplit2[1], Double.parseDouble(stringSplit2[2]));
 					itens[j - 4].setId(Long.parseLong(stringSplit2[0]));
 				}
-				pedidos[i - 1].setItens(itens);
-				pedidos[i - 1].setNumeroItensPedido(j - 4);
+				pedidos.get(i - 1).setItens(itens);
+				pedidos.get(i - 1).setNumeroItensPedido(j - 4);
 			}
 			repositorioPedido.setProximoId(Long.parseLong(strings[0]));
-			repositorioPedido.setNumeroPedidos(i - 1);
-			repositorioPedido.setPedidos(pedidos);
+			repositorioPedido.setElementos(pedidos);
 			return repositorioPedido;
 
 		} catch (ArrayIndexOutOfBoundsException e) {
-			return new RepositorioPedido();
+			return new Repositorio<Pedido>();
 		} catch (NumberFormatException e) {
-			return new RepositorioPedido();
+			return new Repositorio<Pedido>();
 		}
 	}
 

@@ -1,6 +1,6 @@
 package entidades;
 
-public class Pedido {
+public class Pedido implements Cloneable{
 	private long idCliente;
 	private long idPedido;
 	private long idRestaurate;
