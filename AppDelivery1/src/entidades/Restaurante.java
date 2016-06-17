@@ -200,4 +200,9 @@ public class Restaurante extends Usuario {
 	public Pedido getPedidoEspera(int i) {
 		return pedidosEspera[i];
 	}
+
+	public String toExport() {
+		String exportada = getId() + "," + getLogin() + "," + getSenha() + "," + getNome();
+		return exportada;
+	}
 }

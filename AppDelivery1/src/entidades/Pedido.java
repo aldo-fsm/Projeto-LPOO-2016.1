@@ -108,4 +108,9 @@ public class Pedido implements Cloneable{
 		this.numeroItensPedido = numeroItensPedido;
 	}
 
+	public String toExport() {
+		String exportada = idPedido + "," + idCliente + "," + idRestaurate + "," + status;
+		return exportada;
+	}
+
 }

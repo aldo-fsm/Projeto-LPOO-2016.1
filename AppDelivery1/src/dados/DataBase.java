@@ -59,24 +59,71 @@ public class DataBase {
 		}
 		return retorno;
 	}
-	
-	private static String exportado(){
-		String exportada = null;
-		exportada = "ProximoId , Elementos";//definir string a ser salva no arquivo csv
-		return exportada;
-	}
-	public static void exportarCSV() {
+
+	private static void PedidosToCSV() {
 		FileWriter arq;
 		try {
-			arq = new FileWriter("Planilha.csv");
+			String exportada = null;
+			if (lerBasePedidos().getNumeroElementos() != 0) {
+				exportada = "idPedido,idCliente,idRestaurate,status\n";
+			}
+			for (int i = 0; i < lerBasePedidos().getElementos().size(); i++) {
+				exportada = exportada + lerBasePedidos().get(i).toExport() + "\n";
+			}
+			arq = new FileWriter("Planilha De Pedidos.csv");
 			PrintWriter gravarArq = new PrintWriter(arq);
-			gravarArq.println(exportado());
+			gravarArq.println(exportada);
+			gravarArq.close();
 			arq.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	private static void RestauranteToCSV() {
+		FileWriter arq;
+		try {
+			String exportada = null;
+			if (LerBaseRestaurantes().getNumeroElementos() != 0) {
+				exportada = "Id,Nome,Login,Senha\n";
+			}
+			for (int i = 0; i < LerBaseRestaurantes().getElementos().size(); i++) {
+				exportada = exportada + LerBaseRestaurantes().get(i).toExport() + "\n";
+			}
+			arq = new FileWriter("Planilha De Restaurantes.csv");
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println(exportada);
+			gravarArq.close();
+			arq.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void ClienteToCSV() {
+		FileWriter arq;
+		try {
+			String exportada = null;
+			if (lerBaseClientes().getNumeroElementos() != 0) {
+				exportada = "Id,Login,Senha,Nome\n";
+			}
+			for (int i = 0; i < lerBaseClientes().getElementos().size(); i++) {
+				exportada = exportada + lerBaseClientes().get(i).toExport() + "\n";
+			}
+			arq = new FileWriter("Planilha De Clientes.csv");
+			PrintWriter gravarArq = new PrintWriter(arq);
+			gravarArq.println(exportada);
+			gravarArq.close();
+			arq.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void exportarCSV(){
+		ClienteToCSV();
+		PedidosToCSV();
+		RestauranteToCSV();
+	}
 	// Salva em um arquivo de texto os dados do repositorio de restaurantes
 	public static void salvarEstadoRestaurante(Repositorio<Restaurante> restaurante) {
 		int i;

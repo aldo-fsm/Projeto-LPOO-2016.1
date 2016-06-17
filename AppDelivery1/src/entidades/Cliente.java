@@ -79,7 +79,11 @@ public class Cliente extends Usuario {
 	public String toString() {
 		return (getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome());
 	}
-
+	
+	public String toExport() {
+		return (getId() + "," + getLogin() + "," + getSenha() + "," + getNome());
+	}
+	
 	public void setNumeroItensCarrinho(int numeroItensCarrinho) {
 		this.numeroItensCarrinho = numeroItensCarrinho;
 	}
