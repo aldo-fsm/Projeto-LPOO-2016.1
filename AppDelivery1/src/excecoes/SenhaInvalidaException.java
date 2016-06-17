@@ -1,5 +1,6 @@
 package excecoes;
 
+@SuppressWarnings("serial")
 public class SenhaInvalidaException extends Exception {
 
 	private String regraCriarSenha;
