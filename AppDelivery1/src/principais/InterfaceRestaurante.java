@@ -3,6 +3,8 @@ package principais;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -55,7 +57,9 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
-
+		Image iconeTitulo = Toolkit.getDefaultToolkit().getImage("icone.png");  
+		this.setIconImage(iconeTitulo);
+		
 		JPanel telaInicial = new JPanel(null);
 		JPanel telaLogado = new JPanel(null);
 		JPanel telaRemover = new JPanel(null);
