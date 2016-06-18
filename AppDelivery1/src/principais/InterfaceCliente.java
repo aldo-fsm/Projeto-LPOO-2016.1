@@ -422,6 +422,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource().equals(pedir)) {
+			gerente = DataBase.lerBaseGerente();
 			String restauranteEscolhido;
 			int i;
 			boolean idIncorreto = true;
