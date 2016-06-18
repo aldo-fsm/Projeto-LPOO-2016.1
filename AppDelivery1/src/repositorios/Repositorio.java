@@ -20,8 +20,14 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 			if (elemento instanceof Usuario) {
 				((Usuario) elemento).validar();
 				elementos.add(elemento);
+				if (elementos.get(0) instanceof Cliente) {
+					((Cliente) elementos.get(elementos.size()-1)).setId(proximoId);
+				} else {
+					((Restaurante) elementos.get(elementos.size()-1)).setId(proximoId);
+				}
 			} else {
 				elementos.add(elemento);
+				((Pedido) elementos.get(elementos.size()-1)).setIdPedido(proximoId);
 			}
 			proximoId++;
 		} else {
@@ -29,11 +35,13 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 		}
 
 	}
+
 	public void remover(int id) {
 		if (id >= 0 && id < elementos.size()) {
 			elementos.remove(id);
 		}
 	}
+
 	public void alterar(int id, T novoElemento) throws IdInvalidoException, SenhaInvalidaException {
 		if (id >= 0 && id < elementos.size()) {
 			if (novoElemento instanceof Usuario) {
@@ -44,6 +52,7 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 			}
 		}
 	}
+
 	@Override
 	public T get(int id) {
 		if (elementos.size() > id) {
@@ -51,6 +60,7 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 		}
 		return null;
 	}
+
 	@SuppressWarnings("unchecked")
 	public ArrayList<T> copiar() {
 		if (elementos.size() > 0) {
@@ -68,21 +78,27 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 		}
 		return new ArrayList<T>();
 	}
+
 	public T getCopia(int id) {
 		return copiar().get(id);
 	}
+
 	public int getNumeroElementos() {
 		return elementos.size();
 	}
+
 	public void setProximoId(long proximoId) {
 		this.proximoId = proximoId;
 	}
+
 	public long getProximoId() {
 		return proximoId;
 	}
+
 	public void setElementos(ArrayList<T> elementos) {
 		this.elementos = elementos;
 	}
+
 	public ArrayList<T> getElementos() {
 		return elementos;
 	}

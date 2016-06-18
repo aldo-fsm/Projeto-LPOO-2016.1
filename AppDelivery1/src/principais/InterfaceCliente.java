@@ -22,8 +22,8 @@ import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
 
 public class InterfaceCliente extends JFrame implements ActionListener {
-	
-	public InterfaceCliente(){
+
+	public InterfaceCliente() {
 		super("AppDelivery - Cliente");
 	}
 
@@ -52,6 +52,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private JButton efetuarPedido = new JButton("Fazer Pedido");
 	private JButton removerItem = new JButton("Remover Do Carrinho");
 	private JButton adicionarItem = new JButton("Adicionar Ao Carrinho");
+	private JButton cancelarPedido = new JButton("Cancelar Pedido");
 
 	// variaveis de cadastro
 	private JTextField campoCadastroLogin = new JTextField();
@@ -67,7 +68,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private String loginDoUsuario;
 	private int numeroRestauranteEscolhido;
 	private int numeroDoCliente;
-	
+
 	public static void main(String[] args) {
 		InterfaceCliente telaCliente = new InterfaceCliente();
 		telaCliente.janelas();
@@ -144,7 +145,11 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		removerItem.addActionListener(this);
 		removerItem.setBackground(new Color(150, 250, 250));
 		telaPedir.add(removerItem);
-		voltar.setBounds(295, 420, 210, 50);
+		cancelarPedido.setBounds(295, 420, 210, 50);
+		cancelarPedido.addActionListener(this);
+		cancelarPedido.setBackground(new Color(150, 250, 250));
+		telaPedir.add(cancelarPedido);
+		voltar.setBounds(295, 480, 210, 50);
 		voltar.addActionListener(this);
 		voltar.setBackground(new Color(150, 250, 250));
 		telaPedir.add(voltar);
@@ -232,6 +237,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	}
 
 	private void adicionarItem() {
+		gerente.repositorioR().get(numeroRestauranteEscolhido).atualizarListaPedidos();
 		String itemEscolhido;
 		long idItemEscolhido;
 		int i;
@@ -274,6 +280,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				i++;
 			}
 		} while (idIncorreto);
+		gerente.repositorioR().get(numeroRestauranteEscolhido).atualizarListaPedidos();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -392,7 +399,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(logoutButton)) {
 			cL.show(cards, "Tela Inicial");// ao ser deslogado o usuario volta
-			this.setTitle("AppDelivery - Cliente");	// para pagina inicial
+			this.setTitle("AppDelivery - Cliente"); // para pagina inicial
 		}
 		if (e.getSource().equals(opcaoCadastro)) {
 			cL.show(cards, "Tela De Cadastro");// ao escolher a opïçao
@@ -452,13 +459,13 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (gerente.repositorioC().get(numeroDoCliente).getNumeroItensCarrinho() > 0) {
 				try {
 					gerente.repositorioC().get(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
+					JOptionPane.showMessageDialog(this, "Pedido efetuado com sucesso!!","Sucesso",JOptionPane.DEFAULT_OPTION);
 				} catch (RepositorioCheioException e1) {
 					JOptionPane.showMessageDialog(this, "Este restaurante atingiu o numero maximo de pedidos", "Erro",
 							JOptionPane.ERROR_MESSAGE);
 				} catch (IdInvalidoException | SenhaInvalidaException e1) {
 					e1.printStackTrace();
 				}
-				cL.show(cards, "Tela Principal");
 			} else {
 				JOptionPane.showMessageDialog(null, "não há itens fazer pedido", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
@@ -477,6 +484,15 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(voltar)) {
 			cL.show(cards, "Tela Principal");
+		}
+		if (e.getSource().equals(cancelarPedido)) {
+			if (gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera() != 0) {
+				gerente.repositorioR().get(numeroRestauranteEscolhido).cancelarPedido(gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera());
+				JOptionPane.showMessageDialog(this, "Seu pedido foi cancelado","Sucesso",JOptionPane.DEFAULT_OPTION);
+			} else {
+				JOptionPane.showMessageDialog(null, "não há pedido para cancelar", "Erro", JOptionPane.ERROR_MESSAGE,
+						null);
+			}
 		}
 	}
 }
