@@ -55,13 +55,12 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
-		
 
 		JPanel telaInicial = new JPanel(null);
 		JPanel telaLogado = new JPanel(null);
 		JPanel telaRemover = new JPanel(null);
 		JPanel telaListarPedidos = new JPanel(null);
-		
+
 		telas.add(telaLogado, "logado");
 		telas.add(telaInicial, "tela inicial");
 		telas.add(telaRemover, "tela remover");
@@ -74,6 +73,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		campoSenhaLogin = new JPasswordField();
 		loginOkButton = new JButton("OK");
 		loginOkButton.addActionListener(this);
+		loginOkButton.setBackground(new Color(150, 250, 250));
 		JLabel loginNome = new JLabel("Login :");
 		JLabel loginSenha = new JLabel("Senha :");
 		campoTextoLogin.setBounds(300, 350, 200, 30);
@@ -86,15 +86,21 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaInicial.add(loginNome);
 		telaInicial.add(loginSenha);
 		telaInicial.add(loginOkButton);
+		telaInicial.setBackground(new Color(130, 210, 135));
 
 		// tela logado
 		ConfirmarEnvioButton = new JButton("Confirmar Envio");
+		ConfirmarEnvioButton.setBackground(new Color(150, 250, 250));
 		CancelarPedidoButton = new JButton("Cancelar Pedido");
+		CancelarPedidoButton.setBackground(new Color(150, 250, 250));
 		cadastrarItemButton = new JButton("Adicionar Item no Cardapio");
+		cadastrarItemButton.setBackground(new Color(150, 250, 250));
 		removerItemButton = new JButton("Remover Item do Cardapio");
+		removerItemButton.setBackground(new Color(150, 250, 250));
 		listarPedidosButton = new JButton("Listar Pedidos em Espera");
+		listarPedidosButton.setBackground(new Color(150, 250, 250));
 		logoutButton = new JButton("Logout");
-		
+
 		ConfirmarEnvioButton.addActionListener(this);
 		CancelarPedidoButton.addActionListener(this);
 		cadastrarItemButton.addActionListener(this);
@@ -108,6 +114,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		removerItemButton.setBounds(290, 350, 220, 50);
 		listarPedidosButton.setBounds(290, 420, 220, 50);
 		logoutButton.setBounds(300, 500, 200, 30);
+		logoutButton.setBackground(new Color(150, 250, 250));
 		
 		telaLogado.add(ConfirmarEnvioButton);
 		telaLogado.add(CancelarPedidoButton);
@@ -115,6 +122,7 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		telaLogado.add(removerItemButton);
 		telaLogado.add(listarPedidosButton);
 		telaLogado.add(logoutButton);
+		telaLogado.setBackground(new Color(130, 210, 135));
 
 		// tela de remocao de item
 		removerOkButton = new JButton("Remover");
@@ -122,17 +130,21 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		removerItemComboBox = new JComboBox<ItemCardapio>();
 
 		removerOkButton.addActionListener(this);
+		removerOkButton.setBackground(new Color(150, 250, 250));
 		removerCancelarButton.addActionListener(this);
+		removerCancelarButton.setBackground(new Color(150, 250, 250));
 		removerItemComboBox.addActionListener(this);
 		removerItemComboBox.setBackground(Color.WHITE);
 
 		removerItemComboBox.setBounds(290, 280, 220, 30);
 		removerOkButton.setBounds(290, 500, 100, 30);
+		removerOkButton.setBackground(new Color(150, 250, 250));
 		removerCancelarButton.setBounds(410, 500, 100, 30);
-
+		
 		telaRemover.add(removerOkButton);
 		telaRemover.add(removerCancelarButton);
 		telaRemover.add(removerItemComboBox);
+		telaRemover.setBackground(new Color(130, 210, 135));
 
 		// tela listar pedidos
 
@@ -145,11 +157,11 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		listarVoltarButton.setBounds(350, 500, 100, 30);
 		telaListarPedidos.add(scroll);
 		telaListarPedidos.add(listarVoltarButton);
-
+		telaListarPedidos.setBackground(new Color(130, 210, 135));
 		cL.show(telas, "tela inicial");
 		setResizable(false);
 	}
-	
+
 	public void confirmarEnvio() {
 		restaurante.atualizarListaPedidos();
 		JPanel painel = new JPanel(null);
@@ -175,13 +187,14 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (n == 0) {
 			Pedido pedido = restaurante.getPedidoEspera(cb.getSelectedIndex());
 			Repositorio<Pedido> repositorioPedidos = DataBase.lerBasePedidos();
-			for(int i = 0;i<repositorioPedidos.getNumeroElementos();i++){
-				if(repositorioPedidos.get(i).getIdPedido()== pedido.getIdPedido()){
+			for (int i = 0; i < repositorioPedidos.getNumeroElementos(); i++) {
+				if (repositorioPedidos.get(i).getIdPedido() == pedido.getIdPedido()) {
 					restaurante.confirmarEnvio(i);
 				}
 			}
 		}
 	}
+
 	public void cancelarPedido() {
 		restaurante.atualizarListaPedidos();
 		JPanel painel = new JPanel(null);
@@ -207,8 +220,8 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 		if (n == 0) {
 			Pedido pedido = restaurante.getPedidoEspera(cb.getSelectedIndex());
 			Repositorio<Pedido> repositorioPedidos = DataBase.lerBasePedidos();
-			for(int i = 0;i<repositorioPedidos.getNumeroElementos();i++){
-				if(repositorioPedidos.get(i).getIdPedido()== pedido.getIdPedido()){
+			for (int i = 0; i < repositorioPedidos.getNumeroElementos(); i++) {
+				if (repositorioPedidos.get(i).getIdPedido() == pedido.getIdPedido()) {
 					restaurante.cancelarPedido(i);
 				}
 			}
@@ -324,10 +337,10 @@ public class InterfaceRestaurante extends JFrame implements ActionListener {
 			cL.show(telas, "logado");
 			areaTextoPedidos.setText(null);
 		}
-		if(e.getSource().equals(ConfirmarEnvioButton)){
+		if (e.getSource().equals(ConfirmarEnvioButton)) {
 			confirmarEnvio();
 		}
-		if(e.getSource().equals(CancelarPedidoButton)){
+		if (e.getSource().equals(CancelarPedidoButton)) {
 			cancelarPedido();
 		}
 

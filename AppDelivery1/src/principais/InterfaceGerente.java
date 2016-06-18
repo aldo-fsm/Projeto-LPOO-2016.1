@@ -65,6 +65,13 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		removerRestauranteButton.setBounds(290, 380, 220, 30);
 		adicionarPratoButton.setBounds(290, 430, 220, 30);
 		removerPratoButton.setBounds(290, 470, 220, 30);
+		
+		cadastrarClienteButton.setBackground(new Color(150, 250, 250));
+		removerClienteButton.setBackground(new Color(150, 250, 250));
+		cadastrarRestauranteButton.setBackground(new Color(150, 250, 250));
+		removerRestauranteButton.setBackground(new Color(150, 250, 250));
+		adicionarPratoButton.setBackground(new Color(150, 250, 250));
+		removerPratoButton.setBackground(new Color(150, 250, 250));
 
 		add(cadastrarClienteButton);
 		add(removerClienteButton);
@@ -73,6 +80,7 @@ public class InterfaceGerente extends JFrame implements ActionListener {
 		add(adicionarPratoButton);
 		add(removerPratoButton);
 
+		getContentPane().setBackground(new Color(130, 210, 135));
 		getContentPane().setSize(800, 600);
 		setResizable(false);
 	}

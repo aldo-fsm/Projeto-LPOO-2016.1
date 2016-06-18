@@ -22,6 +22,11 @@ import excecoes.RepositorioCheioException;
 import excecoes.SenhaInvalidaException;
 
 public class InterfaceCliente extends JFrame implements ActionListener {
+	
+	public InterfaceCliente(){
+		super("AppDelivery - Cliente");
+	}
+
 	// atributos de interface
 	private static final long serialVersionUID = 1L;
 	private CardLayout cL = new CardLayout();
@@ -62,7 +67,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private String loginDoUsuario;
 	private int numeroRestauranteEscolhido;
 	private int numeroDoCliente;
-
+	
 	public static void main(String[] args) {
 		InterfaceCliente telaCliente = new InterfaceCliente();
 		telaCliente.janelas();
@@ -74,17 +79,14 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		logoutButton.setBounds(295, 360, 210, 50);
 		logoutButton.addActionListener(this);
 		logoutButton.setBackground(new Color(150, 250, 250));
-		logoutButton.setForeground(Color.WHITE);
 		telaLogado.add(logoutButton);
 		pedir.setBounds(295, 300, 210, 50);
 		pedir.addActionListener(this);
 		pedir.setBackground(new Color(150, 250, 250));
-		pedir.setForeground(Color.WHITE);
 		telaLogado.add(pedir);
 		sair.setBounds(295, 420, 210, 50);
 		sair.addActionListener(this);
 		sair.setBackground(new Color(150, 250, 250));
-		sair.setForeground(Color.WHITE);
 		telaLogado.add(sair);
 		telaLogado.setBackground(new Color(130, 210, 135));
 	}
@@ -98,23 +100,32 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaLogin.add(campoSenhaLogin);
 		JLabel login = new JLabel("Login :");
 		login.setBounds(250, 350, 50, 30);
-		login.setForeground(Color.WHITE);
 		telaLogin.add(login);
 		JLabel senha = new JLabel("Senha :");
 		senha.setBounds(250, 400, 50, 30);
-		senha.setForeground(Color.WHITE);
 		telaLogin.add(senha);
 		okButtonLogin.setBounds(285, 450, 100, 30);
 		okButtonLogin.addActionListener(this);
 		okButtonLogin.setBackground(new Color(150, 250, 250));
-		okButtonLogin.setForeground(Color.WHITE);
 		telaLogin.add(okButtonLogin);
 		cancelarLogin.setBounds(415, 450, 100, 30);
 		cancelarLogin.addActionListener(this);
 		cancelarLogin.setBackground(new Color(150, 250, 250));
-		cancelarLogin.setForeground(Color.WHITE);
 		telaLogin.add(cancelarLogin);
 		telaLogin.setBackground(new Color(130, 210, 135));
+	}
+
+	public void janelas() {
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 600);
+		add(cards);
+		janelaInicial();
+		janelaLogin();
+		janelaCadastro();
+		janelaPedido();
+		janelaPrincipal();
+		setResizable(false);
 	}
 
 	private void janelaPedido() {
@@ -124,22 +135,18 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		efetuarPedido.setBounds(295, 240, 210, 50);
 		efetuarPedido.addActionListener(this);
 		efetuarPedido.setBackground(new Color(150, 250, 250));
-		efetuarPedido.setForeground(Color.WHITE);
 		telaPedir.add(efetuarPedido);
 		adicionarItem.setBounds(295, 300, 210, 50);
 		adicionarItem.addActionListener(this);
 		adicionarItem.setBackground(new Color(150, 250, 250));
-		adicionarItem.setForeground(Color.WHITE);
 		telaPedir.add(adicionarItem);
 		removerItem.setBounds(295, 360, 210, 50);
 		removerItem.addActionListener(this);
 		removerItem.setBackground(new Color(150, 250, 250));
-		removerItem.setForeground(Color.WHITE);
 		telaPedir.add(removerItem);
 		voltar.setBounds(295, 420, 210, 50);
 		voltar.addActionListener(this);
 		voltar.setBackground(new Color(150, 250, 250));
-		voltar.setForeground(Color.WHITE);
 		telaPedir.add(voltar);
 		telaPedir.setBackground(new Color(130, 210, 135));
 	}
@@ -156,24 +163,19 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		okButtonCadastro.setBounds(285, 450, 100, 30);
 		okButtonCadastro.addActionListener(this);
 		okButtonCadastro.setBackground(new Color(150, 250, 250));
-		okButtonCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(okButtonCadastro);
 		cancelarCadastro.setBounds(415, 450, 100, 30);
 		cancelarCadastro.addActionListener(this);
 		cancelarCadastro.setBackground(new Color(150, 250, 250));
-		cancelarCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(cancelarCadastro);
 		JLabel nomeCadastro = new JLabel("nome: ");
 		nomeCadastro.setBounds(250, 300, 50, 30);
-		nomeCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(nomeCadastro);
 		JLabel loginCadastro = new JLabel("Login :");
 		loginCadastro.setBounds(250, 350, 50, 30);
-		loginCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(loginCadastro);
 		JLabel senhaCadastro = new JLabel("Senha :");
 		senhaCadastro.setBounds(250, 400, 50, 30);
-		senhaCadastro.setForeground(Color.WHITE);
 		telaCadastro.add(senhaCadastro);
 		telaCadastro.setBackground(new Color(130, 210, 135));
 	}
@@ -184,29 +186,15 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		opcaoCadastro.setBounds(290, 420, 220, 50);
 		opcaoCadastro.addActionListener(this);
 		opcaoCadastro.setBackground(new Color(150, 250, 250));
-		opcaoCadastro.setForeground(Color.WHITE);
 		telaInicial.add(opcaoCadastro);
 		opcaoLogin.setBounds(290, 350, 220, 50);
 		opcaoLogin.addActionListener(this);
 		opcaoLogin.setBackground(new Color(150, 250, 250));
-		opcaoLogin.setForeground(Color.WHITE);
 		telaInicial.add(opcaoLogin);
 		telaInicial.setBackground(new Color(130, 210, 135));
 	}
 
 	// metodo apresenta toda a interface do cliente
-	public void janelas() {
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
-		add(cards);
-		janelaInicial();
-		janelaLogin();
-		janelaCadastro();
-		janelaPedido();
-		janelaPrincipal();
-		setResizable(false);
-	}
 
 	private void removerItem() {
 		String itemRemovido;
@@ -291,11 +279,13 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(cancelarLogin)) {
 			cL.show(cards, "Tela Inicial");
+			this.setTitle("AppDelivery - Cliente");
 			campoLogin.setText("");// campo e apagado
 			campoSenhaLogin.setText("");// campo e apagado
 		}
 		if (e.getSource().equals(cancelarCadastro)) {
 			cL.show(cards, "Tela Inicial");
+			this.setTitle("AppDelivery - Cliente");
 			campoCadastroLogin.setText("");// campo e apagado
 			campoCadastroNome.setText("");// campo e apagado
 			campoCadastroSenha.setText("");// campo e apagado
@@ -312,6 +302,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				if (listaDeClientes.get(i).getLogin().equals(campoLogin.getText())
 						&& listaDeClientes.get(i).getSenha().equals(new String(campoSenhaLogin.getPassword()))) {
 					cL.show(cards, "Tela Principal");
+					this.setTitle(this.getTitle() + " - " + listaDeClientes.get(i).getLogin());
 					/*
 					 * se condiz a tela principal e aberta
 					 */
@@ -363,7 +354,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 						gerente.adicionarCliente(new Cliente(campoCadastroLogin.getText(),
 								new String(campoCadastroSenha.getPassword()), campoCadastroNome.getText()));
 						cL.show(cards, "Tela Principal");// vai para tela
-															// principal
+						this.setTitle(this.getTitle() + " - " + campoCadastroLogin.getText());// principal
 					} catch (IdInvalidoException e1) {
 						JOptionPane.showMessageDialog(this, e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 					} catch (SenhaInvalidaException e1) {
@@ -401,7 +392,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(logoutButton)) {
 			cL.show(cards, "Tela Inicial");// ao ser deslogado o usuario volta
-											// para pagina inicial
+			this.setTitle("AppDelivery - Cliente");	// para pagina inicial
 		}
 		if (e.getSource().equals(opcaoCadastro)) {
 			cL.show(cards, "Tela De Cadastro");// ao escolher a opïçao
