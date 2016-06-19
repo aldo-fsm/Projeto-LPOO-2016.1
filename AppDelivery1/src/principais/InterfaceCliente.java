@@ -29,6 +29,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	}
 
 	// atributos de interface
+	
 	private static final long serialVersionUID = 1L;
 	private CardLayout cL = new CardLayout();
 	private JPanel cards = new JPanel(cL);

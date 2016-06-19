@@ -4,4 +4,3 @@
 2;3;2;DEFAULT;1/item/99.99
 3;3;2;DEFAULT;1/item/99.99
 4;4;2;DEFAULT;1/item/99.99
-5;5;2;DEFAULT;0/nome do prato1/9999.0
