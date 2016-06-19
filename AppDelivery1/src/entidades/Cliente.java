@@ -90,7 +90,7 @@ public class Cliente extends Usuario {
 		Repositorio<Pedido> repositorio = DataBase.lerBasePedidos();
 		if (id >= 0 && id < repositorio.getNumeroElementos()) {
 			Pedido pedido = repositorio.get(id);
-			if (pedido.getIdRestaurate() == this.getId()) {
+			if (pedido.getIdCliente() == this.getId()) {
 				pedido.setStatus(Status.CANCELADO);
 				DataBase.salvarEstadoPedido(repositorio);
 			}
@@ -121,7 +121,7 @@ public class Cliente extends Usuario {
 		String retorno = "";
 		for (int i = 0; i < Repositorio.MAX_NUMERO_ELEMENTOS; i++) {
 			if (DataBase.lerBasePedidos().get(i) != (null)) {
-				if (DataBase.lerBasePedidos().get(i).getIdCliente() == id) {
+				if (DataBase.lerBasePedidos().get(i).getIdCliente() == id && !DataBase.lerBasePedidos().get(i).getStatus().equals(Status.CANCELADO)) {
 					retorno = retorno + DataBase.lerBasePedidos().get(i).getIdPedido() + ". ";
 					for (int j = 0; j < DataBase.lerBasePedidos().get(i).getItens().length; j++) {
 						if (DataBase.lerBasePedidos().get(i).getItens(j) != (null)) {

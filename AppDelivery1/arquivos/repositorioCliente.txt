@@ -1,5 +1,4 @@
 6
 1;senhor12;senha12;oi
-2;aryell;aryell;aryell
 3;leand;francinee;ary
 4;leandro;leandrinho;leo
