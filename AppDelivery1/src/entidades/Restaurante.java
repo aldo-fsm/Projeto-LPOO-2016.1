@@ -205,4 +205,7 @@ public class Restaurante extends Usuario {
 		String exportada = getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome();
 		return exportada;
 	}
+	public ItemCardapio[] getCardapio() {
+		return cardapio;
+	}
 }

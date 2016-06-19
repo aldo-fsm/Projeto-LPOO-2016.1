@@ -117,11 +117,12 @@ public class Cliente extends Usuario {
 		this.carrinho = carrinho;
 	}
 
-	public String listarPedidosInterface(long id) {
+	public String listarPedidosInterface(long idCliente,long idRestaurante) {
 		String retorno = "";
 		for (int i = 0; i < Repositorio.MAX_NUMERO_ELEMENTOS; i++) {
 			if (DataBase.lerBasePedidos().get(i) != (null)) {
-				if (DataBase.lerBasePedidos().get(i).getIdCliente() == id && !DataBase.lerBasePedidos().get(i).getStatus().equals(Status.CANCELADO)) {
+				if (DataBase.lerBasePedidos().get(i).getIdCliente() == idCliente && !DataBase.lerBasePedidos().get(i).getStatus().equals(Status.CANCELADO)) {
+					if(DataBase.lerBasePedidos().get(i).getIdRestaurate() == idRestaurante){
 					retorno = retorno + DataBase.lerBasePedidos().get(i).getIdPedido() + ". ";
 					for (int j = 0; j < DataBase.lerBasePedidos().get(i).getItens().length; j++) {
 						if (DataBase.lerBasePedidos().get(i).getItens(j) != (null)) {
@@ -130,6 +131,7 @@ public class Cliente extends Usuario {
 					}
 					retorno += "\n";
 					;
+					}
 				}
 			}
 		}

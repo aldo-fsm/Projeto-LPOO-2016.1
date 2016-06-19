@@ -1,5 +1,7 @@
-
+7
 1;login1;senha1;cliente1
 2;login2;senha2;cliente2
 3;meu login;senha123;meu nome
 4;login;senha123;nome
+5; di-azs;wer1234;-aryell
+6;lima;1234567p;limo

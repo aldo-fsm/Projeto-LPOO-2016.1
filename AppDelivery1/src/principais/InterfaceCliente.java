@@ -435,14 +435,20 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				while (i < gerente.repositorioR().getNumeroElementos()) {
 					if (restauranteEscolhido.compareTo(String.valueOf(gerente.repositorioR().get(i).getId())) == 0) {
 						idRestauranteEscolhido = Long.parseLong(restauranteEscolhido);
-						cL.show(cards, "Efetuar Pedido");
 						numeroRestauranteEscolhido = i;
 						idIncorreto = false;
 						break;
 					}
 					i++;
 				}
-			} while (idIncorreto);
+				if (gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPratosCardapio() == 0) {
+					JOptionPane.showMessageDialog(this, "este restaurante nao possui nem um item no cardapio", "Erro",
+							JOptionPane.ERROR_MESSAGE);
+				} else if (!idIncorreto) {
+					cL.show(cards, "Efetuar Pedido");
+				}
+			} while (idIncorreto
+					|| gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPratosCardapio() == 0);
 		}
 		if (e.getSource().equals(sair)) {
 			cL.show(cards, "Tela Inicial");
@@ -529,7 +535,10 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					if (!DataBase.lerBasePedidos().get(j).getStatus().equals(Status.CANCELADO)
 							&& DataBase.lerBasePedidos().get(j).getIdCliente() == gerente.repositorioC()
 									.get(numeroDoCliente).getId()) {
-						numeroPedidosDoCliente++;
+						if (DataBase.lerBasePedidos().get(j).getIdRestaurate() == gerente.repositorioR()
+								.get(numeroRestauranteEscolhido).getId()) {
+							numeroPedidosDoCliente++;
+						}
 					}
 				}
 				if (numeroPedidosDoCliente > 0) {
@@ -541,7 +550,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 						pedidoEscolhido = "" + JOptionPane
 								.showInputDialog("digite o numero corresponndente ao pedido a ser cancelado\n"
 										+ gerente.repositorioC().get(numeroDoCliente).listarPedidosInterface(
-												gerente.repositorioC().get(numeroDoCliente).getId()));
+												gerente.repositorioC().get(numeroDoCliente).getId(), gerente
+														.repositorioR().get(numeroRestauranteEscolhido).getId()));
 						if (pedidoEscolhido.equals("null")) {
 							break;
 						}
@@ -562,7 +572,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 								JOptionPane.DEFAULT_OPTION);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "não há pedido para cancelar", "Erro",
+					JOptionPane.showMessageDialog(null, "não há pedido para cancelar nesse restaurante", "Erro",
 							JOptionPane.ERROR_MESSAGE, null);
 				}
 			}
