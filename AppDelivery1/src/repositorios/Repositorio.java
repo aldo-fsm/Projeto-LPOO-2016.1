@@ -18,22 +18,19 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 	public void adicionar(T elemento) throws IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
 		if (elementos.size() < IRepositorio.MAX_NUMERO_ELEMENTOS) {
 			if (elemento instanceof Usuario) {
+				((Usuario) elemento).setId(proximoId);
 				((Usuario) elemento).validar();
 				elementos.add(elemento);
-				if (elementos.get(0) instanceof Cliente) {
-					((Cliente) elementos.get(elementos.size()-1)).setId(proximoId);
-				} else {
-					((Restaurante) elementos.get(elementos.size()-1)).setId(proximoId);
-				}
 			} else {
+				if (elemento instanceof Pedido) {
+					((Pedido) elemento).setIdPedido(proximoId);
+				}
 				elementos.add(elemento);
-				((Pedido) elementos.get(elementos.size()-1)).setIdPedido(proximoId);
 			}
 			proximoId++;
 		} else {
 			throw new RepositorioCheioException();
 		}
-
 	}
 
 	public void remover(int id) {
@@ -45,7 +42,11 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 	public void alterar(int id, T novoElemento) throws IdInvalidoException, SenhaInvalidaException {
 		if (id >= 0 && id < elementos.size()) {
 			if (novoElemento instanceof Usuario) {
+				((Usuario) novoElemento).setId(((Usuario) elementos.get(id)).getId());
 				((Usuario) novoElemento).validar();
+				elementos.set(id, novoElemento);
+			} else if (novoElemento instanceof Pedido) {
+				((Pedido) novoElemento).setIdPedido(((Pedido) elementos.get(id)).getIdPedido());
 				elementos.set(id, novoElemento);
 			} else {
 				elementos.set(id, novoElemento);

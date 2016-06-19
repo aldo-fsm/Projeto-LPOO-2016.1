@@ -1,5 +1,5 @@
-9
-1;login4;senha3456;login4
-1;senhor12;senha12;oi
-7;dias;menezes;aryell
-8;login1;senha1;nome1
+6
+1;login1;senha1;cliente1
+2;login2;senha2;cliente2
+3;meu login;senha123;meu nome
+4;login;senha123;nome

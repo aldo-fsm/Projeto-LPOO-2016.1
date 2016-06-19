@@ -1,6 +1,4 @@
-5
-0;4;2;ENVIADO;1/item/99.99;0/nome do prato1/9999.0
-1;2;2;CANCELADO;0/nome do prato1/9999.0
-2;6;2;CANCELADO;0/nome do prato1/9999.0
-3;8;7;ENVIADO;0/nome do prato/99999.0;1/outro prato/1.0E19;1/outro prato/1.0E19
-4;8;7;ENVIADO;0/nome do prato/99999.0
+4
+1;3;3;DEFAULT;2/outro prato/199.99;1/prato/30.99;2/outro prato/199.99;2/outro prato/199.99
+2;4;3;ENVIADO;1/prato/30.99;1/prato/30.99;1/prato/30.99
+3;4;3;CANCELADO;2/outro prato/199.99;2/outro prato/199.99;2/outro prato/199.99;2/outro prato/199.99

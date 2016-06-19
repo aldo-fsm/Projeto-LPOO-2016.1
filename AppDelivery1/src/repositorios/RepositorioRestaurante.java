@@ -1,4 +1,4 @@
-package repositorios;
+/*package repositorios;
 
 import entidades.Restaurante;
 import excecoes.IdInvalidoException;
@@ -135,3 +135,4 @@ public class RepositorioRestaurante implements InterfaceRepositorioRestaurante {
 		this.numeroRestaurantes = numeroRestaurantes;
 	}
 }
+*/
