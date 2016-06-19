@@ -428,6 +428,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource().equals(pedir)) {
+			gerente = DataBase.lerBaseGerente();
 			String restauranteEscolhido;
 			int i;
 			boolean idIncorreto = true;
@@ -528,6 +529,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				}
 			} while (idIncorreto);
 			if (!(restauranteEscolhido.equals("null") || (restauranteEscolhido.equals("")))) {
+				if (gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera() != 0) {
 					int j = 0;
 					String pedidoEscolhido = null;
 					boolean idPedidoIncorreto = true;
@@ -553,6 +555,10 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(this, "Seu pedido foi cancelado", "Sucesso",
 								JOptionPane.DEFAULT_OPTION);
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "não há pedido para cancelar", "Erro",
+							JOptionPane.ERROR_MESSAGE, null);
+				}
 			}
 		}
 	}
