@@ -1,4 +1,4 @@
-package repositorios;
+/*package repositorios;
 
 import entidades.Pedido;
 import excecoes.RepositorioCheioException;
@@ -87,3 +87,4 @@ public class RepositorioPedido implements InterfaceRepositorioPedido {
 		return numeroPedidos;
 	}
 }
+*/

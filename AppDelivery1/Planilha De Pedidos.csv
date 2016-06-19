@@ -1,4 +1,7 @@
 idPedido;idCliente;idRestaurate;status
-0;4;2;DEFAULT
-1;2;2;DEFAULT
+0;4;2;ENVIADO
+1;2;2;CANCELADO
+2;6;2;CANCELADO
+3;8;7;ENVIADO
+4;8;7;ENVIADO
 

@@ -30,6 +30,9 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 					proximoId++;
 				}
 			} else {
+				if (elemento instanceof Pedido) {
+					((Pedido) elemento).setIdPedido(proximoId);
+				}
 				elementos.add(elemento);
 				((Pedido) elementos.get(elementos.size()-1)).setIdPedido(proximoId);
 				proximoId++;
@@ -37,7 +40,6 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 		} else {
 			throw new RepositorioCheioException();
 		}
-
 	}
 
 	public void remover(int id) {
@@ -49,7 +51,11 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 	public void alterar(int id, T novoElemento) throws IdInvalidoException, SenhaInvalidaException {
 		if (id >= 0 && id < elementos.size()) {
 			if (novoElemento instanceof Usuario) {
+				((Usuario) novoElemento).setId(((Usuario) elementos.get(id)).getId());
 				((Usuario) novoElemento).validar();
+				elementos.set(id, novoElemento);
+			} else if (novoElemento instanceof Pedido) {
+				((Pedido) novoElemento).setIdPedido(((Pedido) elementos.get(id)).getIdPedido());
 				elementos.set(id, novoElemento);
 			} else {
 				elementos.set(id, novoElemento);

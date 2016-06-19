@@ -1,4 +1,4 @@
-package interfaces;
+/*package interfaces;
 
 import entidades.Cliente;
 import excecoes.IdInvalidoException;
@@ -33,3 +33,4 @@ public interface InterfaceRepositorioCliente {
 
 	public void setClientes(Cliente[] clientes);
 }
+*/

@@ -1,4 +1,4 @@
-package interfaces;
+/*package interfaces;
 
 import entidades.Pedido;
 import excecoes.RepositorioCheioException;
@@ -27,3 +27,4 @@ public interface InterfaceRepositorioPedido {
 
 	public int getNumeroPedidos();
 }
+*/

@@ -1,4 +1,4 @@
-package repositorios;
+/*package repositorios;
 
 import entidades.Cliente;
 import excecoes.IdInvalidoException;
@@ -105,3 +105,4 @@ public class RepositorioCliente implements InterfaceRepositorioCliente{
 		this.clientes = clientes;
 	}
 }
+*/

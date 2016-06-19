@@ -1,4 +1,4 @@
-package interfaces;
+/*package interfaces;
 
 import entidades.Restaurante;
 import excecoes.IdInvalidoException;
@@ -37,3 +37,4 @@ public interface InterfaceRepositorioRestaurante {
 
 	public void setNumeroRestaurantes(int numeroRestaurantes);
 }
+*/
