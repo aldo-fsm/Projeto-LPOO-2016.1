@@ -47,6 +47,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 	private JButton pedir = new JButton("Pedir");
 	private JButton sair = new JButton("Sair");
 	private JButton logoutButton = new JButton("Logout");
+	private JButton cancelarPedidoPrincipal = new JButton("Cancelar Pedido");
 
 	// variaveis de pedir
 	private JButton voltar = new JButton("Voltar");
@@ -90,6 +91,10 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		sair.addActionListener(this);
 		sair.setBackground(new Color(150, 250, 250));
 		telaLogado.add(sair);
+		cancelarPedidoPrincipal.setBounds(295, 240, 210, 50);
+		cancelarPedidoPrincipal.addActionListener(this);
+		cancelarPedidoPrincipal.setBackground(new Color(150, 250, 250));
+		telaLogado.add(cancelarPedidoPrincipal);
 		telaLogado.setBackground(new Color(130, 210, 135));
 	}
 
@@ -116,12 +121,12 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		telaLogin.add(cancelarLogin);
 		telaLogin.setBackground(new Color(130, 210, 135));
 	}
-	
+
 	public void janelas() {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
-		Image iconeTitulo = Toolkit.getDefaultToolkit().getImage("icone.png");  
+		Image iconeTitulo = Toolkit.getDefaultToolkit().getImage("icone.png");
 		this.setIconImage(iconeTitulo);
 		add(cards);
 		janelaInicial();
@@ -346,6 +351,7 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 				 */
 				if ((campoCadastroLogin.getText().equals(gerente.repositorioC().get(i).getLogin())
 						|| campoCadastroNome.getText().equals(gerente.repositorioC().get(i).getNome()))) {
+
 					podeCadastrar = false;
 				}
 				i++;
@@ -462,7 +468,8 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			if (gerente.repositorioC().get(numeroDoCliente).getNumeroItensCarrinho() > 0) {
 				try {
 					gerente.repositorioC().get(numeroDoCliente).efetuarPedido(idRestauranteEscolhido);
-					JOptionPane.showMessageDialog(this, "Pedido efetuado com sucesso!!","Sucesso",JOptionPane.DEFAULT_OPTION);
+					JOptionPane.showMessageDialog(this, "Pedido efetuado com sucesso!!", "Sucesso",
+							JOptionPane.DEFAULT_OPTION);
 				} catch (RepositorioCheioException e1) {
 					JOptionPane.showMessageDialog(this, "Este restaurante atingiu o numero maximo de pedidos", "Erro",
 							JOptionPane.ERROR_MESSAGE);
@@ -490,11 +497,62 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(cancelarPedido)) {
 			if (gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera() != 0) {
-				gerente.repositorioR().get(numeroRestauranteEscolhido).cancelarPedido(gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera());
-				JOptionPane.showMessageDialog(this, "Seu pedido foi cancelado","Sucesso",JOptionPane.DEFAULT_OPTION);
+				gerente.repositorioR().get(numeroRestauranteEscolhido).cancelarPedido(
+						gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera());
+				JOptionPane.showMessageDialog(this, "Seu pedido foi cancelado", "Sucesso", JOptionPane.DEFAULT_OPTION);
 			} else {
 				JOptionPane.showMessageDialog(null, "não há pedido para cancelar", "Erro", JOptionPane.ERROR_MESSAGE,
 						null);
+			}
+		}
+		if (e.getSource().equals(cancelarPedidoPrincipal)) {
+			String restauranteEscolhido;
+			int numeroRestauranteEscolhido = 0;
+			int i;
+			boolean idIncorreto = true;
+			do {
+				restauranteEscolhido = "" + JOptionPane
+						.showInputDialog("digite o numero correspondente ao restaurante que deseja cancelar o pedido\n"
+								+ gerente.listarRestaurantes());
+				if (restauranteEscolhido.equals("null")) {
+					break;
+				}
+				i = 0;
+				while (i < gerente.repositorioR().getNumeroElementos()) {
+					if (restauranteEscolhido.compareTo(String.valueOf(gerente.repositorioR().get(i).getId())) == 0) {
+						numeroRestauranteEscolhido = i;
+						idIncorreto = false;
+						break;
+					}
+					i++;
+				}
+			} while (idIncorreto);
+			if (!(restauranteEscolhido.equals("null") || (restauranteEscolhido.equals("")))) {
+					int j = 0;
+					String pedidoEscolhido = null;
+					boolean idPedidoIncorreto = true;
+					do {
+						pedidoEscolhido = "" + JOptionPane
+								.showInputDialog("digite o numero corresponndente ao pedido a ser cancelado\n"
+										+ gerente.repositorioC().get(numeroDoCliente).listarPedidosInterface(
+												gerente.repositorioC().get(numeroDoCliente).getId()));
+						if (pedidoEscolhido.equals("null")) {
+							break;
+						}
+						do {
+							if (gerente.repositorioR().get(numeroRestauranteEscolhido).getPedidoEspera(j)
+									.getIdPedido() == Long.parseLong(pedidoEscolhido)) {
+								idPedidoIncorreto = false;
+								break;
+							}
+							j++;
+						} while (j < gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera());
+					} while (idPedidoIncorreto);
+					if (!(pedidoEscolhido.equals("null") || restauranteEscolhido.equals(""))) {
+						gerente.repositorioC().get(numeroDoCliente).cancelarPedido(Integer.parseInt(pedidoEscolhido));
+						JOptionPane.showMessageDialog(this, "Seu pedido foi cancelado", "Sucesso",
+								JOptionPane.DEFAULT_OPTION);
+					}
 			}
 		}
 	}

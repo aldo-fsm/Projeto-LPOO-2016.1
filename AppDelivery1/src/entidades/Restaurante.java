@@ -30,6 +30,7 @@ public class Restaurante extends Usuario {
 			}
 		}
 	}
+	
 
 	@Override
 	public Restaurante clone() {
@@ -104,6 +105,7 @@ public class Restaurante extends Usuario {
 
 	public void setPedidosEspera(Pedido[] pedidosEspera) {
 		this.pedidosEspera = pedidosEspera;
+		numeroPedidosEspera = pedidosEspera.length; 
 	}
 
 	public ItemCardapio getPratoCardapio(int id) {

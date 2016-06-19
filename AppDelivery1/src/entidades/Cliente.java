@@ -15,7 +15,7 @@ public class Cliente extends Usuario {
 	private ItemCardapio[] carrinho = new ItemCardapio[MAX_ITENS_CARRINHO];
 	public static final int MAX_ITENS_CARRINHO = 150;
 	private int numeroItensCarrinho = 0; // numero atual de itens no carrinho
-	
+
 	public int getNumeroItensCarrinho() {
 		return numeroItensCarrinho;
 	}
@@ -65,7 +65,8 @@ public class Cliente extends Usuario {
 	 * transforma a estrutura do carrinho em uma estrutura que representa um
 	 * pedido
 	 */
-	public void efetuarPedido(long idRestaurante) throws RepositorioCheioException, IdInvalidoException, SenhaInvalidaException {
+	public void efetuarPedido(long idRestaurante)
+			throws RepositorioCheioException, IdInvalidoException, SenhaInvalidaException {
 		Repositorio<Pedido> repositorio = DataBase.lerBasePedidos();
 		Pedido novoPedido = new Pedido(idRestaurante, getId());
 		novoPedido.setItens(carrinho);
@@ -73,19 +74,27 @@ public class Cliente extends Usuario {
 		repositorio.adicionar(novoPedido);
 		DataBase.salvarEstadoPedido(repositorio);
 		this.setNumeroItensCarrinho(0);
+
 	}
 
 	@Override
 	public String toString() {
 		return (getId() + ";" + getLogin() + ";" + getSenha() + ";" + getNome());
 	}
-	
+
 	public void setNumeroItensCarrinho(int numeroItensCarrinho) {
 		this.numeroItensCarrinho = numeroItensCarrinho;
 	}
 
-	public void cancelarPedido() {
-
+	public void cancelarPedido(int id) {
+		Repositorio<Pedido> repositorio = DataBase.lerBasePedidos();
+		if (id >= 0 && id < repositorio.getNumeroElementos()) {
+			Pedido pedido = repositorio.get(id);
+			if (pedido.getIdRestaurate() == this.getId()) {
+				pedido.setStatus(Status.CANCELADO);
+				DataBase.salvarEstadoPedido(repositorio);
+			}
+		}
 	}
 
 	public long[] getFavoritos() {
@@ -108,6 +117,25 @@ public class Cliente extends Usuario {
 		this.carrinho = carrinho;
 	}
 
+	public String listarPedidosInterface(long id) {
+		String retorno = "";
+		for (int i = 0; i < Repositorio.MAX_NUMERO_ELEMENTOS; i++) {
+			if (DataBase.lerBasePedidos().get(i) != (null)) {
+				if (DataBase.lerBasePedidos().get(i).getIdCliente() == id) {
+					retorno = retorno + DataBase.lerBasePedidos().get(i).getIdPedido() + ". ";
+					for (int j = 0; j < DataBase.lerBasePedidos().get(i).getItens().length; j++) {
+						if (DataBase.lerBasePedidos().get(i).getItens(j) != (null)) {
+							retorno = retorno + " " + DataBase.lerBasePedidos().get(i).getItens(j);
+						}
+					}
+					retorno += "\n";
+					;
+				}
+			}
+		}
+		return retorno;
+	}
+
 	@Override
 	public void validar() throws IdInvalidoException, SenhaInvalidaException {
 		if (getId() <= 0) {
@@ -117,8 +145,9 @@ public class Cliente extends Usuario {
 		if (numeroDigitosSenha < 6 || numeroDigitosSenha > 10) {
 			throw new SenhaInvalidaException(" a senha deve ter no mínimo 6 dígitos e no máximo 10");
 		}
-		Pattern p = Pattern.compile("\\W");//padrão de simbolos
-		Matcher m3 = p.matcher(getSenha());//confere se algum simbolo aparece na senha
+		Pattern p = Pattern.compile("\\W");// padrão de simbolos
+		Matcher m3 = p.matcher(getSenha());// confere se algum simbolo aparece
+											// na senha
 		if (m3.find()) {
 			throw new SenhaInvalidaException("a senha deve conter apenas letras e numeros");
 		}

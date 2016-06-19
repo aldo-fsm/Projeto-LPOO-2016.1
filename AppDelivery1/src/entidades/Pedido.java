@@ -63,6 +63,10 @@ public class Pedido implements Cloneable {
 	public ItemCardapio[] getItens() {
 		return itens;
 	}
+	
+	public ItemCardapio getItens(int id) {
+		return itens[id];
+	}
 
 	public void setItens(ItemCardapio[] itens) {
 		this.itens = itens;

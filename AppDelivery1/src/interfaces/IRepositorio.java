@@ -28,5 +28,6 @@ public interface IRepositorio <T extends Cloneable> {
 
 	public long getProximoId();
 
-	void setElementos(ArrayList<T> elementos);
+	public void setElementos(ArrayList<T> elementos);
+	
 }
