@@ -18,18 +18,22 @@ public class Repositorio<T extends Cloneable> implements IRepositorio<T> {
 	public void adicionar(T elemento) throws IdInvalidoException, SenhaInvalidaException, RepositorioCheioException {
 		if (elementos.size() < IRepositorio.MAX_NUMERO_ELEMENTOS) {
 			if (elemento instanceof Usuario) {
-				((Usuario) elemento).validar();
-				elementos.add(elemento);
 				if (elementos.get(0) instanceof Cliente) {
+					((Cliente) elemento).validar();
+					elementos.add(elemento);
 					((Cliente) elementos.get(elementos.size()-1)).setId(proximoId);
+					proximoId++;
 				} else {
+					((Restaurante) elemento).validar();
+					elementos.add(elemento);
 					((Restaurante) elementos.get(elementos.size()-1)).setId(proximoId);
+					proximoId++;
 				}
 			} else {
 				elementos.add(elemento);
 				((Pedido) elementos.get(elementos.size()-1)).setIdPedido(proximoId);
+				proximoId++;
 			}
-			proximoId++;
 		} else {
 			throw new RepositorioCheioException();
 		}

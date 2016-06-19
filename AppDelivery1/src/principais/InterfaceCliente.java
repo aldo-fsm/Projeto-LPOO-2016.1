@@ -507,6 +507,17 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 			}
 		}
 		if (e.getSource().equals(cancelarPedidoPrincipal)) {
+			int numeroDoCliente = 0;
+			while (numeroDoCliente < gerente.repositorioC().getNumeroElementos()) {
+				/*
+				 * identifica o cliete que possui o login e senha informados
+				 */
+				if (gerente.repositorioC().get(numeroDoCliente).getLogin().equals(loginDoUsuario)
+						&& gerente.repositorioC().get(numeroDoCliente).getSenha().equals(senhaDoUsuario)) {
+					break;
+				}
+				numeroDoCliente++;
+			}
 			String restauranteEscolhido;
 			int numeroRestauranteEscolhido = 0;
 			int i;
@@ -523,13 +534,22 @@ public class InterfaceCliente extends JFrame implements ActionListener {
 					if (restauranteEscolhido.compareTo(String.valueOf(gerente.repositorioR().get(i).getId())) == 0) {
 						numeroRestauranteEscolhido = i;
 						idIncorreto = false;
+
 						break;
 					}
 					i++;
 				}
 			} while (idIncorreto);
 			if (!(restauranteEscolhido.equals("null") || (restauranteEscolhido.equals("")))) {
-				if (gerente.repositorioR().get(numeroRestauranteEscolhido).getNumeroPedidosEspera() != 0) {
+				int numeroPedidosDoCliente = 0;
+				for (int j = 0; j < DataBase.lerBasePedidos().getNumeroElementos(); j++) {
+					if (DataBase.lerBasePedidos().get(j).getIdCliente() == gerente.repositorioC().get(numeroDoCliente)
+							.getId()) {
+						numeroPedidosDoCliente++;
+					}
+				}
+				System.out.println(numeroPedidosDoCliente);
+				if (numeroPedidosDoCliente > 0) {
 					int j = 0;
 					String pedidoEscolhido = null;
 					boolean idPedidoIncorreto = true;
